@@ -1,0 +1,29 @@
+import SwiftUI
+
+struct OverView: View {
+    
+    var body: some View {
+        VStack {
+            Spacer()
+            
+                Text("""
+Choose the X-Plane controls that are shown in the Touch Bar.
+
+Available controls:
+
+\u{2022} Throttle
+\u{2022} Propeller Pitch
+\u{2022} Mixture
+\u{2022} Flaps
+""")
+
+            Button("Customize Touch Bar...", action: customizeTouchBar)
+            
+            Spacer()
+        }
+    }
+    
+    func customizeTouchBar() {
+        NSApplication.shared.toggleTouchBarCustomizationPalette(nil)
+    }
+}
