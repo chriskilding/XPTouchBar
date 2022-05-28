@@ -1,0 +1,16 @@
+name: Xcode - Build and Analyze
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - uses: mxcl/xcodebuild@v1
+        with:
+          swift: ~5.4
+          code-coverage: true
