@@ -9,3 +9,4 @@ jobs:
       - uses: mxcl/xcodebuild@v1
         with:
           code-coverage: true
+          scheme: XPTouchBar
