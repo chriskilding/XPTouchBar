@@ -8,12 +8,14 @@ public struct MyTouchBar: NSTouchBarRepresentable {
     @Binding var pitch: Double
     @Binding var mixture: Double
     @Binding var flaps: Double
+    @Binding var gear: Gear
+    @Binding var parkingBrake: ParkingBrake
     
     func makeNSTouchBar(context: Context) -> NSTouchBar {
         let touchBar = NSTouchBar()
         touchBar.customizationIdentifier = .xpTouchBar
         touchBar.defaultItemIdentifiers = [.throttle, .mixture, .flaps]
-        touchBar.customizationAllowedItemIdentifiers = [.throttle, .pitch, .mixture, .flaps]
+        touchBar.customizationAllowedItemIdentifiers = [.throttle, .pitch, .mixture, .flaps, .gear, .parkingBrake]
         return touchBar
     }
     
@@ -59,6 +61,14 @@ public struct MyTouchBar: NSTouchBarRepresentable {
             sliderTouchBarItem.slider.target = context.coordinator
             sliderTouchBarItem.slider.action = #selector(Coordinator.flapsChanged(_:))
             return sliderTouchBarItem
+        case .gear:
+            let toggle = NSButtonTouchBarItem(identifier: identifier, title: "Gear", target: context.coordinator, action: #selector(Coordinator.gearChanged(_:)))
+            toggle.customizationLabel = "Landing Gear"
+            return toggle
+        case .parkingBrake:
+            let toggle = NSButtonTouchBarItem(identifier: identifier, title: "Park", target: context.coordinator, action: #selector(Coordinator.parkingBrakeChanged(_:)))
+            toggle.customizationLabel = "Parking Brake"
+            return toggle
         default:
             return nil
         }
@@ -80,6 +90,24 @@ public struct MyTouchBar: NSTouchBarRepresentable {
         
         if let f = touchBar.item(forIdentifier: .flaps) as? NSSliderTouchBarItem {
             f.doubleValue = flaps
+        }
+        
+        if let g = touchBar.item(forIdentifier: .gear) as? NSButtonTouchBarItem {
+            switch gear {
+            case .down:
+                g.bezelColor = .systemBlue
+            case .up:
+                g.bezelColor = .darkGray
+            }
+        }
+        
+        if let b = touchBar.item(forIdentifier: .parkingBrake) as? NSButtonTouchBarItem {
+            switch parkingBrake {
+            case .on:
+                b.bezelColor = .systemRed
+            case .off:
+                b.bezelColor = .darkGray
+            }
         }
     }
     
@@ -115,6 +143,24 @@ public struct MyTouchBar: NSTouchBarRepresentable {
         @objc func flapsChanged(_ sender: NSSlider) {
             parent.flaps = sender.doubleValue
         }
+        
+        @objc func gearChanged(_ sender: NSButton) {
+            switch parent.gear {
+            case .up:
+                parent.gear = .down
+            case .down:
+                parent.gear = .up
+            }
+        }
+        
+        @objc func parkingBrakeChanged(_ sender: NSButton) {
+            switch parent.parkingBrake {
+            case .off:
+                parent.parkingBrake = .on
+            case .on:
+                parent.parkingBrake = .off
+            }
+        }
     }
 }
 
@@ -128,15 +174,17 @@ struct MyTouchBarModifier: ViewModifier {
     @Binding var pitch: Double
     @Binding var mixture: Double
     @Binding var flaps: Double
+    @Binding var gear: Gear
+    @Binding var parkingBrake: ParkingBrake
     
     func body(content: Content) -> some View {
-        let representable = MyTouchBar(throttle: $throttle, pitch: $pitch, mixture: $mixture, flaps: $flaps)
+        let representable = MyTouchBar(throttle: $throttle, pitch: $pitch, mixture: $mixture, flaps: $flaps, gear: $gear, parkingBrake: $parkingBrake)
         return NSTouchBarViewControllerRepresentable<Content, MyTouchBar>(content: {content}, representable: representable)
     }
 }
 
 extension View {
-    public func myTouchBar(throttle: Binding<Double>, pitch: Binding<Double>, mixture: Binding<Double>, flaps: Binding<Double>) -> some View {
-        self.modifier(MyTouchBarModifier(throttle: throttle, pitch: pitch, mixture: mixture, flaps: flaps))
+    func myTouchBar(throttle: Binding<Double>, pitch: Binding<Double>, mixture: Binding<Double>, flaps: Binding<Double>, gear: Binding<Gear>, parkingBrake: Binding<ParkingBrake>) -> some View {
+        self.modifier(MyTouchBarModifier(throttle: throttle, pitch: pitch, mixture: mixture, flaps: flaps, gear: gear, parkingBrake: parkingBrake))
     }
 }

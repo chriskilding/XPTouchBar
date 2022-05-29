@@ -6,6 +6,9 @@ struct DebugView: View {
     @Binding var pitch: Double
     @Binding var mixture: Double
     @Binding var flaps: Double
+    @Binding var gear: Gear
+    @Binding var parkingBrake: ParkingBrake
+    
     
     var body: some View {
         Form {
@@ -27,12 +30,24 @@ struct DebugView: View {
                 Text("Flaps")
             }
             .tint(Color.green)
+            
+            Picker("Gear", selection: $gear, content: {
+                Text("Down").tag(Gear.down)
+                Text("Up").tag(Gear.up)
+            })
+            .pickerStyle(.segmented)
+            
+            Picker("Parking Brake", selection: $parkingBrake, content: {
+                Text("On").tag(ParkingBrake.on)
+                Text("Off").tag(ParkingBrake.off)
+            })
+            .pickerStyle(.segmented)
         }
     }
 }
 
 struct DebugView_Previews: PreviewProvider {
     static var previews: some View {
-        DebugView(throttle: .constant(0), pitch: .constant(1), mixture: .constant(1), flaps: .constant(0))
+        DebugView(throttle: .constant(0), pitch: .constant(1), mixture: .constant(1), flaps: .constant(0), gear: .constant(.down), parkingBrake: .constant(.on))
     }
 }
