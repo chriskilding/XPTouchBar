@@ -1,6 +1,7 @@
 import AppKit
 
 extension NSTouchBarItem.Identifier {
+    static let speedbrake = NSTouchBarItem.Identifier("XPTouchBar.Speedbrake")
     static let flaps = NSTouchBarItem.Identifier("XPTouchBar.Flaps")
     static let throttle = NSTouchBarItem.Identifier("XPTouchBar.Throttle")
     static let mixture = NSTouchBarItem.Identifier("XPTouchBar.Mixture")

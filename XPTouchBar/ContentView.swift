@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct ContentView: View {
+    @Binding var speedbrake: Double
     @Binding var throttle: Double
     @Binding var pitch: Double
     @Binding var mixture: Double
@@ -26,7 +27,7 @@ struct ContentView: View {
                 }
                 .padding()
             
-            DebugView(throttle: $throttle, pitch: $pitch, mixture: $mixture, flaps: $flaps, gear: $gear, parkingBrake: $parkingBrake)
+            DebugView(speedbrake: $speedbrake, throttle: $throttle, pitch: $pitch, mixture: $mixture, flaps: $flaps, gear: $gear, parkingBrake: $parkingBrake)
                 .tabItem {
                     Text("Debug")
                 }

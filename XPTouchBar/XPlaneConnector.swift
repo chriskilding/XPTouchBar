@@ -67,6 +67,14 @@ class XPlaneConnector: ObservableObject {
         }
     }
     
+    @Published var speedbrake: Double = 0 {
+        didSet {
+            let dref = DREF(dataref: .SpeedbrakeRatio, value: Float(speedbrake))
+            let datagram = dref.data
+            self.send(datagram)
+        }
+    }
+    
     @Published var host: String = "127.0.0.1" {
         didSet {
             restart()

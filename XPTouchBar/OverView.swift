@@ -11,6 +11,7 @@ Choose the X-Plane controls that are shown in the Touch Bar.
 
 Available controls:
 
+\u{2022} Speedbrake
 \u{2022} Throttle
 \u{2022} Propeller Pitch
 \u{2022} Mixture
