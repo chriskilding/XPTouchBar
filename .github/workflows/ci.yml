@@ -10,4 +10,4 @@ jobs:
         with:
           code-coverage: true
           scheme: XPTouchBar
-          working-directory: .
+          working-directory: ../
