@@ -37,6 +37,44 @@ class XPlaneConnector: ObservableObject {
         }
     }
     
+    @Published var gear: Gear = .down {
+        didSet {
+            let value: Float
+            switch gear {
+            case .up:
+                value = 0
+            case .down:
+                value = 1
+            }
+            let dref = DREF(dataref: .GearHandleDown, value: value)
+            let datagram = dref.data
+            self.send(datagram)
+        }
+    }
+    
+    @Published var parkingBrake: ParkingBrake = .on {
+        didSet {
+            let value: Float
+            switch parkingBrake {
+            case .on:
+                value = 1
+            case .off:
+                value = 0
+            }
+            let dref = DREF(dataref: .ParkingBrakeRatio, value: value)
+            let datagram = dref.data
+            self.send(datagram)
+        }
+    }
+    
+    @Published var speedbrake: Double = 0 {
+        didSet {
+            let dref = DREF(dataref: .SpeedbrakeRatio, value: Float(speedbrake))
+            let datagram = dref.data
+            self.send(datagram)
+        }
+    }
+    
     @Published var host: String = "127.0.0.1" {
         didSet {
             restart()
@@ -202,6 +240,14 @@ enum Dataref {
     /// Units: ratio
     /// Since: 900+
     case SpeedbrakeRatio
+    
+    case GearHandleDown
+    
+    /// This is the overall brake requested by the parking brake button… 0.0 is none, 1.0 is complete.
+    /// Type: float
+    /// Units: ratio
+    /// Since: 900+
+    case ParkingBrakeRatio
 }
 
 extension Dataref: CustomStringConvertible {
@@ -218,6 +264,10 @@ extension Dataref: CustomStringConvertible {
             return "sim/cockpit2/controls/flap_ratio"
         case .SpeedbrakeRatio:
             return "sim/cockpit2/controls/speedbrake_ratio"
+        case .GearHandleDown:
+            return "sim/cockpit2/controls/gear_handle_down"
+        case .ParkingBrakeRatio:
+            return "sim/cockpit2/controls/parking_brake_ratio"
         }
     }
 }
@@ -236,6 +286,10 @@ extension Dataref {
             return 4
         case .SpeedbrakeRatio:
             return 5
+        case .GearHandleDown:
+            return 6
+        case .ParkingBrakeRatio:
+            return 7
         }
     }
 }

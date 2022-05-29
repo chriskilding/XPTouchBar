@@ -14,6 +14,7 @@
 		831184FC2836CC5B00BEDBA2 /* XPTouchBarUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 831184FB2836CC5B00BEDBA2 /* XPTouchBarUITests.swift */; };
 		831184FE2836CC5B00BEDBA2 /* XPTouchBarUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 831184FD2836CC5B00BEDBA2 /* XPTouchBarUITestsLaunchTests.swift */; };
 		8311850B2836D07600BEDBA2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8311850A2836D07600BEDBA2 /* AppDelegate.swift */; };
+		8357E2162843A73B0077B6B0 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8357E2152843A73B0077B6B0 /* Model.swift */; };
 		83B80E16283EC1AF007BAD6D /* NSTouchBarRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B80E15283EC1AF007BAD6D /* NSTouchBarRepresentable.swift */; };
 		83B80E18283EC28A007BAD6D /* MyTouchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B80E17283EC28A007BAD6D /* MyTouchBar.swift */; };
 		83B80E1A283F000B007BAD6D /* NSTouchBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B80E19283F000B007BAD6D /* NSTouchBarViewController.swift */; };
@@ -56,6 +57,7 @@
 		831184FB2836CC5B00BEDBA2 /* XPTouchBarUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XPTouchBarUITests.swift; sourceTree = "<group>"; };
 		831184FD2836CC5B00BEDBA2 /* XPTouchBarUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XPTouchBarUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		8311850A2836D07600BEDBA2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		8357E2152843A73B0077B6B0 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		83B80E15283EC1AF007BAD6D /* NSTouchBarRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSTouchBarRepresentable.swift; sourceTree = "<group>"; };
 		83B80E17283EC28A007BAD6D /* MyTouchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTouchBar.swift; sourceTree = "<group>"; };
 		83B80E19283F000B007BAD6D /* NSTouchBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSTouchBarViewController.swift; sourceTree = "<group>"; };
@@ -130,6 +132,7 @@
 				83EE3E9B2837FCEC004CA471 /* OverView.swift */,
 				83EE3E9D2837FFD5004CA471 /* TouchBarIdentifiers.swift */,
 				83C320792843906B000BF8A5 /* ConnectionView.swift */,
+				8357E2152843A73B0077B6B0 /* Model.swift */,
 			);
 			path = XPTouchBar;
 			sourceTree = "<group>";
@@ -310,6 +313,7 @@
 				83EE3E9E2837FFD5004CA471 /* TouchBarIdentifiers.swift in Sources */,
 				83EE3E9C2837FCEC004CA471 /* OverView.swift in Sources */,
 				83B80E16283EC1AF007BAD6D /* NSTouchBarRepresentable.swift in Sources */,
+				8357E2162843A73B0077B6B0 /* Model.swift in Sources */,
 				83B80E1A283F000B007BAD6D /* NSTouchBarViewController.swift in Sources */,
 				83B80E1C283F0038007BAD6D /* NSTouchBarViewControllerRepresentable.swift in Sources */,
 				8311850B2836D07600BEDBA2 /* AppDelegate.swift in Sources */,
