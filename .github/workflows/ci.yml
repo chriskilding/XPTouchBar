@@ -6,8 +6,7 @@ jobs:
   build:
     runs-on: macos-11
     steps:
-      - uses: mxcl/xcodebuild@v1
-        with:
-          code-coverage: true
-          scheme: XPTouchBar
-          working-directory: ../
+    - name: "Build"
+      uses: devbotsxyz/xcode-build@v1
+      with:
+        scheme: XPTouchBar
