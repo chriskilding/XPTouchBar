@@ -8,32 +8,28 @@ class XPlaneConnector: ObservableObject {
     @Published var throttle: Double = 0 {
         didSet {
             let dref = DREF(dataref: .ThrottleRatioAll, value: Float(throttle))
-            let datagram = dref.data
-            self.send(datagram)
+            self.send(dref.data)
         }
     }
     
     @Published var pitch: Double = 1 {
         didSet {
             let dref = DREF(dataref: .PropRatioAll, value: Float(pitch))
-            let datagram = dref.data
-            self.send(datagram)
+            self.send(dref.data)
         }
     }
     
     @Published var mixture: Double = 1 {
         didSet {
             let dref = DREF(dataref: .MixtureRatioAll, value: Float(mixture))
-            let datagram = dref.data
-            self.send(datagram)
+            self.send(dref.data)
         }
     }
     
     @Published var flaps: Double = 0 {
         didSet {
             let dref = DREF(dataref: .FlapRatio, value: Float(flaps))
-            let datagram = dref.data
-            self.send(datagram)
+            self.send(dref.data)
         }
     }
     
@@ -47,8 +43,7 @@ class XPlaneConnector: ObservableObject {
                 value = 1
             }
             let dref = DREF(dataref: .GearHandleDown, value: value)
-            let datagram = dref.data
-            self.send(datagram)
+            self.send(dref.data)
         }
     }
     
@@ -62,16 +57,14 @@ class XPlaneConnector: ObservableObject {
                 value = 0
             }
             let dref = DREF(dataref: .ParkingBrakeRatio, value: value)
-            let datagram = dref.data
-            self.send(datagram)
+            self.send(dref.data)
         }
     }
     
     @Published var speedbrake: Double = 0 {
         didSet {
             let dref = DREF(dataref: .SpeedbrakeRatio, value: Float(speedbrake))
-            let datagram = dref.data
-            self.send(datagram)
+            self.send(dref.data)
         }
     }
     
@@ -85,8 +78,7 @@ class XPlaneConnector: ObservableObject {
                 value = 0
             }
             let dref = DREF(dataref: .SimSpeed, value: value)
-            let datagram = dref.data
-            self.send(datagram)
+            self.send(dref.data)
         }
     }
     
@@ -102,29 +94,6 @@ class XPlaneConnector: ObservableObject {
         }
     }
     
-    // FIXME make the setter private
-    @Published var isConnected: Bool = false
-    
-    private var connection: NWConnection? = nil
-    
-    func restart() {
-        stop()
-        start()
-    }
-    
-    func start() {
-        let h = NWEndpoint.Host(host)
-        let p = NWEndpoint.Port(integerLiteral: NWEndpoint.Port.IntegerLiteralType(port))
-        connection = NWConnection(host: h, port: p, using: .udp)
-        connection?.start(queue: .global())
-        isConnected = true
-    }
-    
-    func stop() {
-        isConnected = false
-        connection?.cancel()
-    }
-
     func subscribe(to dataref: Dataref, handler: @escaping (Double) -> Void) {
         let id = dataref.id
         let rref = RREF(frequency: 60, id: id, dataref: dataref)
@@ -139,11 +108,31 @@ class XPlaneConnector: ObservableObject {
         send(datagram)
     }
     
+    private var connection: NWConnection? = nil
+    
+    func start() {
+        let h = NWEndpoint.Host(host)
+        let p = NWEndpoint.Port(integerLiteral: NWEndpoint.Port.IntegerLiteralType(port))
+        connection = NWConnection(host: h, port: p, using: .udp)
+        connection?.start(queue: .global())
+    }
+    
+    func stop() {
+        connection?.cancel()
+    }
+    
+    func restart() {
+        stop()
+        start()
+    }
+    
     func send(_ data: Data) {
-        if let c = connection,
-           c.state == .ready {
-            c.send(content: data, completion: .idempotent)
+        // wake it up
+        if connection?.state != .ready {
+            connection?.start(queue: .global())
         }
+        
+        connection?.send(content: data, completion: .idempotent)
     }
 }
 

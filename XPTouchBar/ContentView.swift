@@ -12,7 +12,6 @@ struct ContentView: View {
     
     @Binding var host: String
     @Binding var port: Int
-    @Binding var isConnected: Bool
     
     var body: some View {
         TabView {
@@ -22,7 +21,7 @@ struct ContentView: View {
                 }
                 .padding()
             
-            ConnectionView(host: $host, port: $port, isConnected: $isConnected)
+            ConnectionView(host: $host, port: $port)
                 .tabItem {
                     Text("Connection")
                 }
