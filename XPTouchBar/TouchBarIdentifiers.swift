@@ -8,6 +8,7 @@ extension NSTouchBarItem.Identifier {
     static let pitch = NSTouchBarItem.Identifier("XPTouchBar.Pitch")
     static let gear = NSTouchBarItem.Identifier("XPTouchBar.Gear")
     static let parkingBrake = NSTouchBarItem.Identifier("XPTouchBar.ParkingBrake")
+    static let simSpeed = NSTouchBarItem.Identifier("XPTouchBar.SimSpeed")
 }
 
 extension NSTouchBar.CustomizationIdentifier {

@@ -75,6 +75,21 @@ class XPlaneConnector: ObservableObject {
         }
     }
     
+    @Published var simSpeed: SimSpeed = .play {
+        didSet {
+            let value: Float
+            switch simSpeed {
+            case .play:
+                value = 1
+            case .pause:
+                value = 0
+            }
+            let dref = DREF(dataref: .SimSpeed, value: value)
+            let datagram = dref.data
+            self.send(datagram)
+        }
+    }
+    
     @Published var host: String = "127.0.0.1" {
         didSet {
             restart()
@@ -248,6 +263,12 @@ enum Dataref {
     /// Units: ratio
     /// Since: 900+
     case ParkingBrakeRatio
+    
+    /// This is the multiplier for real-time…1 = realtime, 2 = 2x, 0 = paused, etc.
+    /// Type: int
+    /// Units: ratio
+    /// Since: 860+
+    case SimSpeed
 }
 
 extension Dataref: CustomStringConvertible {
@@ -268,6 +289,8 @@ extension Dataref: CustomStringConvertible {
             return "sim/cockpit2/controls/gear_handle_down"
         case .ParkingBrakeRatio:
             return "sim/cockpit2/controls/parking_brake_ratio"
+        case .SimSpeed:
+            return "sim/time/sim_speed"
         }
     }
 }
@@ -290,6 +313,8 @@ extension Dataref {
             return 6
         case .ParkingBrakeRatio:
             return 7
+        case .SimSpeed:
+            return 8
         }
     }
 }

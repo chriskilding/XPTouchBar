@@ -8,6 +8,7 @@ struct ContentView: View {
     @Binding var flaps: Double
     @Binding var gear: Gear
     @Binding var parkingBrake: ParkingBrake
+    @Binding var simSpeed: SimSpeed
     
     @Binding var host: String
     @Binding var port: Int
@@ -27,7 +28,7 @@ struct ContentView: View {
                 }
                 .padding()
             
-            DebugView(speedbrake: $speedbrake, throttle: $throttle, pitch: $pitch, mixture: $mixture, flaps: $flaps, gear: $gear, parkingBrake: $parkingBrake)
+            DebugView(speedbrake: $speedbrake, throttle: $throttle, pitch: $pitch, mixture: $mixture, flaps: $flaps, gear: $gear, parkingBrake: $parkingBrake, simSpeed: $simSpeed)
                 .tabItem {
                     Text("Debug")
                 }

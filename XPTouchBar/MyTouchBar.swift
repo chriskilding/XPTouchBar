@@ -11,12 +11,13 @@ public struct MyTouchBar: NSTouchBarRepresentable {
     @Binding var flaps: Double
     @Binding var gear: Gear
     @Binding var parkingBrake: ParkingBrake
+    @Binding var simSpeed: SimSpeed
     
     func makeNSTouchBar(context: Context) -> NSTouchBar {
         let touchBar = NSTouchBar()
         touchBar.customizationIdentifier = .xpTouchBar
         touchBar.defaultItemIdentifiers = [.throttle, .mixture, .flaps]
-        touchBar.customizationAllowedItemIdentifiers = [.throttle, .pitch, .mixture, .flaps, .gear, .parkingBrake, .speedbrake]
+        touchBar.customizationAllowedItemIdentifiers = [.throttle, .pitch, .mixture, .flaps, .gear, .parkingBrake, .speedbrake, .simSpeed]
         return touchBar
     }
     
@@ -80,6 +81,11 @@ public struct MyTouchBar: NSTouchBarRepresentable {
             let toggle = NSButtonTouchBarItem(identifier: identifier, title: "Park", target: context.coordinator, action: #selector(Coordinator.parkingBrakeChanged(_:)))
             toggle.customizationLabel = "Parking Brake"
             return toggle
+        case .simSpeed:
+            let pauseImage = NSImage(systemSymbolName: "pause.fill", accessibilityDescription: "Pause")!
+            let toggle = NSButtonTouchBarItem(identifier: identifier, image: pauseImage, target: context.coordinator, action: #selector(Coordinator.simSpeedChanged(_:)))
+            toggle.customizationLabel = "Sim Speed"
+            return toggle
         default:
             return nil
         }
@@ -105,6 +111,15 @@ public struct MyTouchBar: NSTouchBarRepresentable {
         
         if let f = touchBar.item(forIdentifier: .flaps) as? NSSliderTouchBarItem {
             f.doubleValue = flaps
+        }
+        
+        if let sims = touchBar.item(forIdentifier: .simSpeed) as? NSButtonTouchBarItem {
+            switch simSpeed {
+            case .play:
+                sims.image = NSImage(systemSymbolName: "pause.fill", accessibilityDescription: "Pause")
+            case .pause:
+                sims.image = NSImage(systemSymbolName: "play.fill", accessibilityDescription: "Play")
+            }
         }
         
         if let g = touchBar.item(forIdentifier: .gear) as? NSButtonTouchBarItem {
@@ -163,6 +178,15 @@ public struct MyTouchBar: NSTouchBarRepresentable {
             parent.speedbrake = sender.doubleValue
         }
         
+        @objc func simSpeedChanged(_ sender: NSButton) {
+            switch parent.simSpeed {
+            case .pause:
+                parent.simSpeed = .play
+            case .play:
+                parent.simSpeed = .pause
+            }
+        }
+        
         @objc func gearChanged(_ sender: NSButton) {
             switch parent.gear {
             case .up:
@@ -196,15 +220,16 @@ struct MyTouchBarModifier: ViewModifier {
     @Binding var flaps: Double
     @Binding var gear: Gear
     @Binding var parkingBrake: ParkingBrake
+    @Binding var simSpeed: SimSpeed
     
     func body(content: Content) -> some View {
-        let representable = MyTouchBar(speedbrake: $speedbrake, throttle: $throttle, pitch: $pitch, mixture: $mixture, flaps: $flaps, gear: $gear, parkingBrake: $parkingBrake)
+        let representable = MyTouchBar(speedbrake: $speedbrake, throttle: $throttle, pitch: $pitch, mixture: $mixture, flaps: $flaps, gear: $gear, parkingBrake: $parkingBrake, simSpeed: $simSpeed)
         return NSTouchBarViewControllerRepresentable<Content, MyTouchBar>(content: {content}, representable: representable)
     }
 }
 
 extension View {
-    func myTouchBar(speedbrake: Binding<Double>, throttle: Binding<Double>, pitch: Binding<Double>, mixture: Binding<Double>, flaps: Binding<Double>, gear: Binding<Gear>, parkingBrake: Binding<ParkingBrake>) -> some View {
-        self.modifier(MyTouchBarModifier(speedbrake: speedbrake, throttle: throttle, pitch: pitch, mixture: mixture, flaps: flaps, gear: gear, parkingBrake: parkingBrake))
+    func myTouchBar(speedbrake: Binding<Double>, throttle: Binding<Double>, pitch: Binding<Double>, mixture: Binding<Double>, flaps: Binding<Double>, gear: Binding<Gear>, parkingBrake: Binding<ParkingBrake>, simSpeed: Binding<SimSpeed>) -> some View {
+        self.modifier(MyTouchBarModifier(speedbrake: speedbrake, throttle: throttle, pitch: pitch, mixture: mixture, flaps: flaps, gear: gear, parkingBrake: parkingBrake, simSpeed: simSpeed))
     }
 }

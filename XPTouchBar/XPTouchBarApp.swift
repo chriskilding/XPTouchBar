@@ -9,11 +9,11 @@ struct XPTouchBarApp: App {
             
     var body: some Scene {
         WindowGroup {
-            ContentView(speedbrake: $props.speedbrake, throttle: $props.throttle, pitch: $props.pitch, mixture: $props.mixture, flaps: $props.flaps, gear: $props.gear, parkingBrake: $props.parkingBrake, host: $props.host, port: $props.port, isConnected: $props.isConnected)
+            ContentView(speedbrake: $props.speedbrake, throttle: $props.throttle, pitch: $props.pitch, mixture: $props.mixture, flaps: $props.flaps, gear: $props.gear, parkingBrake: $props.parkingBrake, simSpeed: $props.simSpeed, host: $props.host, port: $props.port, isConnected: $props.isConnected)
                 .onAppear {
                     props.start()
                 }
-                .myTouchBar(speedbrake: $props.speedbrake, throttle: $props.throttle, pitch: $props.pitch, mixture: $props.mixture, flaps: $props.flaps, gear: $props.gear, parkingBrake: $props.parkingBrake)
+                .myTouchBar(speedbrake: $props.speedbrake, throttle: $props.throttle, pitch: $props.pitch, mixture: $props.mixture, flaps: $props.flaps, gear: $props.gear, parkingBrake: $props.parkingBrake, simSpeed: $props.simSpeed)
             
         }
         

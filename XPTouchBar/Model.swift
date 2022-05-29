@@ -1,6 +1,22 @@
 import Foundation
 import AppKit
 
+enum SimSpeed {
+    case play
+    case pause
+}
+
+extension SimSpeed: CustomStringConvertible {
+    var description: String {
+        switch self {
+        case .play:
+            return "Play"
+        case .pause:
+            return "Pause"
+        }
+    }
+}
+
 enum Gear {
     case up
     case down
@@ -68,3 +84,4 @@ struct Throttle: Control {
     static let name: String = "Throttle"
     static let symbol: String = "T"
 }
+

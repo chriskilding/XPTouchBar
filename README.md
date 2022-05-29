@@ -22,6 +22,7 @@ XPTouchBar has Touch Bar widgets for the following aircraft controls:
 - Flaps
 - Landing Gear
 - Parking Brake
+- Sim Speed (Play | Pause)
 
 ## Requirements
 

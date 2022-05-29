@@ -9,7 +9,7 @@ struct DebugView: View {
     @Binding var flaps: Double
     @Binding var gear: Gear
     @Binding var parkingBrake: ParkingBrake
-    
+    @Binding var simSpeed: SimSpeed
     
     var body: some View {
         Form {
@@ -49,12 +49,18 @@ struct DebugView: View {
                 Text(ParkingBrake.off.description).tag(ParkingBrake.off)
             })
             .pickerStyle(.segmented)
+            
+            Picker("Sim Speed", selection: $simSpeed, content: {
+                Text(SimSpeed.pause.description).tag(SimSpeed.pause)
+                Text("1x").tag(SimSpeed.play)
+            })
+            .pickerStyle(.segmented)
         }
     }
 }
 
 struct DebugView_Previews: PreviewProvider {
     static var previews: some View {
-        DebugView(speedbrake: .constant(0), throttle: .constant(0), pitch: .constant(1), mixture: .constant(1), flaps: .constant(0), gear: .constant(.down), parkingBrake: .constant(.on))
+        DebugView(speedbrake: .constant(0), throttle: .constant(0), pitch: .constant(1), mixture: .constant(1), flaps: .constant(0), gear: .constant(.down), parkingBrake: .constant(.on), simSpeed: .constant(.play))
     }
 }
