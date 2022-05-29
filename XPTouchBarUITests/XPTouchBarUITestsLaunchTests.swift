@@ -1,10 +1,3 @@
-//
-//  XPTouchBarUITestsLaunchTests.swift
-//  XPTouchBarUITests
-//
-//  Created by Chris Kilding on 19/05/2022.
-//
-
 import XCTest
 
 class XPTouchBarUITestsLaunchTests: XCTestCase {

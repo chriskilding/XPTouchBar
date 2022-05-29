@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "poweredtouchbar",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/pkasila/PoweredTouchBar",
+      "state" : {
+        "branch" : "main",
+        "revision" : "f259212915c8c4c2035efe93e2c5f9ebcd1af48d"
+      }
+    }
+  ],
+  "version" : 2
+}

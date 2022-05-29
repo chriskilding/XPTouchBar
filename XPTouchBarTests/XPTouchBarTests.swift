@@ -1,10 +1,3 @@
-//
-//  XPTouchBarTests.swift
-//  XPTouchBarTests
-//
-//  Created by Chris Kilding on 19/05/2022.
-//
-
 import XCTest
 @testable import XPTouchBar
 
