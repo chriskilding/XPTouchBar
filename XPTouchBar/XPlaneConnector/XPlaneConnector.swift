@@ -161,7 +161,7 @@ class XPlaneConnector: ObservableObject {
     private var connection: NWConnection? = nil
     
     deinit {
-        connection?.cancel()
+        stop()
     }
     
     func start() {
@@ -170,16 +170,24 @@ class XPlaneConnector: ObservableObject {
             switch newState {
             case .ready:
                 NSLog("X-Plane UDP connection ready")
+                
+                self.subscribe(to: .ThrottleRatioAll, frequency: 2)
+                
+                self.receive()
             case .cancelled:
                 NSLog("X-Plane UDP connection cancelled")
             default:
                 break
             }
         }
-        connection?.start(queue: .global())
+        connection?.start(queue: .init(label: "XPlaneConnector"))
     }
     
     func stop() {
+        NSLog("Stopping X-Plane UDP connection...")
+        
+        unsubscribe(from: .SimSpeed)
+        
         connection?.cancel()
     }
     
@@ -201,6 +209,30 @@ class XPlaneConnector: ObservableObject {
     
     private func send(_ data: Data) {
         connection?.send(content: data, completion: .idempotent)
+    }
+    
+    private func receive() {
+//        NSLog("Set X-Plane UDP connection receiveMessage handler")
+        
+        connection?.receiveMessage() { [weak self] (data, context, isComplete, error) in
+            NSLog("Got X-Plane message (isComplete: \(isComplete))")
+            if let data = data {
+                NSLog("Got data")
+                parseResponse(data)
+            }
+            
+            // Ensure we continue to receive messages
+            self?.receive()
+        }
+    }
+}
+
+fileprivate func parseResponse(_ data: Data) {
+    if let res = String(data: data, encoding: .utf8) {
+        NSLog(res)
+        if res.starts(with: "RREF") {
+            NSLog("Got RREF")
+        }
     }
 }
 

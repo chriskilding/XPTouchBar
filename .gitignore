@@ -7,3 +7,9 @@ xcuserdata
 .DS_Store
 *.xcresult
 *.swp
+
+## Xcode diff/merge tool
+*_BACKUP_*.*
+*_BASE_*.*
+*_LOCAL_*.*
+*_REMOTE_*.*
