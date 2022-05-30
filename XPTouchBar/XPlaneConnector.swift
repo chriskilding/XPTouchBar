@@ -94,9 +94,15 @@ class XPlaneConnector: ObservableObject {
         }
     }
     
-    func subscribe(to dataref: Dataref, handler: @escaping (Double) -> Void) {
+    func subscribe(to datarefs: [Dataref]) {
+        for dataref in datarefs {
+            subscribe(to: dataref)
+        }
+    }
+    
+    func subscribe(to dataref: Dataref) {
         let id = dataref.id
-        let rref = RREF(frequency: 60, id: id, dataref: dataref)
+        let rref = RREF(frequency: 10, id: id, dataref: dataref)
         let datagram = rref.data
         send(datagram)
     }
@@ -110,10 +116,20 @@ class XPlaneConnector: ObservableObject {
     
     private var connection: NWConnection? = nil
     
+    deinit {
+        connection?.cancel()
+    }
+    
     func start() {
-        let h = NWEndpoint.Host(host)
-        let p = NWEndpoint.Port(integerLiteral: NWEndpoint.Port.IntegerLiteralType(port))
-        connection = NWConnection(host: h, port: p, using: .udp)
+        connection = udpConnection(host: host, port: port)
+        connection?.stateUpdateHandler = { newState in
+            switch newState {
+            case .ready:
+                NSLog("XPlane UDP connection ready")
+            default:
+                break
+            }
+        }
         connection?.start(queue: .global())
     }
     
@@ -127,13 +143,17 @@ class XPlaneConnector: ObservableObject {
     }
     
     func send(_ data: Data) {
-        // wake it up
-        if connection?.state != .ready {
-            connection?.start(queue: .global())
-        }
-        
         connection?.send(content: data, completion: .idempotent)
     }
+}
+
+func udpConnection(host: String, port: Int) -> NWConnection {
+    let h = NWEndpoint.Host(host)
+    let p = NWEndpoint.Port(integerLiteral: NWEndpoint.Port.IntegerLiteralType(port))
+    let params: NWParameters = .udp
+    params.allowLocalEndpointReuse = true
+    params.allowFastOpen = true
+    return NWConnection(host: h, port: p, using: params)
 }
 
 protocol CustomDataConvertible {
@@ -189,7 +209,8 @@ class XPDatagramBuilder {
     }
     
     func append(_ int: Int) {
-        withUnsafeBytes(of: int) {
+        /// X-Plane ints are 4 byte
+        withUnsafeBytes(of: UInt32(int)) {
             data.append(contentsOf: $0)
         }
     }
