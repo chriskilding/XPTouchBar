@@ -9,11 +9,11 @@ struct XPTouchBarApp: App {
             
     var body: some Scene {
         WindowGroup {
-            ContentView(speedbrake: $props.speedbrake, throttle: $props.throttle, pitch: $props.pitch, mixture: $props.mixture, flaps: $props.flaps, gear: $props.gear, parkingBrake: $props.parkingBrake, simSpeed: $props.simSpeed, host: $props.host, port: $props.port)
+            ContentView(speedbrake: $props.speedbrake, throttle: $props.throttle, pitch: $props.pitch, mixture: $props.mixture, flaps: $props.flaps, gear: $props.gear, parkingBrake: $props.parkingBrake, simSpeed: $props.simSpeed, beaconLights: $props.beaconLights, landingLights: $props.landingLights, navigationLights: $props.navigationLights, strobeLights: $props.strobeLights, taxiLight: $props.taxiLight, cockpitLights: $props.cockpitLights, instrumentBrightness: $props.instrumentBrightness, host: $props.host, port: $props.port)
                 .onAppear {
                     props.start()
                 }
-                .myTouchBar(speedbrake: $props.speedbrake, throttle: $props.throttle, pitch: $props.pitch, mixture: $props.mixture, flaps: $props.flaps, gear: $props.gear, parkingBrake: $props.parkingBrake, simSpeed: $props.simSpeed)
+                .myTouchBar(speedbrake: $props.speedbrake, throttle: $props.throttle, pitch: $props.pitch, mixture: $props.mixture, flaps: $props.flaps, gear: $props.gear, parkingBrake: $props.parkingBrake, simSpeed: $props.simSpeed, beaconLights: $props.beaconLights, landingLights: $props.landingLights, navigationLights: $props.navigationLights, strobeLights: $props.strobeLights, taxiLight: $props.taxiLight, cockpitLights: $props.cockpitLights, instrumentBrightness: $props.instrumentBrightness)
             
         }
         

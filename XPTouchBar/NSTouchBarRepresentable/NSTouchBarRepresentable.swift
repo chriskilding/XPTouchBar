@@ -7,7 +7,7 @@ protocol NSTouchBarRepresentable {
     func makeNSTouchBar(context: Context) -> NSTouchBar
 
     /// Creates the specified item within the touch bar object.
-    func makeNSTouchBarItem(makeItemForIdentifier identifier: NSTouchBarItem.Identifier, context: Context) -> NSTouchBarItem?
+    func makeNSTouchBarItem(_ touchBar: NSTouchBar, makeItemForIdentifier identifier: NSTouchBarItem.Identifier, context: Context) -> NSTouchBarItem?
     
     /// Updates the state of the specified touch bar with new information from
     /// SwiftUI.

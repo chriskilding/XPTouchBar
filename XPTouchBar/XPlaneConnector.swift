@@ -82,6 +82,55 @@ class XPlaneConnector: ObservableObject {
         }
     }
     
+    @Published var landingLights: Bool = true {
+        didSet {
+            let dref = DREF(dataref: .LandingLightsOn, value: landingLights.floatValue)
+            self.send(dref.data)
+        }
+    }
+    
+    @Published var strobeLights: Bool = true {
+        didSet {
+            let dref = DREF(dataref: .StrobeLightsOn, value: strobeLights.floatValue)
+            self.send(dref.data)
+        }
+    }
+    
+    @Published var taxiLight: Bool = true {
+        didSet {
+            let dref = DREF(dataref: .TaxiLightOn, value: taxiLight.floatValue)
+            self.send(dref.data)
+        }
+    }
+    
+    @Published var beaconLights: Bool = true {
+        didSet {
+            let dref = DREF(dataref: .BeaconOn, value: beaconLights.floatValue)
+            self.send(dref.data)
+        }
+    }
+    
+    @Published var navigationLights: Bool = true {
+        didSet {
+            let dref = DREF(dataref: .NavigationLightsOn, value: navigationLights.floatValue)
+            self.send(dref.data)
+        }
+    }
+    
+    @Published var cockpitLights: Brightness = .min {
+        didSet {
+            let dref = DREF(dataref: .CockpitLights, value: cockpitLights.floatValue)
+            self.send(dref.data)
+        }
+    }
+    
+    @Published var instrumentBrightness: Brightness = .max {
+        didSet {
+            let dref = DREF(dataref: .InstrumentBrightness, value: instrumentBrightness.floatValue)
+            self.send(dref.data)
+        }
+    }
+    
     @Published var host: String = "127.0.0.1" {
         didSet {
             restart()
@@ -279,6 +328,25 @@ enum Dataref {
     /// Units: ratio
     /// Since: 860+
     case SimSpeed
+    
+    case BeaconOn
+    
+    case StrobeLightsOn
+    
+    case LandingLightsOn
+    
+    case TaxiLightOn
+    
+    case NavigationLightsOn
+    
+    /// Cockpit light level
+    /// Type: float
+    /// Units: ratio
+    /// Since: 660+
+    case CockpitLights
+    
+    /// Instrument LED lighting level
+    case InstrumentBrightness
 }
 
 extension Dataref: CustomStringConvertible {
@@ -301,6 +369,20 @@ extension Dataref: CustomStringConvertible {
             return "sim/cockpit2/controls/parking_brake_ratio"
         case .SimSpeed:
             return "sim/time/sim_speed"
+        case .BeaconOn:
+            return "sim/cockpit2/switches/beacon_on"
+        case .StrobeLightsOn:
+            return "sim/cockpit2/switches/strobe_lights_on"
+        case .LandingLightsOn:
+            return "sim/cockpit2/switches/landing_lights_on"
+        case .NavigationLightsOn:
+            return "sim/cockpit2/switches/navigation_lights_on"
+        case .TaxiLightOn:
+            return "sim/cockpit2/switches/taxi_light_on"
+        case .CockpitLights:
+            return "sim/cockpit/electrical/cockpit_lights"
+        case .InstrumentBrightness:
+            return "sim/cockpit/electrical/instrument_brightness"
         }
     }
 }
@@ -325,6 +407,49 @@ extension Dataref {
             return 7
         case .SimSpeed:
             return 8
+        case .LandingLightsOn:
+            return 9
+        case .StrobeLightsOn:
+            return 10
+        case .TaxiLightOn:
+            return 11
+        case .BeaconOn:
+            return 12
+        case .NavigationLightsOn:
+            return 13
+        case .CockpitLights:
+            return 14
+        case .InstrumentBrightness:
+            return 15
         }
     }
+}
+
+extension Bool: CustomFloatConvertible {
+    var floatValue: Float {
+        if self == true {
+            return 1
+        }
+        return 0
+    }
+    
+    
+}
+
+extension Brightness: CustomFloatConvertible {
+    var floatValue: Float {
+        switch self {
+        case .min:
+            return 0
+        case .mid:
+            return 0.5
+        case .max:
+            return 1
+        }
+    }
+}
+
+
+protocol CustomFloatConvertible {
+    var floatValue: Float { get }
 }

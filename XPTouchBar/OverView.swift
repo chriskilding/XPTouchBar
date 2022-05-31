@@ -18,6 +18,7 @@ Available controls:
 \u{2022} Flaps
 \u{2022} Landing Gear
 \u{2022} Parking Brake
+\u{2022} Lights
 \u{2022} Sim Speed (Play | Pause)
 """)
 

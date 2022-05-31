@@ -12,16 +12,23 @@ public struct MyTouchBar: NSTouchBarRepresentable {
     @Binding var gear: Gear
     @Binding var parkingBrake: ParkingBrake
     @Binding var simSpeed: SimSpeed
+    @Binding var beaconLights: Bool
+    @Binding var landingLights: Bool
+    @Binding var navigationLights: Bool
+    @Binding var strobeLights: Bool
+    @Binding var taxiLight: Bool
+    @Binding var cockpitLights: Brightness
+    @Binding var instrumentBrightness: Brightness
     
     func makeNSTouchBar(context: Context) -> NSTouchBar {
         let touchBar = NSTouchBar()
         touchBar.customizationIdentifier = .xpTouchBar
         touchBar.defaultItemIdentifiers = [.throttle, .mixture, .flaps]
-        touchBar.customizationAllowedItemIdentifiers = [.throttle, .pitch, .mixture, .flaps, .gear, .parkingBrake, .speedbrake, .simSpeed]
+        touchBar.customizationAllowedItemIdentifiers = [.throttle, .pitch, .mixture, .flaps, .gear, .parkingBrake, .speedbrake, .simSpeed, .lights]
         return touchBar
     }
     
-    func makeNSTouchBarItem(makeItemForIdentifier identifier: NSTouchBarItem.Identifier, context: Context) -> NSTouchBarItem? {
+    func makeNSTouchBarItem(_ touchBar: NSTouchBar, makeItemForIdentifier identifier: NSTouchBarItem.Identifier, context: Context) -> NSTouchBarItem? {
         switch identifier {
         case .speedbrake:
             let sliderTouchBarItem = NSSliderTouchBarItem(identifier: identifier)
@@ -86,6 +93,42 @@ public struct MyTouchBar: NSTouchBarRepresentable {
             let toggle = NSButtonTouchBarItem(identifier: identifier, image: pauseImage, target: context.coordinator, action: #selector(Coordinator.simSpeedChanged(_:)))
             toggle.customizationLabel = "Sim Speed"
             return toggle
+        case .beaconLight:
+            let toggle = NSButtonTouchBarItem(identifier: identifier, title: "Beacon", target: context.coordinator, action: #selector(Coordinator.beaconChanged(_:)))
+            toggle.customizationLabel = "Beacon Light"
+            return toggle
+        case .landingLights:
+            let toggle = NSButtonTouchBarItem(identifier: identifier, title: "Land", target: context.coordinator, action: #selector(Coordinator.landingChanged(_:)))
+            toggle.customizationLabel = "Landing Lights"
+            return toggle
+        case .navigationLights:
+            let toggle = NSButtonTouchBarItem(identifier: identifier, title: "Nav", target: context.coordinator, action: #selector(Coordinator.navigationChanged(_:)))
+            toggle.customizationLabel = "Navigation Lights"
+            return toggle
+        case.taxiLight:
+            let toggle = NSButtonTouchBarItem(identifier: identifier, title: "Taxi", target: context.coordinator, action: #selector(Coordinator.taxiChanged(_:)))
+            toggle.customizationLabel = "Taxi Light"
+            return toggle
+        case .strobeLights:
+            let toggle = NSButtonTouchBarItem(identifier: identifier, title: "Strobe", target: context.coordinator, action: #selector(Coordinator.strobeChanged(_:)))
+            toggle.customizationLabel = "Strobe Lights"
+            return toggle
+        case .cockpitLights:
+            let toggle = NSButtonTouchBarItem(identifier: identifier, title: "Cockpit", target: context.coordinator, action: #selector(Coordinator.cockpitLightsChanged(_:)))
+            toggle.customizationLabel = "Cockpit Lights"
+            return toggle
+        case .instrumentBrightness:
+            let toggle = NSButtonTouchBarItem(identifier: identifier, title: "Inst", target: context.coordinator, action: #selector(Coordinator.instrumentBrightnessChanged(_:)))
+            toggle.customizationLabel = "Instrument Brightness"
+            return toggle
+        case .lights:
+            let popover = NSPopoverTouchBarItem(identifier: identifier)
+            popover.customizationLabel = "Lights"
+            popover.collapsedRepresentationImage = NSImage(systemSymbolName: "lightbulb.fill", accessibilityDescription: "Lights")
+            popover.popoverTouchBar.customizationIdentifier = .lightsBar
+            popover.popoverTouchBar.defaultItemIdentifiers = [.beaconLight, .landingLights, .navigationLights, .strobeLights, .taxiLight, .flexibleSpace, .cockpitLights, .instrumentBrightness]
+            popover.popoverTouchBar.delegate = touchBar.delegate!
+            return popover
         default:
             return nil
         }
@@ -127,7 +170,7 @@ public struct MyTouchBar: NSTouchBarRepresentable {
             case .down:
                 g.bezelColor = .systemGray
             case .up:
-                g.bezelColor = .darkGray
+                g.bezelColor = .controlColor
             }
         }
         
@@ -136,7 +179,59 @@ public struct MyTouchBar: NSTouchBarRepresentable {
             case .on:
                 b.bezelColor = .systemRed
             case .off:
-                b.bezelColor = .darkGray
+                b.bezelColor = .controlColor
+            }
+        }
+        
+        if let l = touchBar.item(forIdentifier: .lights) as? NSPopoverTouchBarItem {
+            let lightsBar = l.popoverTouchBar
+            
+            if let beaconButton = lightsBar.item(forIdentifier: .beaconLight) as? NSButtonTouchBarItem {
+                if beaconLights {
+                    beaconButton.bezelColor = .systemYellow
+                } else {
+                    beaconButton.bezelColor = .controlColor
+                }
+            }
+            
+            if let landingButton = lightsBar.item(forIdentifier: .landingLights) as? NSButtonTouchBarItem {
+                if landingLights {
+                    landingButton.bezelColor = .systemYellow
+                } else {
+                    landingButton.bezelColor = .controlColor
+                }
+            }
+            
+            if let navigationButton = lightsBar.item(forIdentifier: .navigationLights) as? NSButtonTouchBarItem {
+                if navigationLights {
+                    navigationButton.bezelColor = .systemYellow
+                } else {
+                    navigationButton.bezelColor = .controlColor
+                }
+            }
+            
+            if let strobeButton = lightsBar.item(forIdentifier: .strobeLights) as? NSButtonTouchBarItem {
+                if strobeLights {
+                    strobeButton.bezelColor = .systemYellow
+                } else {
+                    strobeButton.bezelColor = .controlColor
+                }
+            }
+            
+            if let taxiButton = lightsBar.item(forIdentifier: .taxiLight) as? NSButtonTouchBarItem {
+                if taxiLight {
+                    taxiButton.bezelColor = .systemYellow
+                } else {
+                    taxiButton.bezelColor = .controlColor
+                }
+            }
+            
+            if let cockpitLightsButton = lightsBar.item(forIdentifier: .cockpitLights) as? NSButtonTouchBarItem {
+                cockpitLightsButton.bezelColor = cockpitLights.color
+            }
+            
+            if let instrumentBrightnessButton = lightsBar.item(forIdentifier: .instrumentBrightness) as? NSButtonTouchBarItem {
+                instrumentBrightnessButton.bezelColor = instrumentBrightness.color
             }
         }
     }
@@ -204,6 +299,34 @@ public struct MyTouchBar: NSTouchBarRepresentable {
                 parent.parkingBrake = .off
             }
         }
+        
+        @objc func beaconChanged(_ sender: NSButton) {
+            parent.beaconLights = !parent.beaconLights
+        }
+        
+        @objc func landingChanged(_ sender: NSButton) {
+            parent.landingLights = !parent.landingLights
+        }
+        
+        @objc func navigationChanged(_ sender: NSButton) {
+            parent.navigationLights = !parent.navigationLights
+        }
+        
+        @objc func taxiChanged(_ sender: NSButton) {
+            parent.taxiLight = !parent.taxiLight
+        }
+        
+        @objc func strobeChanged(_ sender: NSButton) {
+            parent.strobeLights = !parent.strobeLights
+        }
+        
+        @objc func cockpitLightsChanged(_ sender: NSButton) {
+            parent.cockpitLights = parent.cockpitLights.next
+        }
+        
+        @objc func instrumentBrightnessChanged(_ sender: NSButton) {
+            parent.instrumentBrightness = parent.instrumentBrightness.next
+        }
     }
 }
 
@@ -221,15 +344,23 @@ struct MyTouchBarModifier: ViewModifier {
     @Binding var gear: Gear
     @Binding var parkingBrake: ParkingBrake
     @Binding var simSpeed: SimSpeed
+    @Binding var beaconLights: Bool
+    @Binding var landingLights: Bool
+    @Binding var navigationLights: Bool
+    @Binding var strobeLights: Bool
+    @Binding var taxiLight: Bool
+    @Binding var cockpitLights: Brightness
+    @Binding var instrumentBrightness: Brightness
     
     func body(content: Content) -> some View {
-        let representable = MyTouchBar(speedbrake: $speedbrake, throttle: $throttle, pitch: $pitch, mixture: $mixture, flaps: $flaps, gear: $gear, parkingBrake: $parkingBrake, simSpeed: $simSpeed)
+        let representable = MyTouchBar(speedbrake: $speedbrake, throttle: $throttle, pitch: $pitch, mixture: $mixture, flaps: $flaps, gear: $gear, parkingBrake: $parkingBrake, simSpeed: $simSpeed, beaconLights: $beaconLights, landingLights: $landingLights, navigationLights: $navigationLights, strobeLights: $strobeLights, taxiLight: $taxiLight, cockpitLights: $cockpitLights, instrumentBrightness: $instrumentBrightness)
         return NSTouchBarViewControllerRepresentable<Content, MyTouchBar>(content: {content}, representable: representable)
     }
 }
 
 extension View {
-    func myTouchBar(speedbrake: Binding<Double>, throttle: Binding<Double>, pitch: Binding<Double>, mixture: Binding<Double>, flaps: Binding<Double>, gear: Binding<Gear>, parkingBrake: Binding<ParkingBrake>, simSpeed: Binding<SimSpeed>) -> some View {
-        self.modifier(MyTouchBarModifier(speedbrake: speedbrake, throttle: throttle, pitch: pitch, mixture: mixture, flaps: flaps, gear: gear, parkingBrake: parkingBrake, simSpeed: simSpeed))
+    func myTouchBar(speedbrake: Binding<Double>, throttle: Binding<Double>, pitch: Binding<Double>, mixture: Binding<Double>, flaps: Binding<Double>, gear: Binding<Gear>, parkingBrake: Binding<ParkingBrake>, simSpeed: Binding<SimSpeed>, beaconLights: Binding<Bool>, landingLights: Binding<Bool>, navigationLights: Binding<Bool>, strobeLights: Binding<Bool>, taxiLight: Binding<Bool>, cockpitLights: Binding<Brightness>, instrumentBrightness: Binding<Brightness>) -> some View {
+        self.modifier(MyTouchBarModifier(speedbrake: speedbrake, throttle: throttle, pitch: pitch, mixture: mixture, flaps: flaps, gear: gear, parkingBrake: parkingBrake, simSpeed: simSpeed, beaconLights: beaconLights, landingLights: landingLights, navigationLights: navigationLights, strobeLights: strobeLights, taxiLight: taxiLight, cockpitLights: cockpitLights, instrumentBrightness: instrumentBrightness))
     }
 }
+

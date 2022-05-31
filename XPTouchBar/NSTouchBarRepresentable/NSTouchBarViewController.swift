@@ -26,7 +26,7 @@ class NSTouchBarViewController<Content: View, Representable: NSTouchBarRepresent
     }
     
     func touchBar(_ touchBar: NSTouchBar, makeItemForIdentifier identifier: NSTouchBarItem.Identifier) -> NSTouchBarItem? {
-        return representable.makeNSTouchBarItem(makeItemForIdentifier: identifier, context: context)
+        return representable.makeNSTouchBarItem(touchBar, makeItemForIdentifier: identifier, context: context)
     }
     
     
