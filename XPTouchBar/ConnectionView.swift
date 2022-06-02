@@ -14,8 +14,35 @@ struct ConnectionView: View {
     
     var body: some View {
         Form {
+            Label("X-Plane UDP Connection", systemImage: "bolt.horizontal.fill")
             TextField("Host", text: $host)
-            Stepper("Port: \(portStr)", value: $port, in: 0...65535)
+            NumberTextField("Port", value: $port, range: 0...65535)
         }
+    }
+}
+
+fileprivate struct NumberTextField: View {
+    
+    let title: String
+    let value: Binding<Int>
+    let range: ClosedRange<Int>
+    
+    init(_ title: String, value: Binding<Int>, range: ClosedRange<Int>) {
+        self.title = title
+        self.value = value
+        self.range = range
+    }
+    
+    var body: some View {
+        TextField(title, text: Binding(
+            get: { String(value.wrappedValue) },
+            set: {
+                if let v = Int($0) {
+                    if range ~= v {
+                        value.wrappedValue = v
+                    }
+                }
+            }
+        ))
     }
 }

@@ -7,7 +7,7 @@ class NSTouchBarViewController<Content: View, Representable: NSTouchBarRepresent
     var representable: Representable!
     
     // TODO keep this framework-private
-    // TODO is this the best place to cache this?
+    // (is this the best place to cache the context?)
     var context: NSTouchBarRepresentableContext<Representable>!
     
     override func loadView() {

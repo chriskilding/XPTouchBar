@@ -1,11 +1,11 @@
 import SwiftUI
 
 struct ContentView: View {
-    @Binding var speedbrake: Double
-    @Binding var throttle: Double
-    @Binding var pitch: Double
-    @Binding var mixture: Double
-    @Binding var flaps: Double
+    @Binding var speedbrake: Float
+    @Binding var throttle: Float
+    @Binding var pitch: Float
+    @Binding var mixture: Float
+    @Binding var flaps: Float
     @Binding var gear: Gear
     @Binding var parkingBrake: ParkingBrake
     @Binding var simSpeed: SimSpeed

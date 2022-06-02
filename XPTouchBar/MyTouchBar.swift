@@ -4,11 +4,11 @@ import SwiftUI
 
 public struct MyTouchBar: NSTouchBarRepresentable {
     
-    @Binding var speedbrake: Double
-    @Binding var throttle: Double
-    @Binding var pitch: Double
-    @Binding var mixture: Double
-    @Binding var flaps: Double
+    @Binding var speedbrake: Float
+    @Binding var throttle: Float
+    @Binding var pitch: Float
+    @Binding var mixture: Float
+    @Binding var flaps: Float
     @Binding var gear: Gear
     @Binding var parkingBrake: ParkingBrake
     @Binding var simSpeed: SimSpeed
@@ -24,7 +24,7 @@ public struct MyTouchBar: NSTouchBarRepresentable {
         let touchBar = NSTouchBar()
         touchBar.customizationIdentifier = .xpTouchBar
         touchBar.defaultItemIdentifiers = [.throttle, .mixture, .flaps]
-        touchBar.customizationAllowedItemIdentifiers = [.throttle, .pitch, .mixture, .flaps, .gear, .parkingBrake, .speedbrake, .simSpeed, .lights]
+        touchBar.customizationAllowedItemIdentifiers = [.throttle, .pitch, .mixture, .flaps, .gear, .parkingBrake, .speedbrake, .simSpeed, .lights, .flexibleSpace]
         return touchBar
     }
     
@@ -32,9 +32,9 @@ public struct MyTouchBar: NSTouchBarRepresentable {
         switch identifier {
         case .speedbrake:
             let sliderTouchBarItem = NSSliderTouchBarItem(identifier: identifier)
-            sliderTouchBarItem.label = Speedbrake.symbol
-            sliderTouchBarItem.customizationLabel = Speedbrake.name
-            sliderTouchBarItem.slider.trackFillColor = Speedbrake.color
+            sliderTouchBarItem.label = "S"
+            sliderTouchBarItem.customizationLabel = "Speedbrake"
+            sliderTouchBarItem.slider.trackFillColor = .systemMint
             sliderTouchBarItem.slider.minValue = 0
             sliderTouchBarItem.slider.maxValue = 1
             sliderTouchBarItem.slider.target = context.coordinator
@@ -42,9 +42,9 @@ public struct MyTouchBar: NSTouchBarRepresentable {
             return sliderTouchBarItem
         case .throttle:
             let sliderTouchBarItem = NSSliderTouchBarItem(identifier: identifier)
-            sliderTouchBarItem.label = Throttle.symbol
-            sliderTouchBarItem.customizationLabel = Throttle.name
-            sliderTouchBarItem.slider.trackFillColor = Throttle.color
+            sliderTouchBarItem.label = "T"
+            sliderTouchBarItem.customizationLabel = "Throttle"
+            sliderTouchBarItem.slider.trackFillColor = .white
             sliderTouchBarItem.slider.minValue = 0
             sliderTouchBarItem.slider.maxValue = 1
             sliderTouchBarItem.slider.target = context.coordinator
@@ -52,9 +52,9 @@ public struct MyTouchBar: NSTouchBarRepresentable {
             return sliderTouchBarItem
         case .pitch:
             let sliderTouchBarItem = NSSliderTouchBarItem(identifier: identifier)
-            sliderTouchBarItem.label = Pitch.symbol
-            sliderTouchBarItem.customizationLabel = Pitch.name
-            sliderTouchBarItem.slider.trackFillColor = Pitch.color
+            sliderTouchBarItem.label = "P"
+            sliderTouchBarItem.customizationLabel = "Propeller Pitch"
+            sliderTouchBarItem.slider.trackFillColor = .systemBlue
             sliderTouchBarItem.slider.minValue = 0
             sliderTouchBarItem.slider.maxValue = 1
             sliderTouchBarItem.slider.target = context.coordinator
@@ -62,9 +62,9 @@ public struct MyTouchBar: NSTouchBarRepresentable {
             return sliderTouchBarItem
         case .mixture:
             let sliderTouchBarItem = NSSliderTouchBarItem(identifier: identifier)
-            sliderTouchBarItem.label = Mixture.symbol
-            sliderTouchBarItem.customizationLabel = Mixture.name
-            sliderTouchBarItem.slider.trackFillColor = Mixture.color
+            sliderTouchBarItem.label = "M"
+            sliderTouchBarItem.customizationLabel = "Mixture"
+            sliderTouchBarItem.slider.trackFillColor = .systemRed
             sliderTouchBarItem.slider.minValue = 0
             sliderTouchBarItem.slider.maxValue = 1
             sliderTouchBarItem.slider.target = context.coordinator
@@ -72,9 +72,9 @@ public struct MyTouchBar: NSTouchBarRepresentable {
             return sliderTouchBarItem
         case .flaps:
             let sliderTouchBarItem = NSSliderTouchBarItem(identifier: identifier)
-            sliderTouchBarItem.label = Flaps.symbol
-            sliderTouchBarItem.customizationLabel = Flaps.name
-            sliderTouchBarItem.slider.trackFillColor = Flaps.color
+            sliderTouchBarItem.label = "F"
+            sliderTouchBarItem.customizationLabel = "Flaps"
+            sliderTouchBarItem.slider.trackFillColor = .systemPurple
             sliderTouchBarItem.slider.minValue = 0
             sliderTouchBarItem.slider.maxValue = 1
             sliderTouchBarItem.slider.target = context.coordinator
@@ -89,9 +89,9 @@ public struct MyTouchBar: NSTouchBarRepresentable {
             toggle.customizationLabel = "Parking Brake"
             return toggle
         case .simSpeed:
-            let pauseImage = NSImage(systemSymbolName: "pause.fill", accessibilityDescription: "Pause")!
-            let toggle = NSButtonTouchBarItem(identifier: identifier, image: pauseImage, target: context.coordinator, action: #selector(Coordinator.simSpeedChanged(_:)))
-            toggle.customizationLabel = "Sim Speed"
+            let simSpeedImage = NSImage(systemSymbolName: "playpause.fill", accessibilityDescription: "Sim Speed")!
+            let toggle = NSButtonTouchBarItem(identifier: identifier, image: simSpeedImage, target: context.coordinator, action: #selector(Coordinator.simSpeedChanged(_:)))
+            toggle.customizationLabel = "Simulation Speed"
             return toggle
         case .beaconLight:
             let toggle = NSButtonTouchBarItem(identifier: identifier, title: "Beacon", target: context.coordinator, action: #selector(Coordinator.beaconChanged(_:)))
@@ -118,7 +118,7 @@ public struct MyTouchBar: NSTouchBarRepresentable {
             toggle.customizationLabel = "Cockpit Lights"
             return toggle
         case .instrumentBrightness:
-            let toggle = NSButtonTouchBarItem(identifier: identifier, title: "Inst", target: context.coordinator, action: #selector(Coordinator.instrumentBrightnessChanged(_:)))
+            let toggle = NSButtonTouchBarItem(identifier: identifier, title: "Instr", target: context.coordinator, action: #selector(Coordinator.instrumentBrightnessChanged(_:)))
             toggle.customizationLabel = "Instrument Brightness"
             return toggle
         case .lights:
@@ -127,6 +127,7 @@ public struct MyTouchBar: NSTouchBarRepresentable {
             popover.collapsedRepresentationImage = NSImage(systemSymbolName: "lightbulb.fill", accessibilityDescription: "Lights")
             popover.popoverTouchBar.customizationIdentifier = .lightsBar
             popover.popoverTouchBar.defaultItemIdentifiers = [.beaconLight, .landingLights, .navigationLights, .strobeLights, .taxiLight, .flexibleSpace, .cockpitLights, .instrumentBrightness]
+            // This method will also construct the items of the popover touchbar
             popover.popoverTouchBar.delegate = touchBar.delegate!
             return popover
         default:
@@ -137,40 +138,40 @@ public struct MyTouchBar: NSTouchBarRepresentable {
     // SwiftUI -> AppKit updates
     func updateNSTouchBar(_ touchBar: NSTouchBar, context: Context) {
         if let s = touchBar.item(forIdentifier: .speedbrake) as? NSSliderTouchBarItem {
-            s.doubleValue = speedbrake
+            s.doubleValue = Double(speedbrake)
         }
         
         if let t = touchBar.item(forIdentifier: .throttle) as? NSSliderTouchBarItem {
-            t.doubleValue = throttle
+            t.doubleValue = Double(throttle)
         }
         
         if let p = touchBar.item(forIdentifier: .pitch) as? NSSliderTouchBarItem {
-            p.doubleValue = pitch
+            p.doubleValue = Double(pitch)
         }
         
         if let m = touchBar.item(forIdentifier: .mixture) as? NSSliderTouchBarItem {
-            m.doubleValue = mixture
+            m.doubleValue = Double(mixture)
         }
         
         if let f = touchBar.item(forIdentifier: .flaps) as? NSSliderTouchBarItem {
-            f.doubleValue = flaps
-        }
-        
-        if let sims = touchBar.item(forIdentifier: .simSpeed) as? NSButtonTouchBarItem {
-            switch simSpeed {
-            case .play:
-                sims.image = NSImage(systemSymbolName: "pause.fill", accessibilityDescription: "Pause")
-            case .pause:
-                sims.image = NSImage(systemSymbolName: "play.fill", accessibilityDescription: "Play")
-            }
+            f.doubleValue = Double(flaps)
         }
         
         if let g = touchBar.item(forIdentifier: .gear) as? NSButtonTouchBarItem {
             switch gear {
             case .down:
-                g.bezelColor = .systemGray
+                g.bezelColor = .systemGreen
             case .up:
                 g.bezelColor = .controlColor
+            }
+        }
+        
+        if let ss = touchBar.item(forIdentifier: .simSpeed) as? NSButtonTouchBarItem {
+            switch simSpeed {
+            case .pause:
+                ss.image = NSImage(systemSymbolName: "play.fill", accessibilityDescription: "Play")
+            case .x1:
+                ss.image = NSImage(systemSymbolName: "pause.fill", accessibilityDescription: "Pause")
             }
         }
         
@@ -237,7 +238,7 @@ public struct MyTouchBar: NSTouchBarRepresentable {
     }
     
     static func dismantleNSTouchBar(_ touchBar: NSTouchBar, coordinator: Coordinator) {
-        // optional
+        // no-op
     }
     
     func makeCoordinator() -> Coordinator {
@@ -254,50 +255,35 @@ public struct MyTouchBar: NSTouchBarRepresentable {
         // AppKit -> SwiftUI updates
         
         @objc func throttleChanged(_ sender: NSSlider) {
-            parent.throttle = sender.doubleValue
+            parent.throttle = sender.floatValue
         }
         
         @objc func pitchChanged(_ sender: NSSlider) {
-            parent.pitch = sender.doubleValue
+            parent.pitch = sender.floatValue
         }
         
         @objc func mixtureChanged(_ sender: NSSlider) {
-            parent.mixture = sender.doubleValue
+            parent.mixture = sender.floatValue
         }
         
         @objc func flapsChanged(_ sender: NSSlider) {
-            parent.flaps = sender.doubleValue
+            parent.flaps = sender.floatValue
         }
         
         @objc func speedbrakeChanged(_ sender: NSSlider) {
-            parent.speedbrake = sender.doubleValue
+            parent.speedbrake = sender.floatValue
         }
         
         @objc func simSpeedChanged(_ sender: NSButton) {
-            switch parent.simSpeed {
-            case .pause:
-                parent.simSpeed = .play
-            case .play:
-                parent.simSpeed = .pause
-            }
+            parent.simSpeed = parent.simSpeed.opposite
         }
         
         @objc func gearChanged(_ sender: NSButton) {
-            switch parent.gear {
-            case .up:
-                parent.gear = .down
-            case .down:
-                parent.gear = .up
-            }
+            parent.gear = parent.gear.opposite
         }
         
         @objc func parkingBrakeChanged(_ sender: NSButton) {
-            switch parent.parkingBrake {
-            case .off:
-                parent.parkingBrake = .on
-            case .on:
-                parent.parkingBrake = .off
-            }
+            parent.parkingBrake = parent.parkingBrake.opposite
         }
         
         @objc func beaconChanged(_ sender: NSButton) {
@@ -336,11 +322,11 @@ public struct MyTouchBar: NSTouchBarRepresentable {
 
 struct MyTouchBarModifier: ViewModifier {
     
-    @Binding var speedbrake: Double
-    @Binding var throttle: Double
-    @Binding var pitch: Double
-    @Binding var mixture: Double
-    @Binding var flaps: Double
+    @Binding var speedbrake: Float
+    @Binding var throttle: Float
+    @Binding var pitch: Float
+    @Binding var mixture: Float
+    @Binding var flaps: Float
     @Binding var gear: Gear
     @Binding var parkingBrake: ParkingBrake
     @Binding var simSpeed: SimSpeed
@@ -359,7 +345,7 @@ struct MyTouchBarModifier: ViewModifier {
 }
 
 extension View {
-    func myTouchBar(speedbrake: Binding<Double>, throttle: Binding<Double>, pitch: Binding<Double>, mixture: Binding<Double>, flaps: Binding<Double>, gear: Binding<Gear>, parkingBrake: Binding<ParkingBrake>, simSpeed: Binding<SimSpeed>, beaconLights: Binding<Bool>, landingLights: Binding<Bool>, navigationLights: Binding<Bool>, strobeLights: Binding<Bool>, taxiLight: Binding<Bool>, cockpitLights: Binding<Brightness>, instrumentBrightness: Binding<Brightness>) -> some View {
+    func myTouchBar(speedbrake: Binding<Float>, throttle: Binding<Float>, pitch: Binding<Float>, mixture: Binding<Float>, flaps: Binding<Float>, gear: Binding<Gear>, parkingBrake: Binding<ParkingBrake>, simSpeed: Binding<SimSpeed>, beaconLights: Binding<Bool>, landingLights: Binding<Bool>, navigationLights: Binding<Bool>, strobeLights: Binding<Bool>, taxiLight: Binding<Bool>, cockpitLights: Binding<Brightness>, instrumentBrightness: Binding<Brightness>) -> some View {
         self.modifier(MyTouchBarModifier(speedbrake: speedbrake, throttle: throttle, pitch: pitch, mixture: mixture, flaps: flaps, gear: gear, parkingBrake: parkingBrake, simSpeed: simSpeed, beaconLights: beaconLights, landingLights: landingLights, navigationLights: navigationLights, strobeLights: strobeLights, taxiLight: taxiLight, cockpitLights: cockpitLights, instrumentBrightness: instrumentBrightness))
     }
 }
