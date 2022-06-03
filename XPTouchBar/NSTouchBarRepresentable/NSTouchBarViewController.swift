@@ -11,7 +11,7 @@ class NSTouchBarViewController<Content: View, Representable: NSTouchBarRepresent
     var context: NSTouchBarRepresentableContext<Representable>!
     
     override func loadView() {
-        self.view = NSHostingView(rootView: content())
+        self.view = NSHostingView(rootView: content().focusable())
     }
     
     override func viewDidLoad() {

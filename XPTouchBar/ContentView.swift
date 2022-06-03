@@ -7,39 +7,51 @@ struct ContentView: View {
     @Binding var mixture: Float
     @Binding var flaps: Float
     @Binding var gear: Gear
-    @Binding var parkingBrake: ParkingBrake
+    @Binding var parkingBrake: Bool
     @Binding var simSpeed: SimSpeed
     @Binding var beaconLights: Bool
     @Binding var landingLights: Bool
     @Binding var navigationLights: Bool
     @Binding var strobeLights: Bool
     @Binding var taxiLight: Bool
-    @Binding var cockpitLights: Brightness
-    @Binding var instrumentBrightness: Brightness
     
     @Binding var host: String
     @Binding var port: Int
     
-    var body: some View {
-        TabView {
-            OverView()
-                .tabItem {
-                    Text("Overview")
-                }
+    @State var selectedView: MyTab = .touchBar
+    
+    @ViewBuilder var childView: some View {
+        switch selectedView {
+        case .touchBar:
+            TouchBarView()
                 .padding()
-            
-            ConnectionView(host: $host, port: $port)
-                .tabItem {
-                    Text("Connection")
-                }
-                .padding()
-            
-            DebugView(speedbrake: $speedbrake, throttle: $throttle, pitch: $pitch, mixture: $mixture, flaps: $flaps, gear: $gear, parkingBrake: $parkingBrake, simSpeed: $simSpeed, beaconLights: $beaconLights, landingLights: $landingLights, navigationLights: $navigationLights, strobeLights: $strobeLights, taxiLight: $taxiLight, cockpitLights: $cockpitLights, instrumentBrightness: $instrumentBrightness)
-                .tabItem {
-                    Text("Debug")
-                }
-                .padding()
+        case .manuals:
+            ManualsView()
+        case .debug:
+            DebugView(speedbrake: $speedbrake, throttle: $throttle, pitch: $pitch, mixture: $mixture, flaps: $flaps, gear: $gear, parkingBrake: $parkingBrake, simSpeed: $simSpeed, beaconLights: $beaconLights, landingLights: $landingLights, navigationLights: $navigationLights, strobeLights: $strobeLights, taxiLight: $taxiLight)
         }
-        .padding()
     }
+    
+    var body: some View {
+        childView
+            .toolbar {
+                Spacer()
+                
+                Picker("", selection: $selectedView) {
+                    Text("Touch Bar").tag(MyTab.touchBar)
+                    Text("Manuals").tag(MyTab.manuals)
+                    Text("Debug").tag(MyTab.debug)
+                }
+                .pickerStyle(.segmented)
+                
+                
+                Spacer()
+            }
+    }
+}
+
+enum MyTab {
+    case touchBar
+    case manuals
+    case debug
 }

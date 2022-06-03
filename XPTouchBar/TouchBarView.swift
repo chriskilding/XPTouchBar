@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct OverView: View {
+struct TouchBarView: View {
     
     var body: some View {
         VStack {

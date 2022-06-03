@@ -76,17 +76,10 @@ enum Dataref {
     /// Since: 900+
     case NavigationLightsOn
     
-    /// Cockpit light level
-    /// Type: float
-    /// Units: ratio
-    /// Since: 660+
-    case CockpitLights
-    
-    /// Instrument LED lighting level
-    /// Type: float
-    /// Units: ratio
-    /// Since: 762+
-    case InstrumentBrightness
+    /// Is the yoke visible in the 3-d cockpit?
+    /// Type: int
+    /// Since: 1041+
+    case HideYoke
 }
 
 extension Dataref: CustomStringConvertible {
@@ -119,10 +112,8 @@ extension Dataref: CustomStringConvertible {
             return "sim/cockpit2/switches/navigation_lights_on"
         case .TaxiLightOn:
             return "sim/cockpit2/switches/taxi_light_on"
-        case .CockpitLights:
-            return "sim/cockpit/electrical/cockpit_lights"
-        case .InstrumentBrightness:
-            return "sim/cockpit/electrical/instrument_brightness"
+        case .HideYoke:
+            return "sim/graphics/view/hide_yoke"
         }
     }
 }

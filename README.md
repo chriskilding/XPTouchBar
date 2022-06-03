@@ -83,7 +83,7 @@ You can add any controls that you find useful. Here are some suggestions:
 
 XPTouchBar connects over X-Plane's UDP connection. By default it connects to X-Plane on the same machine (`localhost:49000`).
 
-If X-Plane is running on a different host or port, use the `Connection` tab in XPTouchBar to change your connection settings.
+If X-Plane is running on a different host or port, go to `XPTouchBar` → `Preferences` to change the connection settings.
 
 ## Recommendations
 

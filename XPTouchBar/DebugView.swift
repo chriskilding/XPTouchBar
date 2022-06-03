@@ -8,15 +8,13 @@ struct DebugView: View {
     @Binding var mixture: Float
     @Binding var flaps: Float
     @Binding var gear: Gear
-    @Binding var parkingBrake: ParkingBrake
+    @Binding var parkingBrake: Bool
     @Binding var simSpeed: SimSpeed
     @Binding var beaconLights: Bool
     @Binding var landingLights: Bool
     @Binding var navigationLights: Bool
     @Binding var strobeLights: Bool
     @Binding var taxiLight: Bool
-    @Binding var cockpitLights: Brightness
-    @Binding var instrumentBrightness: Brightness
     
     fileprivate var entries: [Entry] {
         return [
@@ -33,8 +31,6 @@ struct DebugView: View {
             Entry(dataref: Dataref.NavigationLightsOn, value: navigationLights),
             Entry(dataref: Dataref.StrobeLightsOn, value: strobeLights),
             Entry(dataref: Dataref.TaxiLightOn, value: taxiLight),
-            Entry(dataref: Dataref.CockpitLights, value: cockpitLights),
-            Entry(dataref: Dataref.InstrumentBrightness, value: instrumentBrightness)
         ].sorted(using: sortOrder)
     }
     
@@ -50,7 +46,7 @@ struct DebugView: View {
 
 struct DebugView_Previews: PreviewProvider {
     static var previews: some View {
-        DebugView(speedbrake: .constant(0), throttle: .constant(0), pitch: .constant(1), mixture: .constant(1), flaps: .constant(0), gear: .constant(.down), parkingBrake: .constant(.on), simSpeed: .constant(.x1), beaconLights: .constant(true), landingLights: .constant(true), navigationLights: .constant(true), strobeLights: .constant(true), taxiLight: .constant(true), cockpitLights: .constant(.min), instrumentBrightness: .constant(.max))
+        DebugView(speedbrake: .constant(0), throttle: .constant(0), pitch: .constant(1), mixture: .constant(1), flaps: .constant(0), gear: .constant(.down), parkingBrake: .constant(true), simSpeed: .constant(.x1), beaconLights: .constant(true), landingLights: .constant(true), navigationLights: .constant(true), strobeLights: .constant(true), taxiLight: .constant(true))
     }
 }
 

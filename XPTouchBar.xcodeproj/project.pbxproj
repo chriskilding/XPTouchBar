@@ -13,9 +13,9 @@
 		831184FC2836CC5B00BEDBA2 /* XPTouchBarUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 831184FB2836CC5B00BEDBA2 /* XPTouchBarUITests.swift */; };
 		831184FE2836CC5B00BEDBA2 /* XPTouchBarUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 831184FD2836CC5B00BEDBA2 /* XPTouchBarUITestsLaunchTests.swift */; };
 		8311850B2836D07600BEDBA2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8311850A2836D07600BEDBA2 /* AppDelegate.swift */; };
+		8346631C2849773E002C09AE /* ManualsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8346631B2849773E002C09AE /* ManualsView.swift */; };
 		8357E2162843A73B0077B6B0 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8357E2152843A73B0077B6B0 /* Model.swift */; };
 		83B80E16283EC1AF007BAD6D /* NSTouchBarRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B80E15283EC1AF007BAD6D /* NSTouchBarRepresentable.swift */; };
-		83B80E18283EC28A007BAD6D /* MyTouchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B80E17283EC28A007BAD6D /* MyTouchBar.swift */; };
 		83B80E1A283F000B007BAD6D /* NSTouchBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B80E19283F000B007BAD6D /* NSTouchBarViewController.swift */; };
 		83B80E1C283F0038007BAD6D /* NSTouchBarViewControllerRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B80E1B283F0038007BAD6D /* NSTouchBarViewControllerRepresentable.swift */; };
 		83B80E1E283F9480007BAD6D /* XPlaneConnector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B80E1D283F9480007BAD6D /* XPlaneConnector.swift */; };
@@ -25,14 +25,13 @@
 		83EC623728477EEC008D0D0C /* CustomFloatConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EC623628477EEC008D0D0C /* CustomFloatConvertible.swift */; };
 		83EC623B28478F6F008D0D0C /* CustomDataConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EC623A28478F6F008D0D0C /* CustomDataConvertible.swift */; };
 		83EC623D2847983A008D0D0C /* RREFTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EC623C2847983A008D0D0C /* RREFTests.swift */; };
-		83EC623F2847A6CD008D0D0C /* BrightnessTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EC623E2847A6CD008D0D0C /* BrightnessTests.swift */; };
 		83EC62412847A7CB008D0D0C /* XPDatagramBuilderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EC62402847A7CB008D0D0C /* XPDatagramBuilderTests.swift */; };
 		83EC62442847ABF2008D0D0C /* XPDatagramBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EC62432847ABF2008D0D0C /* XPDatagramBuilder.swift */; };
 		83EC62462847AC61008D0D0C /* DREF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EC62452847AC61008D0D0C /* DREF.swift */; };
 		83EC62482847AC78008D0D0C /* RREF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EC62472847AC78008D0D0C /* RREF.swift */; };
 		83EE3E952837B05D004CA471 /* DebugView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EE3E942837B05D004CA471 /* DebugView.swift */; };
 		83EE3E9A2837FCAF004CA471 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EE3E992837FCAF004CA471 /* ContentView.swift */; };
-		83EE3E9C2837FCEC004CA471 /* OverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EE3E9B2837FCEC004CA471 /* OverView.swift */; };
+		83EE3E9C2837FCEC004CA471 /* TouchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EE3E9B2837FCEC004CA471 /* TouchBarView.swift */; };
 		83EE3E9E2837FFD5004CA471 /* TouchBarIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EE3E9D2837FFD5004CA471 /* TouchBarIdentifiers.swift */; };
 /* End PBXBuildFile section */
 
@@ -64,9 +63,9 @@
 		831184FB2836CC5B00BEDBA2 /* XPTouchBarUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XPTouchBarUITests.swift; sourceTree = "<group>"; };
 		831184FD2836CC5B00BEDBA2 /* XPTouchBarUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XPTouchBarUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		8311850A2836D07600BEDBA2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		8346631B2849773E002C09AE /* ManualsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManualsView.swift; sourceTree = "<group>"; };
 		8357E2152843A73B0077B6B0 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		83B80E15283EC1AF007BAD6D /* NSTouchBarRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSTouchBarRepresentable.swift; sourceTree = "<group>"; };
-		83B80E17283EC28A007BAD6D /* MyTouchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTouchBar.swift; sourceTree = "<group>"; };
 		83B80E19283F000B007BAD6D /* NSTouchBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSTouchBarViewController.swift; sourceTree = "<group>"; };
 		83B80E1B283F0038007BAD6D /* NSTouchBarViewControllerRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSTouchBarViewControllerRepresentable.swift; sourceTree = "<group>"; };
 		83B80E1D283F9480007BAD6D /* XPlaneConnector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XPlaneConnector.swift; sourceTree = "<group>"; };
@@ -76,14 +75,13 @@
 		83EC623628477EEC008D0D0C /* CustomFloatConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomFloatConvertible.swift; sourceTree = "<group>"; };
 		83EC623A28478F6F008D0D0C /* CustomDataConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDataConvertible.swift; sourceTree = "<group>"; };
 		83EC623C2847983A008D0D0C /* RREFTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RREFTests.swift; sourceTree = "<group>"; };
-		83EC623E2847A6CD008D0D0C /* BrightnessTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrightnessTests.swift; sourceTree = "<group>"; };
 		83EC62402847A7CB008D0D0C /* XPDatagramBuilderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XPDatagramBuilderTests.swift; sourceTree = "<group>"; };
 		83EC62432847ABF2008D0D0C /* XPDatagramBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XPDatagramBuilder.swift; sourceTree = "<group>"; };
 		83EC62452847AC61008D0D0C /* DREF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DREF.swift; sourceTree = "<group>"; };
 		83EC62472847AC78008D0D0C /* RREF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RREF.swift; sourceTree = "<group>"; };
 		83EE3E942837B05D004CA471 /* DebugView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugView.swift; sourceTree = "<group>"; };
 		83EE3E992837FCAF004CA471 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		83EE3E9B2837FCEC004CA471 /* OverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverView.swift; sourceTree = "<group>"; };
+		83EE3E9B2837FCEC004CA471 /* TouchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchBarView.swift; sourceTree = "<group>"; };
 		83EE3E9D2837FFD5004CA471 /* TouchBarIdentifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchBarIdentifiers.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -138,7 +136,6 @@
 				83EC623A28478F6F008D0D0C /* CustomDataConvertible.swift */,
 				83EC62422847ABBE008D0D0C /* XPlaneConnector */,
 				83EC623628477EEC008D0D0C /* CustomFloatConvertible.swift */,
-				83B80E17283EC28A007BAD6D /* MyTouchBar.swift */,
 				8311850F2836DF1A00BEDBA2 /* NSTouchBarRepresentable */,
 				831184DF2836CC5600BEDBA2 /* XPTouchBarApp.swift */,
 				831184E32836CC5B00BEDBA2 /* Assets.xcassets */,
@@ -147,10 +144,11 @@
 				8311850A2836D07600BEDBA2 /* AppDelegate.swift */,
 				83EE3E942837B05D004CA471 /* DebugView.swift */,
 				83EE3E992837FCAF004CA471 /* ContentView.swift */,
-				83EE3E9B2837FCEC004CA471 /* OverView.swift */,
+				83EE3E9B2837FCEC004CA471 /* TouchBarView.swift */,
 				83EE3E9D2837FFD5004CA471 /* TouchBarIdentifiers.swift */,
 				83C320792843906B000BF8A5 /* ConnectionView.swift */,
 				8357E2152843A73B0077B6B0 /* Model.swift */,
+				8346631B2849773E002C09AE /* ManualsView.swift */,
 			);
 			path = XPTouchBar;
 			sourceTree = "<group>";
@@ -167,7 +165,6 @@
 			isa = PBXGroup;
 			children = (
 				83EC62492847ACAC008D0D0C /* XPlaneConnector */,
-				83EC623E2847A6CD008D0D0C /* BrightnessTests.swift */,
 			);
 			path = XPTouchBarTests;
 			sourceTree = "<group>";
@@ -348,12 +345,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				83EE3E952837B05D004CA471 /* DebugView.swift in Sources */,
-				83B80E18283EC28A007BAD6D /* MyTouchBar.swift in Sources */,
 				83EE3E9A2837FCAF004CA471 /* ContentView.swift in Sources */,
 				83EE3E9E2837FFD5004CA471 /* TouchBarIdentifiers.swift in Sources */,
+				8346631C2849773E002C09AE /* ManualsView.swift in Sources */,
 				83EC62462847AC61008D0D0C /* DREF.swift in Sources */,
 				83EC62442847ABF2008D0D0C /* XPDatagramBuilder.swift in Sources */,
-				83EE3E9C2837FCEC004CA471 /* OverView.swift in Sources */,
+				83EE3E9C2837FCEC004CA471 /* TouchBarView.swift in Sources */,
 				83B80E16283EC1AF007BAD6D /* NSTouchBarRepresentable.swift in Sources */,
 				8357E2162843A73B0077B6B0 /* Model.swift in Sources */,
 				83B80E1A283F000B007BAD6D /* NSTouchBarViewController.swift in Sources */,
@@ -373,7 +370,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				83EC623F2847A6CD008D0D0C /* BrightnessTests.swift in Sources */,
 				83B80E2528415BEC007BAD6D /* DREFTests.swift in Sources */,
 				83EC623D2847983A008D0D0C /* RREFTests.swift in Sources */,
 				83EC62412847A7CB008D0D0C /* XPDatagramBuilderTests.swift in Sources */,
