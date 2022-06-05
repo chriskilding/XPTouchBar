@@ -13,6 +13,7 @@ struct TouchBarView: View {
             Spacer()
             
             Label("If the X-Plane Touch Bar controls disappear, click this window to restore them.", systemImage: "info.circle.fill")
+                .frame(maxWidth: .infinity)
         }
     }
     

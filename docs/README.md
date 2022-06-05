@@ -2,6 +2,8 @@
 
 Control [X-Plane](https://www.x-plane.com) with the Mac Touch Bar.
 
+![Screenshot](img/screenshot.png)
+
 ## Overview
 
 XPTouchBar is a companion app to X-Plane which presents flight controls in the Touch Bar.
@@ -14,12 +16,14 @@ You could use XPTouchBar as...
 - an avionics panel
 - ...anything else you can think of
 
+You can use XPTouchBar on the same machine as X-Plane (e.g. X-Plane on your external monitor, XPTouchBar on your MacBook monitor), or you can use them on different machines (e.g. X-Plane on your gaming PC, XPTouchBar on your Mac as a remote control).
+
 ## Design
 
 XPTouchBar aims to provide X-Plane controls which:
 
 - play to the strengths of the Touch Bar (e.g. sliders and multi-state switches)
-- are used frequently in flight, or must be immediately accessible in takeoff/landing
+- are used frequently in flight, or must be quickly accessible during takeoff/landing
 - are hard to click with your mouse in the on-screen cockpit
 - do not translate well to keyboard shortcuts
 
@@ -41,8 +45,15 @@ XPTouchBar has Touch Bar widgets for the following aircraft controls:
   - Nav
   - Strobe
   - Taxi
-  - Cockpit
-  - Instruments
+  
+XPTouchBar also forwards the following X-Plane keyboard shortcuts for convenience:
+
+| Key | Shortcut             |
+|-----|----------------------|
+| B   | Parking Brake On/Off |
+| G   | Landing Gear Up/Down |
+| P   | Play/Pause           |
+| Y   | Show/Hide Yoke       |
 
 ## Requirements
 
@@ -108,3 +119,9 @@ If the XPTouchBar controls don't behave as you expect...
 ## Limitations
 
 The biggest limitation is that **Mac apps can only control the Touch Bar when they are in focus.** Unfortunately this means **you need to Cmd-Tab between X-Plane and XPTouchBar** whenever you need to click something in X-Plane. This is very much something we would like to find a workaround for.
+
+In the meantime, XPTouchBar does a couple of things to help you keep it in focus:
+
+- The minimize button is disabled. (Minimized apps cannot control the Touch Bar.)
+- When the window is closed, the app also quits. (This avoids the 'no windows open but still running' state, where it cannot control the Touch Bar.)
+- XPTouchBar proxies some of the most important X-Plane keyboard shortcuts (as described above), so you don't need to switch to X-Plane to use them.

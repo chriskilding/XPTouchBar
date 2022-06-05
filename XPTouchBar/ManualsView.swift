@@ -58,12 +58,6 @@ struct ManualView: View {
     }
 }
 
-struct ManualsView_Previews: PreviewProvider {
-    static var previews: some View {
-        ManualsView()
-    }
-}
-
 struct Manual: Identifiable {
     let title: String
     let url: URL?

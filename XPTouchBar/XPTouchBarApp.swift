@@ -13,8 +13,49 @@ struct XPTouchBarApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView(speedbrake: $props.speedbrake, throttle: $props.throttle, pitch: $props.pitch, mixture: $props.mixture, flaps: $props.flaps, gear: $props.gear, parkingBrake: $props.parkingBrake, simSpeed: $props.simSpeed, beaconLights: $props.beaconLights, landingLights: $props.landingLights, navigationLights: $props.navigationLights, strobeLights: $props.strobeLights, taxiLight: $props.taxiLight, host: $props.host, port: $props.port)
+            ContentView()
+                .environmentObject(props)
         }
+        .onChange(of: props.throttle) { newState in
+            appDelegate.updateTouchBar()
+        }
+        .onChange(of: props.pitch) { newState in
+            appDelegate.updateTouchBar()
+        }
+        .onChange(of: props.mixture) { newState in
+            appDelegate.updateTouchBar()
+        }
+        .onChange(of: props.speedbrake) { newState in
+            appDelegate.updateTouchBar()
+        }
+        .onChange(of: props.flaps) { newState in
+            appDelegate.updateTouchBar()
+        }
+        .onChange(of: props.beaconLights) { newState in
+            appDelegate.updateTouchBar()
+        }
+        .onChange(of: props.landingLights) { newState in
+            appDelegate.updateTouchBar()
+        }
+        .onChange(of: props.navigationLights) { newState in
+            appDelegate.updateTouchBar()
+        }
+        .onChange(of: props.strobeLights) { newState in
+            appDelegate.updateTouchBar()
+        }
+        .onChange(of: props.taxiLight) { newState in
+            appDelegate.updateTouchBar()
+        }
+        .onChange(of: props.gear) { newState in
+            appDelegate.updateTouchBar()
+        }
+        .onChange(of: props.parkingBrake) { newState in
+            appDelegate.updateTouchBar()
+        }
+        .onChange(of: props.simSpeed) { newState in
+            appDelegate.updateTouchBar()
+        }
+        .windowToolbarStyle(.unifiedCompact(showsTitle: false))
         .commands {
             // Turn off the "New Window" option
             CommandGroup(replacing: .newItem, addition: { })
@@ -47,7 +88,8 @@ struct XPTouchBarApp: App {
         }
         
         Settings {
-            ConnectionView(host: $props.host, port: $props.port)
+            ConnectionView()
+                .environmentObject(props)
                 .padding()
         }
     }

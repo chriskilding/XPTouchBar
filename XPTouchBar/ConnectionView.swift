@@ -2,22 +2,36 @@ import SwiftUI
 
 struct ConnectionView: View {
     
-    @Binding var host: String
-    @Binding var port: Int
+    @EnvironmentObject var props: XPlaneConnector
     
     private var portStr: String {
         let f = NumberFormatter()
         f.alwaysShowsDecimalSeparator = false
-        let n = NSNumber(integerLiteral: port)
+        let n = NSNumber(integerLiteral: props.port)
         return f.string(from: n) ?? ""
     }
     
     var body: some View {
         Form {
-            Label("X-Plane UDP Connection", systemImage: "bolt.horizontal.fill")
-            TextField("Host", text: $host)
-            NumberTextField("Port", value: $port, range: 0...65535)
+            Section("X-Plane UDP Connection") {
+                HStack {
+                    TextField("Host", text: $props.host)
+                    Button("Reset", action: resetHost)
+                }
+                HStack {
+                    NumberTextField("Port", value: $props.port, range: 0...65535)
+                    Button("Reset", action: resetPort)
+                }
+            }
         }
+    }
+        
+    func resetHost() {
+        props.host = "127.0.0.1"
+    }
+    
+    func resetPort() {
+        props.port = 49000
     }
 }
 

@@ -2,35 +2,23 @@ import SwiftUI
 
 struct DebugView: View {
     
-    @Binding var speedbrake: Float
-    @Binding var throttle: Float
-    @Binding var pitch: Float
-    @Binding var mixture: Float
-    @Binding var flaps: Float
-    @Binding var gear: Gear
-    @Binding var parkingBrake: Bool
-    @Binding var simSpeed: SimSpeed
-    @Binding var beaconLights: Bool
-    @Binding var landingLights: Bool
-    @Binding var navigationLights: Bool
-    @Binding var strobeLights: Bool
-    @Binding var taxiLight: Bool
+    @EnvironmentObject var props: XPlaneConnector
     
     fileprivate var entries: [Entry] {
         return [
-            Entry(dataref: Dataref.SpeedbrakeRatio, value: speedbrake),
-            Entry(dataref: Dataref.ThrottleRatioAll, value: throttle),
-            Entry(dataref: Dataref.PropRatioAll, value: pitch),
-            Entry(dataref: Dataref.MixtureRatioAll, value: mixture),
-            Entry(dataref: Dataref.FlapRatio, value: flaps),
-            Entry(dataref: Dataref.BeaconOn, value: beaconLights),
-            Entry(dataref: Dataref.GearHandleDown, value: gear),
-            Entry(dataref: Dataref.ParkingBrakeRatio, value: parkingBrake),
-            Entry(dataref: Dataref.SimSpeed, value: simSpeed),
-            Entry(dataref: Dataref.LandingLightsOn, value: landingLights),
-            Entry(dataref: Dataref.NavigationLightsOn, value: navigationLights),
-            Entry(dataref: Dataref.StrobeLightsOn, value: strobeLights),
-            Entry(dataref: Dataref.TaxiLightOn, value: taxiLight),
+            Entry(dataref: Dataref.SpeedbrakeRatio, value: props.speedbrake),
+            Entry(dataref: Dataref.ThrottleRatioAll, value: props.throttle),
+            Entry(dataref: Dataref.PropRatioAll, value: props.pitch),
+            Entry(dataref: Dataref.MixtureRatioAll, value: props.mixture),
+            Entry(dataref: Dataref.FlapRatio, value: props.flaps),
+            Entry(dataref: Dataref.BeaconOn, value: props.beaconLights),
+            Entry(dataref: Dataref.GearHandleDown, value: props.gear),
+            Entry(dataref: Dataref.ParkingBrakeRatio, value: props.parkingBrake),
+            Entry(dataref: Dataref.SimSpeed, value: props.simSpeed),
+            Entry(dataref: Dataref.LandingLightsOn, value: props.landingLights),
+            Entry(dataref: Dataref.NavigationLightsOn, value: props.navigationLights),
+            Entry(dataref: Dataref.StrobeLightsOn, value: props.strobeLights),
+            Entry(dataref: Dataref.TaxiLightOn, value: props.taxiLight),
         ].sorted(using: sortOrder)
     }
     
@@ -41,12 +29,6 @@ struct DebugView: View {
             TableColumn("Dataref", value: \.dataref)
             TableColumn("Value", value: \.value)
         }
-    }
-}
-
-struct DebugView_Previews: PreviewProvider {
-    static var previews: some View {
-        DebugView(speedbrake: .constant(0), throttle: .constant(0), pitch: .constant(1), mixture: .constant(1), flaps: .constant(0), gear: .constant(.down), parkingBrake: .constant(true), simSpeed: .constant(.x1), beaconLights: .constant(true), landingLights: .constant(true), navigationLights: .constant(true), strobeLights: .constant(true), taxiLight: .constant(true))
     }
 }
 

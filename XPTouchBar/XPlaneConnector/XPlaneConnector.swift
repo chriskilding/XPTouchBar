@@ -1,4 +1,3 @@
-import Foundation
 import SwiftUI
 import Network
 
@@ -102,24 +101,24 @@ class XPlaneConnector: ObservableObject {
         }
     }
     
-    @Published var host: String = "127.0.0.1" {
+    @AppStorage("host") var host: String = "127.0.0.1" {
         didSet {
             restart()
         }
     }
     
-    @Published var port: Int = 49000 {
+    @AppStorage("port") var port: Int = 49000 {
         didSet {
             restart()
         }
     }
     
-    func subscribe(to dataref: Dataref, frequency: Int) {
+    private func subscribe(to dataref: Dataref, frequency: Int) {
         let rref = RREF(frequency: frequency, id: dataref.id, dataref: dataref)
         send(rref)
     }
     
-    func unsubscribe(from dataref: Dataref) {
+    private func unsubscribe(from dataref: Dataref) {
         let rref = RREF(frequency: 0, id: dataref.id, dataref: dataref)
         send(rref)
     }
@@ -149,22 +148,22 @@ class XPlaneConnector: ObservableObject {
         connection?.cancel()
     }
     
-    func restart() {
+    private func restart() {
         stop()
         start()
     }
     
-    func send(_ dataConvertible: CustomDataConvertible) {
+    private func send(_ dataConvertible: CustomDataConvertible) {
         let data = dataConvertible.dataValue
         send(data)
     }
     
-    func send(_ data: Data) {
+    private func send(_ data: Data) {
         connection?.send(content: data, completion: .idempotent)
     }
 }
 
-func udpConnection(host: String, port: Int) -> NWConnection {
+fileprivate func udpConnection(host: String, port: Int) -> NWConnection {
     let h = NWEndpoint.Host(host)
     let p = NWEndpoint.Port(integerLiteral: NWEndpoint.Port.IntegerLiteralType(port))
     let params: NWParameters = .udp
