@@ -6,6 +6,8 @@ jobs:
   build:
     runs-on: macos-11
     steps:
+    - name: "List"
+      run: "ls -lah"
     - name: "Build"
       uses: devbotsxyz/xcode-build@v1
       with:
