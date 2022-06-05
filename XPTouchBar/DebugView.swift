@@ -2,59 +2,48 @@ import SwiftUI
 
 struct DebugView: View {
     
-    @Binding var speedbrake: Double
-    @Binding var throttle: Double
-    @Binding var pitch: Double
-    @Binding var mixture: Double
-    @Binding var flaps: Double
-    @Binding var gear: Gear
-    @Binding var parkingBrake: ParkingBrake
+    @EnvironmentObject var props: XPlaneConnector
     
+    fileprivate var entries: [Entry] {
+        return [
+            Entry(dataref: Dataref.SpeedbrakeRatio, value: props.speedbrake),
+            Entry(dataref: Dataref.ThrottleRatioAll, value: props.throttle),
+            Entry(dataref: Dataref.PropRatioAll, value: props.pitch),
+            Entry(dataref: Dataref.MixtureRatioAll, value: props.mixture),
+            Entry(dataref: Dataref.FlapRatio, value: props.flaps),
+            Entry(dataref: Dataref.BeaconOn, value: props.beaconLights),
+            Entry(dataref: Dataref.GearHandleDown, value: props.gear),
+            Entry(dataref: Dataref.ParkingBrakeRatio, value: props.parkingBrake),
+            Entry(dataref: Dataref.SimSpeed, value: props.simSpeed),
+            Entry(dataref: Dataref.LandingLightsOn, value: props.landingLights),
+            Entry(dataref: Dataref.NavigationLightsOn, value: props.navigationLights),
+            Entry(dataref: Dataref.StrobeLightsOn, value: props.strobeLights),
+            Entry(dataref: Dataref.TaxiLightOn, value: props.taxiLight),
+        ].sorted(using: sortOrder)
+    }
+    
+    @State private var sortOrder = [KeyPathComparator(\Entry.dataref)]
     
     var body: some View {
-        Form {
-            Slider(value: $speedbrake, in: 0...1) {
-                Text(Speedbrake.name)
-            }
-            .tint(Color(Speedbrake.color))
-            
-            Slider(value: $throttle, in: 0...1) {
-                Text(Throttle.name)
-            }
-            .tint(Color(Throttle.color))
-            
-            Slider(value: $pitch, in: 0...1) {
-                Text(Pitch.name)
-            }
-            .tint(Color(Pitch.color))
-            
-            Slider(value: $mixture, in: 0...1) {
-                Text(Mixture.name)
-            }
-            .tint(Color(Mixture.color))
-            
-            Slider(value: $flaps, in: 0...1) {
-                Text(Flaps.name)
-            }
-            .tint(Color(Flaps.color))
-            
-            Picker("Gear", selection: $gear, content: {
-                Text(Gear.down.description).tag(Gear.down)
-                Text(Gear.up.description).tag(Gear.up)
-            })
-            .pickerStyle(.segmented)
-            
-            Picker("Parking Brake", selection: $parkingBrake, content: {
-                Text(ParkingBrake.on.description).tag(ParkingBrake.on)
-                Text(ParkingBrake.off.description).tag(ParkingBrake.off)
-            })
-            .pickerStyle(.segmented)
+        Table(entries, sortOrder: $sortOrder) {
+            TableColumn("Dataref", value: \.dataref)
+            TableColumn("Value", value: \.value)
         }
     }
 }
 
-struct DebugView_Previews: PreviewProvider {
-    static var previews: some View {
-        DebugView(speedbrake: .constant(0), throttle: .constant(0), pitch: .constant(1), mixture: .constant(1), flaps: .constant(0), gear: .constant(.down), parkingBrake: .constant(.on))
+fileprivate struct Entry: Identifiable {
+    let dataref: String
+    let value: String
+    let id = UUID()
+    
+    init(dataref: CustomStringConvertible, value: Float) {
+        self.dataref = dataref.description
+        self.value = "\(value)"
+    }
+    
+    init(dataref: CustomStringConvertible, value: CustomFloatConvertible) {
+        self.dataref = dataref.description
+        self.value = "\(value.floatValue)"
     }
 }

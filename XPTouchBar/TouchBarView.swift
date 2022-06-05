@@ -1,28 +1,19 @@
 import SwiftUI
 
-struct OverView: View {
+struct TouchBarView: View {
     
     var body: some View {
         VStack {
             Spacer()
             
-                Text("""
-Choose the X-Plane controls that are shown in the Touch Bar.
-
-Available controls:
-
-\u{2022} Speedbrake
-\u{2022} Throttle
-\u{2022} Propeller Pitch
-\u{2022} Mixture
-\u{2022} Flaps
-\u{2022} Landing Gear
-\u{2022} Parking Brake
-""")
+            Text("Choose the relevant X-Plane Touch Bar controls for your aircraft.")
 
             Button("Customize Touch Bar...", action: customizeTouchBar)
             
             Spacer()
+            
+            Label("If the X-Plane Touch Bar controls disappear, click this window to restore them.", systemImage: "info.circle.fill")
+                .frame(maxWidth: .infinity)
         }
     }
     

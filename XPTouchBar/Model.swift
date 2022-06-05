@@ -1,18 +1,34 @@
 import Foundation
 import AppKit
 
+enum SimSpeed {
+    case pause
+    case x1
+}
+
+extension SimSpeed {
+    var opposite: SimSpeed {
+        switch self {
+        case .pause:
+            return .x1
+        case .x1:
+            return .pause
+        }
+    }
+}
+
 enum Gear {
     case up
     case down
 }
 
-extension Gear: CustomStringConvertible {
-    var description: String {
+extension Gear {
+    var opposite: Gear {
         switch self {
         case .up:
-            return "Up"
+            return .down
         case .down:
-            return "Down"
+            return .up
         }
     }
 }
@@ -22,49 +38,13 @@ enum ParkingBrake {
     case off
 }
 
-extension ParkingBrake: CustomStringConvertible {
-    var description: String {
+extension ParkingBrake {
+    var opposite: ParkingBrake {
         switch self {
         case .on:
-            return "On"
+            return .off
         case .off:
-            return "Off"
+            return .on
         }
     }
-}
-
-protocol Control {
-    static var color: NSColor { get }
-    static var name: String { get }
-    static var symbol: String { get }
-}
-
-struct Speedbrake: Control {
-    static let color: NSColor = .systemMint
-    static let name: String = "Speedbrake"
-    static let symbol: String = "S"
-}
-
-struct Pitch: Control {
-    static let color: NSColor = .systemBlue
-    static let name: String = "Pitch"
-    static let symbol: String = "P"
-}
-
-struct Mixture: Control {
-    static let color: NSColor = .systemRed
-    static let name: String = "Mixture"
-    static let symbol: String = "M"
-}
-
-struct Flaps: Control {
-    static let color: NSColor = .systemGreen
-    static let name: String = "Flaps"
-    static let symbol: String = "F"
-}
-
-struct Throttle: Control {
-    static let color: NSColor = .white
-    static let name: String = "Throttle"
-    static let symbol: String = "T"
 }
