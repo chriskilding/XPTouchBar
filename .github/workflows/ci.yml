@@ -10,3 +10,4 @@ jobs:
       uses: devbotsxyz/xcode-build@v1
       with:
         scheme: XPTouchBar
+        project: XPTouchBar.xcodeproj
