@@ -4,12 +4,9 @@ on: [push, workflow_dispatch]
 
 jobs:
   build:
-    runs-on: macos-11
+    runs-on: macos-12
     steps:
-    - name: "List"
-      run: "ls -lah"
-    - name: "Build"
-      uses: devbotsxyz/xcode-build@v1
+    - uses: mxcl/xcodebuild@v1
       with:
-        scheme: XPTouchBar
-        project: XPTouchBar.xcodeproj
+        xcode: 13
+        code-coverage: true
