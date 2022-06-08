@@ -12,4 +12,5 @@ jobs:
           xcode: 13
           scheme: XPTouchBar
           action: test
-          code-coverage: false
+          configuration: Release
+          code-coverage: true
