@@ -22,6 +22,7 @@
 		83B80E1E283F9480007BAD6D /* XPlaneConnector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B80E1D283F9480007BAD6D /* XPlaneConnector.swift */; };
 		83B80E2528415BEC007BAD6D /* DREFTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B80E2428415BEC007BAD6D /* DREFTests.swift */; };
 		83C3207A2843906B000BF8A5 /* ConnectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C320792843906B000BF8A5 /* ConnectionView.swift */; };
+		83D46E5C284D33A7003F84B0 /* PDFViewRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D46E5B284D33A7003F84B0 /* PDFViewRepresentable.swift */; };
 		83EC623428477E52008D0D0C /* Dataref.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EC623328477E52008D0D0C /* Dataref.swift */; };
 		83EC623728477EEC008D0D0C /* CustomFloatConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EC623628477EEC008D0D0C /* CustomFloatConvertible.swift */; };
 		83EC623B28478F6F008D0D0C /* CustomDataConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EC623A28478F6F008D0D0C /* CustomDataConvertible.swift */; };
@@ -73,6 +74,7 @@
 		83B80E1D283F9480007BAD6D /* XPlaneConnector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XPlaneConnector.swift; sourceTree = "<group>"; };
 		83B80E2428415BEC007BAD6D /* DREFTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DREFTests.swift; sourceTree = "<group>"; };
 		83C320792843906B000BF8A5 /* ConnectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionView.swift; sourceTree = "<group>"; };
+		83D46E5B284D33A7003F84B0 /* PDFViewRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFViewRepresentable.swift; sourceTree = "<group>"; };
 		83EC623328477E52008D0D0C /* Dataref.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dataref.swift; sourceTree = "<group>"; };
 		83EC623628477EEC008D0D0C /* CustomFloatConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomFloatConvertible.swift; sourceTree = "<group>"; };
 		83EC623A28478F6F008D0D0C /* CustomDataConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDataConvertible.swift; sourceTree = "<group>"; };
@@ -152,6 +154,7 @@
 				8357E2152843A73B0077B6B0 /* Model.swift */,
 				8346631B2849773E002C09AE /* ManualsView.swift */,
 				8346631E284ABAD1002C09AE /* MyTouchBar.swift */,
+				83D46E5B284D33A7003F84B0 /* PDFViewRepresentable.swift */,
 			);
 			path = XPTouchBar;
 			sourceTree = "<group>";
@@ -366,6 +369,7 @@
 				83C3207A2843906B000BF8A5 /* ConnectionView.swift in Sources */,
 				83B80E1E283F9480007BAD6D /* XPlaneConnector.swift in Sources */,
 				83EC62482847AC78008D0D0C /* RREF.swift in Sources */,
+				83D46E5C284D33A7003F84B0 /* PDFViewRepresentable.swift in Sources */,
 				83EC623728477EEC008D0D0C /* CustomFloatConvertible.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
