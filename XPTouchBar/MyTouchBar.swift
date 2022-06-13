@@ -79,10 +79,15 @@ class MyTouchBar: NSObject, NSTouchBarDelegate {
             toggle.customizationLabel = "Parking Brake"
             return toggle
         case .simSpeed:
-            let simSpeedImage = NSImage(systemSymbolName: "playpause.fill", accessibilityDescription: "Sim Speed")!
-            let toggle = NSButtonTouchBarItem(identifier: identifier, image: simSpeedImage, target: self, action: #selector(Self.simSpeedChanged(_:)))
-            toggle.customizationLabel = "Simulation Speed"
-            return toggle
+            let simSpeedImages = [
+                NSImage(systemSymbolName: "pause.fill", accessibilityDescription: "Pause")!,
+                NSImage(systemSymbolName: "play.fill", accessibilityDescription: "1x Speed")!,
+                NSImage(systemSymbolName: "forward.fill", accessibilityDescription: "2x Speed")!
+            ]
+            let control = NSPickerTouchBarItem(identifier: identifier, images: simSpeedImages, selectionMode: .selectOne, target: self, action: #selector(Self.simSpeedChanged(_:)))
+            control.controlRepresentation = .expanded
+            control.customizationLabel = "Simulation Speed"
+            return control
         case .beaconLight:
             let toggle = NSButtonTouchBarItem(identifier: identifier, title: "Beacon", target: self, action: #selector(Self.beaconChanged(_:)))
             toggle.customizationLabel = "Beacon Light"
@@ -137,36 +142,45 @@ class MyTouchBar: NSObject, NSTouchBarDelegate {
         props.speedbrake = sender.floatValue
     }
     
-    @objc func simSpeedChanged(_ sender: NSButton) {
-        props.simSpeed = props.simSpeed.opposite
+    @objc func simSpeedChanged(_ sender: NSPickerTouchBarItem) {
+        switch sender.selectedIndex {
+        case 0:
+            props.simSpeed = .pause
+        case 1:
+            props.simSpeed = .x1
+        case 2:
+            props.simSpeed = .x2
+        default:
+            break
+        }
     }
     
     @objc func gearChanged(_ sender: NSButton) {
-        props.gear = props.gear.opposite
+        props.gear.toggle()
     }
     
     @objc func parkingBrakeChanged(_ sender: NSButton) {
-        props.parkingBrake = !props.parkingBrake
+        props.parkingBrake.toggle()
     }
     
     @objc func beaconChanged(_ sender: NSButton) {
-        props.beaconLights = !props.beaconLights
+        props.beaconLights.toggle()
     }
     
     @objc func landingChanged(_ sender: NSButton) {
-        props.landingLights = !props.landingLights
+        props.landingLights.toggle()
     }
     
     @objc func navigationChanged(_ sender: NSButton) {
-        props.navigationLights = !props.navigationLights
+        props.navigationLights.toggle()
     }
     
     @objc func taxiChanged(_ sender: NSButton) {
-        props.taxiLight = !props.taxiLight
+        props.taxiLight.toggle()
     }
     
     @objc func strobeChanged(_ sender: NSButton) {
-        props.strobeLights = !props.strobeLights
+        props.strobeLights.toggle()
     }
     
     
@@ -200,12 +214,14 @@ class MyTouchBar: NSObject, NSTouchBarDelegate {
             }
         }
         
-        if let ss = touchBar.item(forIdentifier: .simSpeed) as? NSButtonTouchBarItem {
+        if let ss = touchBar.item(forIdentifier: .simSpeed) as? NSPickerTouchBarItem {
             switch props.simSpeed {
             case .pause:
-                ss.image = NSImage(systemSymbolName: "play.fill", accessibilityDescription: "Play")
+                ss.selectedIndex = 0
             case .x1:
-                ss.image = NSImage(systemSymbolName: "pause.fill", accessibilityDescription: "Pause")
+                ss.selectedIndex = 1
+            case .x2:
+                ss.selectedIndex = 2
             }
         }
         

@@ -4,15 +4,16 @@ import AppKit
 enum SimSpeed {
     case pause
     case x1
+    case x2
 }
 
-extension SimSpeed {
-    var opposite: SimSpeed {
+extension SimSpeed: Toggleable {
+    mutating func toggle() {
         switch self {
         case .pause:
-            return .x1
-        case .x1:
-            return .pause
+            self = .x1
+        default:
+            self = .pause
         }
     }
 }
@@ -22,29 +23,13 @@ enum Gear {
     case down
 }
 
-extension Gear {
-    var opposite: Gear {
+extension Gear: Toggleable {
+    mutating func toggle() {
         switch self {
         case .up:
-            return .down
+            self = .down
         case .down:
-            return .up
-        }
-    }
-}
-
-enum ParkingBrake {
-    case on
-    case off
-}
-
-extension ParkingBrake {
-    var opposite: ParkingBrake {
-        switch self {
-        case .on:
-            return .off
-        case .off:
-            return .on
+            self = .up
         }
     }
 }

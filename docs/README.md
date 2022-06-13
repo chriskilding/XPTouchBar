@@ -41,7 +41,10 @@ XPTouchBar has Touch Bar widgets for the following aircraft controls:
 - Flaps
 - Landing Gear
 - Parking Brake
-- Simulation Speed (Pause | Play)
+- Simulation Speed
+  - Pause
+  - Play (1x speed)
+  - Fast Forward (2x speed)
 - Lights
   - Beacon
   - Land
@@ -64,10 +67,11 @@ XPTouchBar also forwards the following X-Plane keyboard shortcuts for convenienc
 - macOS 12
 - X-Plane 11.55 or higher
 - Access to X-Plane's UDP port (default: 49000)
+- External monitor (if you are using X-Plane and XPTouchBar on the same machine)
 
 ## Setup
 
-Compile the app from source, or otherwise install it on your Mac.
+Compile the app from source with Xcode, or otherwise install it on your Mac.
 
 ## Usage
 
@@ -102,7 +106,6 @@ If X-Plane is running on a different host or port, go to `XPTouchBar` → `Prefe
 ## Recommendations
 
 - Don't overcrowd the Touch Bar. (Space is at a premium, so only add the XPTouchBar controls that you most need.)
-- Run XPTouchBar on a separate monitor to X-Plane, or on a separate machine.
 - Remove unneeded macOS controls from the Touch Bar to make space for the XPTouchBar controls:
   - Use `System Preferences` → `Keyboard` → `Customize Control Strip...` to remove controls from the always-on control strip.
   - Alternatively, untick `System Preferences` → `Keyboard` → `☑️ Show Control Strip` to hide the always-on control strip altogether. This will give apps (like XPTouchBar) the full width of the Touch Bar.
@@ -121,11 +124,11 @@ If the XPTouchBar controls don't behave as you expect...
 
 ## Limitations
 
-The biggest limitation is that **Mac apps can only control the Touch Bar when they are in focus.** Unfortunately this means **you need to Cmd-Tab between X-Plane and XPTouchBar** whenever you need to click something in X-Plane. This is very much something we would like to find a workaround for.
+**Mac apps can only control the Touch Bar when they are in focus.** Unfortunately this means that if X-Plane and XPTouchBar are on the same computer, and you click into X-Plane to do something, **you need to Cmd-Tab back to XPTouchBar** afterwards. This is something we would like to find a workaround for.
 
-In the meantime, XPTouchBar does some things to help you keep it in focus more of the time:
+In the meantime, XPTouchBar does some things to help you keep it in focus:
 
-- The minimize button is disabled. (This avoids the minimized state, where it cannot control the Touch Bar.)
-- When the window is closed, the app also quits. (This avoids the 'no windows open but still running' state, where it cannot control the Touch Bar.)
-- XPTouchBar proxies some of the most important X-Plane keyboard shortcuts (as described above), so you don't need to switch to X-Plane to use them.
-- To justify its presence on your second screen, XPTouchBar includes an optional aircraft manuals viewer. (Keeping your aircraft's Operational Speeds page open can be useful.)
+- The minimize button is disabled.
+- When the window is closed, the app also quits.
+- XPTouchBar forwards some of the most important X-Plane keyboard shortcuts (as described above), so you don't need to switch to X-Plane to use them.
+- To justify its presence on your screen, XPTouchBar includes an optional aircraft manuals viewer. (Keeping your aircraft's Operational Speeds page open can be useful.)

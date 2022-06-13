@@ -16,6 +16,7 @@
 		8346631C2849773E002C09AE /* ManualsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8346631B2849773E002C09AE /* ManualsView.swift */; };
 		8346631F284ABAD1002C09AE /* MyTouchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8346631E284ABAD1002C09AE /* MyTouchBar.swift */; };
 		8357E2162843A73B0077B6B0 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8357E2152843A73B0077B6B0 /* Model.swift */; };
+		83A0374E2856A05B000BD174 /* Toggleable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A0374D2856A05B000BD174 /* Toggleable.swift */; };
 		83B80E16283EC1AF007BAD6D /* NSTouchBarRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B80E15283EC1AF007BAD6D /* NSTouchBarRepresentable.swift */; };
 		83B80E1A283F000B007BAD6D /* NSTouchBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B80E19283F000B007BAD6D /* NSTouchBarViewController.swift */; };
 		83B80E1C283F0038007BAD6D /* NSTouchBarViewControllerRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B80E1B283F0038007BAD6D /* NSTouchBarViewControllerRepresentable.swift */; };
@@ -68,6 +69,7 @@
 		8346631B2849773E002C09AE /* ManualsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManualsView.swift; sourceTree = "<group>"; };
 		8346631E284ABAD1002C09AE /* MyTouchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTouchBar.swift; sourceTree = "<group>"; };
 		8357E2152843A73B0077B6B0 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		83A0374D2856A05B000BD174 /* Toggleable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toggleable.swift; sourceTree = "<group>"; };
 		83B80E15283EC1AF007BAD6D /* NSTouchBarRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSTouchBarRepresentable.swift; sourceTree = "<group>"; };
 		83B80E19283F000B007BAD6D /* NSTouchBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSTouchBarViewController.swift; sourceTree = "<group>"; };
 		83B80E1B283F0038007BAD6D /* NSTouchBarViewControllerRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSTouchBarViewControllerRepresentable.swift; sourceTree = "<group>"; };
@@ -155,6 +157,7 @@
 				8346631B2849773E002C09AE /* ManualsView.swift */,
 				8346631E284ABAD1002C09AE /* MyTouchBar.swift */,
 				83D46E5B284D33A7003F84B0 /* PDFViewRepresentable.swift */,
+				83A0374D2856A05B000BD174 /* Toggleable.swift */,
 			);
 			path = XPTouchBar;
 			sourceTree = "<group>";
@@ -367,6 +370,7 @@
 				8311850B2836D07600BEDBA2 /* AppDelegate.swift in Sources */,
 				831184E02836CC5600BEDBA2 /* XPTouchBarApp.swift in Sources */,
 				83C3207A2843906B000BF8A5 /* ConnectionView.swift in Sources */,
+				83A0374E2856A05B000BD174 /* Toggleable.swift in Sources */,
 				83B80E1E283F9480007BAD6D /* XPlaneConnector.swift in Sources */,
 				83EC62482847AC78008D0D0C /* RREF.swift in Sources */,
 				83D46E5C284D33A7003F84B0 /* PDFViewRepresentable.swift in Sources */,

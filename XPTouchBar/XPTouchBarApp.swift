@@ -67,12 +67,13 @@ struct XPTouchBarApp: App {
                     .keyboardShortcut("B", modifiers: [])
                 
                 Button("Landing Gear") {
-                    props.gear = props.gear.opposite
+                    props.gear.toggle()
                 }.keyboardShortcut("G", modifiers: [])
                 
                 Button("Play/Pause") {
-                    props.simSpeed = props.simSpeed.opposite
-                }.keyboardShortcut("P", modifiers: [])
+                    props.simSpeed.toggle()
+                }
+                .keyboardShortcut("P", modifiers: [])
                 
                 Toggle("Yoke", isOn: $props.yoke)
                     .keyboardShortcut("Y", modifiers: [])

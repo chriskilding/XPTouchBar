@@ -224,6 +224,8 @@ extension SimSpeed: CustomFloatConvertible {
             return 0
         case .x1:
             return 1
+        case .x2:
+            return 2
         }
     }
 }
