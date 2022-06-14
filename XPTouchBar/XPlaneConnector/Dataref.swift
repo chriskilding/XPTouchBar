@@ -80,6 +80,12 @@ enum Dataref {
     /// Type: int
     /// Since: 1041+
     case HideYoke
+    
+    /// The current camera view
+    /// Type: int
+    /// Units: enum
+    /// Since: 660+
+    case ViewType
 }
 
 extension Dataref: CustomStringConvertible {
@@ -114,6 +120,8 @@ extension Dataref: CustomStringConvertible {
             return "sim/cockpit2/switches/taxi_light_on"
         case .HideYoke:
             return "sim/graphics/view/hide_yoke"
+        case .ViewType:
+            return "sim/graphics/view/view_type"
         }
     }
 }

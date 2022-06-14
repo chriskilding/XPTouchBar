@@ -45,6 +45,15 @@ XPTouchBar has Touch Bar widgets for the following aircraft controls:
   - Pause
   - Play (1x speed)
   - Fast Forward (2x speed)
+- Camera (view type)
+  - Cockpit
+  - Chase
+  - Circle
+  - Forward with HUD
+  - Linear Spot
+  - Runway
+  - Still Spot
+  - Tower
 - Lights
   - Beacon
   - Land

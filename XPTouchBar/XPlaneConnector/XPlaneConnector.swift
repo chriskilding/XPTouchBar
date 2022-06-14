@@ -101,6 +101,13 @@ class XPlaneConnector: ObservableObject {
         }
     }
     
+    @Published var camera: Camera = .cockpit {
+        didSet {
+            let dref = DREF(dataref: .ViewType, value: camera.floatValue)
+            self.send(dref)
+        }
+    }
+    
     @AppStorage("host") var host: String = "127.0.0.1" {
         didSet {
             restart()
@@ -204,6 +211,8 @@ fileprivate extension Dataref {
             return 13
         case .HideYoke:
             return 14
+        case .ViewType:
+            return 15
         }
     }
 }
@@ -237,6 +246,32 @@ extension Gear: CustomFloatConvertible {
             return 0
         case .down:
             return 1
+        }
+    }
+}
+
+extension Camera: CustomFloatConvertible {
+    /// The X-Plane 7+ values for the camera angles
+    /// Taken from https://www.xsquawkbox.net/xpsdk/mediawiki/Sim/graphics/view/view_type
+    /// WARNING: this likely corresponds to an internal X-Plane enum, so the values may change between X-Plane versions
+    var floatValue: Float {
+        switch self {
+        case .cockpit:
+            return 1026
+        case .chase:
+            return 1017
+        case .circle:
+            return 1018
+        case .hud:
+            return 1023
+        case .linearSpot:
+            return 1021
+        case .stillSpot:
+            return 1020
+        case .tower:
+            return 1014
+        case .runway:
+            return 1015
         }
     }
 }

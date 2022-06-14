@@ -19,6 +19,7 @@ struct DebugView: View {
             Entry(dataref: Dataref.NavigationLightsOn, value: props.navigationLights),
             Entry(dataref: Dataref.StrobeLightsOn, value: props.strobeLights),
             Entry(dataref: Dataref.TaxiLightOn, value: props.taxiLight),
+            Entry(dataref: Dataref.ViewType, value: props.camera)
         ].sorted(using: sortOrder)
     }
     

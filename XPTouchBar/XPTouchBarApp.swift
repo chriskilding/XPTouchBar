@@ -55,6 +55,9 @@ struct XPTouchBarApp: App {
         .onChange(of: props.simSpeed) { newState in
             appDelegate.updateTouchBar()
         }
+        .onChange(of: props.camera) { newState in
+            appDelegate.updateTouchBar()
+        }
         .windowToolbarStyle(.unifiedCompact(showsTitle: false))
         .commands {
             // Turn off the "New Window" option
@@ -77,6 +80,17 @@ struct XPTouchBarApp: App {
                 
                 Toggle("Yoke", isOn: $props.yoke)
                     .keyboardShortcut("Y", modifiers: [])
+                
+                Picker("Camera", selection: $props.camera) {
+                    Text("Cockpit").tag(Camera.cockpit)
+                    Text("Chase").tag(Camera.chase)
+                    Text("Circle").tag(Camera.circle)
+                    Text("Forward with HUD").tag(Camera.hud)
+                    Text("Linear Spot").tag(Camera.linearSpot)
+                    Text("Runway").tag(Camera.runway)
+                    Text("Still Spot").tag(Camera.stillSpot)
+                    Text("Tower").tag(Camera.tower)
+                }
                 
                 Menu("Lights") {
                     Toggle("Beacon", isOn: $props.beaconLights)

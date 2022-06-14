@@ -15,6 +15,7 @@ extension NSTouchBarItem.Identifier {
     static let landingLights = NSTouchBarItem.Identifier("XPTouchBar.Lights.Landing")
     static let navigationLights = NSTouchBarItem.Identifier("XPTouchBar.Lights.Navigation")
     static let strobeLights = NSTouchBarItem.Identifier("XPTouchBar.Lights.Strobe")
+    static let camera = NSTouchBarItem.Identifier("XPTouchBar.Camera")
 }
 
 extension NSTouchBar.CustomizationIdentifier {

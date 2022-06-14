@@ -8,7 +8,7 @@ class MyTouchBar: NSObject, NSTouchBarDelegate {
         let touchBar = NSTouchBar()
         touchBar.customizationIdentifier = .xpTouchBar
         touchBar.defaultItemIdentifiers = [.throttle, .mixture, .flaps]
-        touchBar.customizationAllowedItemIdentifiers = [.throttle, .pitch, .mixture, .flaps, .gear, .parkingBrake, .speedbrake, .simSpeed, .lights, .flexibleSpace]
+        touchBar.customizationAllowedItemIdentifiers = [.throttle, .pitch, .mixture, .flaps, .gear, .parkingBrake, .speedbrake, .simSpeed, .lights, .camera]
         touchBar.delegate = self
         return touchBar
     }
@@ -111,12 +111,28 @@ class MyTouchBar: NSObject, NSTouchBarDelegate {
         case .lights:
             let popover = NSPopoverTouchBarItem(identifier: identifier)
             popover.customizationLabel = "Lights"
-            popover.collapsedRepresentationImage = NSImage(systemSymbolName: "lightbulb.fill", accessibilityDescription: "Lights")
+            popover.collapsedRepresentationImage = NSImage(systemSymbolName: "lightbulb", accessibilityDescription: "Lights")
             popover.popoverTouchBar.customizationIdentifier = .lightsBar
             popover.popoverTouchBar.defaultItemIdentifiers = [.beaconLight, .landingLights, .navigationLights, .strobeLights, .taxiLight]
             // This method will also construct the items of the popover touchbar
             popover.popoverTouchBar.delegate = touchBar.delegate!
             return popover
+        case .camera:
+            let labels = [
+                "Cockpit",
+                "Chase",
+                "Circle",
+                "HUD",
+                "Linear Spot",
+                "Runway",
+                "Still Spot",
+                "Tower",
+            ]
+            let control = NSPickerTouchBarItem(identifier: identifier, labels: labels, selectionMode: .selectOne, target: self, action: #selector(Self.cameraChanged(_:)))
+            control.controlRepresentation = .collapsed
+            control.customizationLabel = "Camera"
+            control.collapsedRepresentationImage = NSImage(systemSymbolName: "video", accessibilityDescription: "Camera")
+            return control
         default:
             return nil
         }
@@ -150,6 +166,29 @@ class MyTouchBar: NSObject, NSTouchBarDelegate {
             props.simSpeed = .x1
         case 2:
             props.simSpeed = .x2
+        default:
+            break
+        }
+    }
+    
+    @objc func cameraChanged(_ sender: NSPickerTouchBarItem) {
+        switch sender.selectedIndex {
+        case 0:
+            props.camera = .cockpit
+        case 1:
+            props.camera = .chase
+        case 2:
+            props.camera = .circle
+        case 3:
+            props.camera = .hud
+        case 4:
+            props.camera = .linearSpot
+        case 5:
+            props.camera = .runway
+        case 6:
+            props.camera = .stillSpot
+        case 7:
+            props.camera = .tower
         default:
             break
         }
@@ -222,6 +261,27 @@ class MyTouchBar: NSObject, NSTouchBarDelegate {
                 ss.selectedIndex = 1
             case .x2:
                 ss.selectedIndex = 2
+            }
+        }
+        
+        if let c = touchBar.item(forIdentifier: .camera) as? NSPickerTouchBarItem {
+            switch props.camera {
+            case .cockpit:
+                c.selectedIndex = 0
+            case .chase:
+                c.selectedIndex = 1
+            case .circle:
+                c.selectedIndex = 2
+            case .hud:
+                c.selectedIndex = 3
+            case .linearSpot:
+                c.selectedIndex = 4
+            case .runway:
+                c.selectedIndex = 5
+            case .stillSpot:
+                c.selectedIndex = 6
+            case .tower:
+                c.selectedIndex = 7
             }
         }
         

@@ -1,5 +1,15 @@
-import Foundation
 import AppKit
+
+enum Camera {
+    case cockpit
+    case chase
+    case circle
+    case hud
+    case linearSpot
+    case runway
+    case stillSpot
+    case tower
+}
 
 enum SimSpeed {
     case pause
