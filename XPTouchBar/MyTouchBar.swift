@@ -222,7 +222,6 @@ class MyTouchBar: NSObject, NSTouchBarDelegate {
         props.strobeLights.toggle()
     }
     
-    
     func updateNSTouchBar(_ touchBar: NSTouchBar) {
         if let s = touchBar.item(forIdentifier: .speedbrake) as? NSSliderTouchBarItem {
             s.doubleValue = Double(props.speedbrake)
@@ -297,29 +296,29 @@ class MyTouchBar: NSObject, NSTouchBarDelegate {
             let lightsBar = l.popoverTouchBar
             
             if let beaconButton = lightsBar.item(forIdentifier: .beaconLight) as? NSButtonTouchBarItem {
-                beaconButton.bezelColor = bezelColor(props.beaconLights)
+                beaconButton.bezelColor = lightsBezelColor(props.beaconLights)
             }
             
             if let landingButton = lightsBar.item(forIdentifier: .landingLights) as? NSButtonTouchBarItem {
-                landingButton.bezelColor = bezelColor(props.landingLights)
+                landingButton.bezelColor = lightsBezelColor(props.landingLights)
             }
             
             if let navigationButton = lightsBar.item(forIdentifier: .navigationLights) as? NSButtonTouchBarItem {
-                navigationButton.bezelColor = bezelColor(props.navigationLights)
+                navigationButton.bezelColor = lightsBezelColor(props.navigationLights)
             }
             
             if let strobeButton = lightsBar.item(forIdentifier: .strobeLights) as? NSButtonTouchBarItem {
-                strobeButton.bezelColor = bezelColor(props.strobeLights)
+                strobeButton.bezelColor = lightsBezelColor(props.strobeLights)
             }
             
             if let taxiButton = lightsBar.item(forIdentifier: .taxiLight) as? NSButtonTouchBarItem {
-                taxiButton.bezelColor  = bezelColor(props.taxiLight)
+                taxiButton.bezelColor = lightsBezelColor(props.taxiLight)
             }
         }
     }
 }
 
-fileprivate func bezelColor(_ isOn: Bool) -> NSColor {
+fileprivate func lightsBezelColor(_ isOn: Bool) -> NSColor {
     if isOn {
         return .systemYellow
     } else {

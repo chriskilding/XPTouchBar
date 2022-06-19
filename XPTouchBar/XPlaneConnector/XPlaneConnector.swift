@@ -101,6 +101,34 @@ class XPlaneConnector: ObservableObject {
         }
     }
     
+    @Published var com1power: Bool = true {
+        didSet {
+            let dref = DREF(dataref: .Com1Power, value: com1power.floatValue)
+            self.send(dref)
+        }
+    }
+    
+    @Published var com2power: Bool = true {
+        didSet {
+            let dref = DREF(dataref: .Com2Power, value: com2power.floatValue)
+            self.send(dref)
+        }
+    }
+    
+    @Published var nav1power: Bool = true {
+        didSet {
+            let dref = DREF(dataref: .Nav1Power, value: nav1power.floatValue)
+            self.send(dref)
+        }
+    }
+    
+    @Published var nav2power: Bool = true {
+        didSet {
+            let dref = DREF(dataref: .Nav2Power, value: nav2power.floatValue)
+            self.send(dref)
+        }
+    }
+    
     @Published var camera: Camera = .cockpit {
         didSet {
             let dref = DREF(dataref: .ViewType, value: camera.floatValue)
@@ -213,6 +241,14 @@ fileprivate extension Dataref {
             return 14
         case .ViewType:
             return 15
+        case .Com1Power:
+            return 16
+        case .Com2Power:
+            return 17
+        case .Nav1Power:
+            return 18
+        case .Nav2Power:
+            return 19
         }
     }
 }

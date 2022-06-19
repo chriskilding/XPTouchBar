@@ -37,6 +37,7 @@ enum Dataref {
     /// Since: 900+
     case SpeedbrakeRatio
     
+    /// Gear handle position. 0 is up. 1 is down.
     case GearHandleDown
     
     /// This is the overall brake requested by the parking brake button… 0.0 is none, 1.0 is complete.
@@ -86,6 +87,18 @@ enum Dataref {
     /// Units: enum
     /// Since: 660+
     case ViewType
+    
+    /// Com radio 1 off or on, 0 or 1.
+    case Com1Power
+    
+    /// Com radio 2 off or on, 0 or 1.
+    case Com2Power
+    
+    /// Nav radio 1 off or on, 0 or 1.
+    case Nav1Power
+    
+    /// Nav radio 2 off or on, 0 or 1.
+    case Nav2Power
 }
 
 extension Dataref: CustomStringConvertible {
@@ -122,6 +135,14 @@ extension Dataref: CustomStringConvertible {
             return "sim/graphics/view/hide_yoke"
         case .ViewType:
             return "sim/graphics/view/view_type"
+        case .Com1Power:
+            return "sim/cockpit2/radios/actuators/com1_power"
+        case .Com2Power:
+            return "sim/cockpit2/radios/actuators/com2_power"
+        case .Nav1Power:
+            return "sim/cockpit2/radios/actuators/nav1_power"
+        case .Nav2Power:
+            return "sim/cockpit2/radios/actuators/nav2_power"
         }
     }
 }

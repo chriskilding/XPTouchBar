@@ -92,6 +92,13 @@ struct XPTouchBarApp: App {
                     Text("Tower").tag(Camera.tower)
                 }
                 
+                Menu("Radios") {
+                    Toggle("COM1 Power", isOn: $props.com1power)
+                    Toggle("COM2 Power", isOn: $props.com2power)
+                    Toggle("NAV1 Power", isOn: $props.nav1power)
+                    Toggle("NAV2 Power", isOn: $props.nav2power)
+                }
+                
                 Menu("Lights") {
                     Toggle("Beacon", isOn: $props.beaconLights)
                     Toggle("Landing", isOn: $props.landingLights)
@@ -108,5 +115,4 @@ struct XPTouchBarApp: App {
                 .padding()
         }
     }
-    
 }
