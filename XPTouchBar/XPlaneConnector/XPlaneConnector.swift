@@ -94,9 +94,9 @@ class XPlaneConnector: ObservableObject {
         }
     }
     
-    @Published var yoke: Bool = true {
+    @Published var hideYoke: Bool = false {
         didSet {
-            let dref = DREF(dataref: .HideYoke, value: (!yoke).floatValue)
+            let dref = DREF(dataref: .HideYoke, value: hideYoke.floatValue)
             self.send(dref)
         }
     }

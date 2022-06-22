@@ -78,8 +78,10 @@ struct XPTouchBarApp: App {
                 }
                 .keyboardShortcut("P", modifiers: [])
                 
-                Toggle("Yoke", isOn: $props.yoke)
-                    .keyboardShortcut("Y", modifiers: [])
+                Button("Show/Hide Yoke") {
+                    props.hideYoke.toggle()
+                }
+                .keyboardShortcut("Y", modifiers: [])
                 
                 Picker("Camera", selection: $props.camera) {
                     Text("Cockpit").tag(Camera.cockpit)

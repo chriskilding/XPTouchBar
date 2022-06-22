@@ -23,7 +23,8 @@ struct DebugView: View {
             Entry(dataref: Dataref.Com1Power, value: props.com1power),
             Entry(dataref: Dataref.Com2Power, value: props.com2power),
             Entry(dataref: Dataref.Nav1Power, value: props.nav1power),
-            Entry(dataref: Dataref.Nav2Power, value: props.nav2power)
+            Entry(dataref: Dataref.Nav2Power, value: props.nav2power),
+            Entry(dataref: Dataref.HideYoke, value: props.hideYoke)
         ].sorted(using: sortOrder)
     }
     
