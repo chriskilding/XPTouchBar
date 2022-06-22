@@ -80,7 +80,7 @@ XPTouchBar also forwards the following X-Plane keyboard shortcuts for convenienc
 
 ## Setup
 
-Compile the app from source with Xcode, or otherwise install it on your Mac.
+Download the app from [GitHub Releases](https://github.com/chriskilding/XPTouchBar/releases), or compile the app from source with Xcode.
 
 ## Usage
 
