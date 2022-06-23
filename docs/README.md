@@ -67,6 +67,7 @@ XPTouchBar also forwards the following X-Plane keyboard shortcuts for convenienc
 |-----|----------------------|
 | B   | Parking Brake On/Off |
 | G   | Landing Gear Up/Down |
+| M   | Show/Hide Map        |
 | P   | Play/Pause           |
 | Y   | Show/Hide Yoke       |
 
@@ -87,7 +88,7 @@ Download the app from [GitHub Releases](https://github.com/chriskilding/XPTouchB
 1. Start X-Plane and load a new flight.
 2. Start XPTouchBar. (Configure it if necessary.)
 3. Begin your flight.
-4. During flight you may need to click into X-Plane to perform certain operations (e.g. show the map). When you're done, click on XPTouchBar again (or Cmd-Tab to it) to make the Touch Bar controls reappear.
+4. During flight you may need to click into X-Plane to perform certain operations. When you're done, click on XPTouchBar again (or Cmd-Tab to it) to make the Touch Bar controls reappear.
 
 ## Configuration
 

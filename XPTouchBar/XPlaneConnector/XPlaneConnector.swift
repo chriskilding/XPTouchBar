@@ -183,6 +183,12 @@ class XPlaneConnector: ObservableObject {
         connection?.cancel()
     }
     
+    /// Toggles the map window. Presented as a function rather than a variable, because this drives a CMND not a DREF.
+    func toggleMap() {
+        let cmnd = CMND(command: .MapShowCurrent)
+        self.send(cmnd)
+    }
+    
     private func restart() {
         stop()
         start()
