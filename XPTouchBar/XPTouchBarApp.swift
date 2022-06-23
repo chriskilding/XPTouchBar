@@ -73,6 +73,10 @@ struct XPTouchBarApp: App {
                     props.gear.toggle()
                 }.keyboardShortcut("G", modifiers: [])
                 
+                Button("Show/Hide Map") {
+                    props.toggleMap()
+                }.keyboardShortcut("M", modifiers: [])
+                
                 Button("Play/Pause") {
                     props.simSpeed.toggle()
                 }

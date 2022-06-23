@@ -14,6 +14,9 @@
 		831184FE2836CC5B00BEDBA2 /* XPTouchBarUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 831184FD2836CC5B00BEDBA2 /* XPTouchBarUITestsLaunchTests.swift */; };
 		8311850B2836D07600BEDBA2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8311850A2836D07600BEDBA2 /* AppDelegate.swift */; };
 		8312FC162862647200BB6664 /* Credits.html in Resources */ = {isa = PBXBuildFile; fileRef = 8312FC152862647200BB6664 /* Credits.html */; };
+		8312FC1828651FF700BB6664 /* CMND.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8312FC1728651FF700BB6664 /* CMND.swift */; };
+		8312FC1A2865204E00BB6664 /* Command.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8312FC192865204E00BB6664 /* Command.swift */; };
+		8312FC1C2865242900BB6664 /* CMNDTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8312FC1B2865242900BB6664 /* CMNDTests.swift */; };
 		8346631C2849773E002C09AE /* ManualsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8346631B2849773E002C09AE /* ManualsView.swift */; };
 		8346631F284ABAD1002C09AE /* MyTouchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8346631E284ABAD1002C09AE /* MyTouchBar.swift */; };
 		8357E2162843A73B0077B6B0 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8357E2152843A73B0077B6B0 /* Model.swift */; };
@@ -68,6 +71,9 @@
 		831184FD2836CC5B00BEDBA2 /* XPTouchBarUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XPTouchBarUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		8311850A2836D07600BEDBA2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8312FC152862647200BB6664 /* Credits.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = Credits.html; sourceTree = "<group>"; };
+		8312FC1728651FF700BB6664 /* CMND.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CMND.swift; sourceTree = "<group>"; };
+		8312FC192865204E00BB6664 /* Command.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Command.swift; sourceTree = "<group>"; };
+		8312FC1B2865242900BB6664 /* CMNDTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CMNDTests.swift; sourceTree = "<group>"; };
 		8346631B2849773E002C09AE /* ManualsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManualsView.swift; sourceTree = "<group>"; };
 		8346631E284ABAD1002C09AE /* MyTouchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTouchBar.swift; sourceTree = "<group>"; };
 		8357E2152843A73B0077B6B0 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
@@ -208,6 +214,8 @@
 				83EC62452847AC61008D0D0C /* DREF.swift */,
 				83EC62472847AC78008D0D0C /* RREF.swift */,
 				83EC623328477E52008D0D0C /* Dataref.swift */,
+				8312FC1728651FF700BB6664 /* CMND.swift */,
+				8312FC192865204E00BB6664 /* Command.swift */,
 			);
 			path = XPlaneConnector;
 			sourceTree = "<group>";
@@ -218,6 +226,7 @@
 				83EC62402847A7CB008D0D0C /* XPDatagramBuilderTests.swift */,
 				83EC623C2847983A008D0D0C /* RREFTests.swift */,
 				83B80E2428415BEC007BAD6D /* DREFTests.swift */,
+				8312FC1B2865242900BB6664 /* CMNDTests.swift */,
 			);
 			path = XPlaneConnector;
 			sourceTree = "<group>";
@@ -373,12 +382,14 @@
 				83EC623428477E52008D0D0C /* Dataref.swift in Sources */,
 				8311850B2836D07600BEDBA2 /* AppDelegate.swift in Sources */,
 				831184E02836CC5600BEDBA2 /* XPTouchBarApp.swift in Sources */,
+				8312FC1828651FF700BB6664 /* CMND.swift in Sources */,
 				83C3207A2843906B000BF8A5 /* ConnectionView.swift in Sources */,
 				83A0374E2856A05B000BD174 /* Toggleable.swift in Sources */,
 				83B80E1E283F9480007BAD6D /* XPlaneConnector.swift in Sources */,
 				83EC62482847AC78008D0D0C /* RREF.swift in Sources */,
 				83D46E5C284D33A7003F84B0 /* PDFViewRepresentable.swift in Sources */,
 				83EC623728477EEC008D0D0C /* CustomFloatConvertible.swift in Sources */,
+				8312FC1A2865204E00BB6664 /* Command.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -389,6 +400,7 @@
 				83B80E2528415BEC007BAD6D /* DREFTests.swift in Sources */,
 				83EC623D2847983A008D0D0C /* RREFTests.swift in Sources */,
 				83EC62412847A7CB008D0D0C /* XPDatagramBuilderTests.swift in Sources */,
+				8312FC1C2865242900BB6664 /* CMNDTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
