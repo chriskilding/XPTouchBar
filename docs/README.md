@@ -8,9 +8,9 @@ Control [X-Plane](https://www.x-plane.com) with the Mac Touch Bar.
 
 XPTouchBar is a companion app to X-Plane which presents flight controls in the Touch Bar.
 
-![Screenshot](img/app.png)
-
 XPTouchBar is completely customizable. You choose the controls that appear in the Touch Bar to complement the aircraft you're flying, and the hardware controls you have (e.g. sidestick/yoke, rudder pedals, throttle quadrant).
+
+![Screenshot](img/jet.png)
 
 You could use XPTouchBar as...
 
@@ -18,11 +18,9 @@ You could use XPTouchBar as...
 - an avionics panel
 - ...anything else you can think of
 
-You can use XPTouchBar on the same machine as X-Plane (e.g. X-Plane on your external monitor, XPTouchBar on your MacBook monitor), or you can use them on different machines (e.g. X-Plane on your gaming PC, XPTouchBar on your Mac as a remote control).
-
-![Screenshot](img/jet.png)
-
 ![Screenshot](img/lights.png)
+
+You can use XPTouchBar on the same machine as X-Plane (e.g. X-Plane on your external monitor, XPTouchBar on your MacBook monitor), or you can use them on different machines (e.g. X-Plane on your gaming PC, XPTouchBar on your Mac as a remote control).
 
 ## Design
 
