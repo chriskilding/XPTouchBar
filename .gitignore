@@ -7,3 +7,8 @@ xcuserdata
 .DS_Store
 *.xcresult
 *.swp
+
+*_BACKUP_*.swift
+*_REMOTE_*.swift
+*_BASE_*.swift
+*_LOCAL_*.swift

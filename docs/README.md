@@ -60,6 +60,13 @@ XPTouchBar has Touch Bar widgets for the following aircraft controls:
   - Nav
   - Strobe
   - Taxi
+- Radios
+  - COM1 (audio, mic)
+  - COM2 (audio, mic)
+  - NAV1 (audio)
+  - NAV2 (audio)
+  - DME (audio)
+  - MKR (audio)
   
 XPTouchBar also forwards the following X-Plane keyboard shortcuts for convenience:
 

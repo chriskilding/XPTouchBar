@@ -8,7 +8,7 @@ class MyTouchBar: NSObject, NSTouchBarDelegate {
         let touchBar = NSTouchBar()
         touchBar.customizationIdentifier = .xpTouchBar
         touchBar.defaultItemIdentifiers = [.throttle, .mixture, .flaps]
-        touchBar.customizationAllowedItemIdentifiers = [.throttle, .pitch, .mixture, .flaps, .gear, .parkingBrake, .speedbrake, .simSpeed, .lights, .camera]
+        touchBar.customizationAllowedItemIdentifiers = [.throttle, .pitch, .mixture, .flaps, .gear, .parkingBrake, .speedbrake, .simSpeed, .lights, .camera, .radios, .flexibleSpace]
         touchBar.delegate = self
         return touchBar
     }
@@ -117,6 +117,48 @@ class MyTouchBar: NSObject, NSTouchBarDelegate {
             // This method will also construct the items of the popover touchbar
             popover.popoverTouchBar.delegate = touchBar.delegate!
             return popover
+        case .radios:
+            let popover = NSPopoverTouchBarItem(identifier: identifier)
+            popover.customizationLabel = "Radios"
+            popover.collapsedRepresentationImage = NSImage(systemSymbolName: "radio", accessibilityDescription: "Radios")
+            popover.popoverTouchBar.customizationIdentifier = .radiosBar
+            popover.popoverTouchBar.defaultItemIdentifiers = [.com1, .com1Mic, .flexibleSpace, .com2, .com2Mic, .flexibleSpace, .nav1, .nav2, .flexibleSpace, .dme, .flexibleSpace, .mkr]
+            popover.popoverTouchBar.delegate = touchBar.delegate!
+            return popover
+        case .com1:
+            let toggle = NSButtonTouchBarItem(identifier: identifier, title: "COM1", target: self, action: #selector(Self.com1Changed(_:)))
+            toggle.customizationLabel = "COM1"
+            return toggle
+        case .com2:
+            let toggle = NSButtonTouchBarItem(identifier: identifier, title: "COM2", target: self, action: #selector(Self.com2Changed(_:)))
+            toggle.customizationLabel = "COM2"
+            return toggle
+        case .nav1:
+            let toggle = NSButtonTouchBarItem(identifier: identifier, title: "NAV1", target: self, action: #selector(Self.nav1Changed(_:)))
+            toggle.customizationLabel = "NAV1"
+            return toggle
+        case .nav2:
+            let toggle = NSButtonTouchBarItem(identifier: identifier, title: "NAV2", target: self, action: #selector(Self.nav2Changed(_:)))
+            toggle.customizationLabel = "NAV2"
+            return toggle
+        case .dme:
+            let toggle = NSButtonTouchBarItem(identifier: identifier, title: "DME", target: self, action: #selector(Self.dmeChanged(_:)))
+            toggle.customizationLabel = "DME"
+            return toggle
+        case .mkr:
+            let toggle = NSButtonTouchBarItem(identifier: identifier, title: "MKR", target: self, action: #selector(Self.mkrChanged(_:)))
+            toggle.customizationLabel = "MKR"
+            return toggle
+        case .com1Mic:
+            let image = NSImage(systemSymbolName: "mic", accessibilityDescription: "COM1 Mic")!
+            let toggle = NSButtonTouchBarItem(identifier: identifier, image: image, target: self, action: #selector(Self.com1MicPressed(_:)))
+            toggle.customizationLabel = "COM1 MIC"
+            return toggle
+        case .com2Mic:
+            let image = NSImage(systemSymbolName: "mic", accessibilityDescription: "COM2 Mic")!
+            let toggle = NSButtonTouchBarItem(identifier: identifier, image: image, target: self, action: #selector(Self.com2MicPressed(_:)))
+            toggle.customizationLabel = "COM2 MIC"
+            return toggle
         case .camera:
             let labels = [
                 "Cockpit",
@@ -222,6 +264,38 @@ class MyTouchBar: NSObject, NSTouchBarDelegate {
         props.strobeLights.toggle()
     }
     
+    @objc func com1Changed(_ sender: NSButton) {
+        props.com1audio.toggle()
+    }
+    
+    @objc func com2Changed(_ sender: NSButton) {
+        props.com2audio.toggle()
+    }
+    
+    @objc func nav1Changed(_ sender: NSButton) {
+        props.nav1audio.toggle()
+    }
+    
+    @objc func nav2Changed(_ sender: NSButton) {
+        props.nav2audio.toggle()
+    }
+    
+    @objc func mkrChanged(_ sender: NSButton) {
+        props.markerAudio.toggle()
+    }
+    
+    @objc func dmeChanged(_ sender: NSButton) {
+        props.dmeAudio.toggle()
+    }
+    
+    @objc func com1MicPressed(_ sender: NSButton) {
+        props.comSelection = .com1
+    }
+    
+    @objc func com2MicPressed(_ sender: NSButton) {
+        props.comSelection = .com2
+    }
+    
     func updateNSTouchBar(_ touchBar: NSTouchBar) {
         if let s = touchBar.item(forIdentifier: .speedbrake) as? NSSliderTouchBarItem {
             s.doubleValue = Double(props.speedbrake)
@@ -315,12 +389,60 @@ class MyTouchBar: NSObject, NSTouchBarDelegate {
                 taxiButton.bezelColor = lightsBezelColor(props.taxiLight)
             }
         }
+        
+        if let r = touchBar.item(forIdentifier: .radios) as? NSPopoverTouchBarItem {
+            let radiosBar = r.popoverTouchBar
+            
+            if let com1Button = radiosBar.item(forIdentifier: .com1) as? NSButtonTouchBarItem {
+                com1Button.bezelColor = radiosBezelColor(props.com1audio)
+            }
+            
+            if let com2Button = radiosBar.item(forIdentifier: .com2) as? NSButtonTouchBarItem {
+                com2Button.bezelColor = radiosBezelColor(props.com2audio)
+            }
+            
+            if let nav1Button = radiosBar.item(forIdentifier: .nav1) as? NSButtonTouchBarItem {
+                nav1Button.bezelColor = radiosBezelColor(props.nav1audio)
+            }
+            
+            if let nav2Button = radiosBar.item(forIdentifier: .nav2) as? NSButtonTouchBarItem {
+                nav2Button.bezelColor = radiosBezelColor(props.nav2audio)
+            }
+            
+            if let mkrButton = radiosBar.item(forIdentifier: .mkr) as? NSButtonTouchBarItem {
+                mkrButton.bezelColor = radiosBezelColor(props.markerAudio)
+            }
+            
+            if let dmeButton = radiosBar.item(forIdentifier: .dme) as? NSButtonTouchBarItem {
+                dmeButton.bezelColor = radiosBezelColor(props.dmeAudio)
+            }
+            
+            if let com1MicButton = radiosBar.item(forIdentifier: .com1Mic) as? NSButtonTouchBarItem,
+               let com2MicButton = radiosBar.item(forIdentifier: .com2Mic) as? NSButtonTouchBarItem {
+                switch props.comSelection {
+                case .com1:
+                    com1MicButton.bezelColor = .systemGreen
+                    com2MicButton.bezelColor = .controlColor
+                case .com2:
+                    com1MicButton.bezelColor = .controlColor
+                    com2MicButton.bezelColor = .systemGreen
+                }
+            }
+        }
     }
 }
 
 fileprivate func lightsBezelColor(_ isOn: Bool) -> NSColor {
     if isOn {
         return .systemYellow
+    } else {
+        return .controlColor
+    }
+}
+
+fileprivate func radiosBezelColor(_ isOn: Bool) -> NSColor {
+    if isOn {
+        return .systemGreen
     } else {
         return .controlColor
     }

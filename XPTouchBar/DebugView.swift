@@ -21,9 +21,15 @@ struct DebugView: View {
             Entry(dataref: Dataref.TaxiLightOn, value: props.taxiLight),
             Entry(dataref: Dataref.ViewType, value: props.camera),
             Entry(dataref: Dataref.Com1Power, value: props.com1power),
+            Entry(dataref: Dataref.AudioSelectionCom1, value: props.com1audio),
             Entry(dataref: Dataref.Com2Power, value: props.com2power),
+            Entry(dataref: Dataref.AudioSelectionCom2, value: props.com2audio),
             Entry(dataref: Dataref.Nav1Power, value: props.nav1power),
+            Entry(dataref: Dataref.AudioSelectionNav1, value: props.nav1audio),
             Entry(dataref: Dataref.Nav2Power, value: props.nav2power),
+            Entry(dataref: Dataref.AudioSelectionNav2, value: props.nav2audio),
+            Entry(dataref: Dataref.AudioMarkerEnabled, value: props.markerAudio),
+            Entry(dataref: Dataref.AudioComSelection, value: props.comSelection),
             Entry(dataref: Dataref.HideYoke, value: props.hideYoke)
         ].sorted(using: sortOrder)
     }
