@@ -43,3 +43,9 @@ extension Gear: Toggleable {
         }
     }
 }
+
+/// Which COM audio channel is transmitting
+enum ComSelection {
+    case com1
+    case com2
+}

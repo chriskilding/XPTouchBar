@@ -108,9 +108,23 @@ class XPlaneConnector: ObservableObject {
         }
     }
     
+    @Published var com1audio: Bool = true {
+        didSet {
+            let dref = DREF(dataref: .AudioSelectionCom1, value: com1audio.floatValue)
+            self.send(dref)
+        }
+    }
+    
     @Published var com2power: Bool = true {
         didSet {
             let dref = DREF(dataref: .Com2Power, value: com2power.floatValue)
+            self.send(dref)
+        }
+    }
+    
+    @Published var com2audio: Bool = false {
+        didSet {
+            let dref = DREF(dataref: .AudioSelectionCom2, value: com2audio.floatValue)
             self.send(dref)
         }
     }
@@ -122,9 +136,47 @@ class XPlaneConnector: ObservableObject {
         }
     }
     
+    @Published var nav1audio: Bool = false {
+        didSet {
+            let dref = DREF(dataref: .AudioSelectionNav1, value: nav1audio.floatValue)
+            self.send(dref)
+        }
+    }
+    
     @Published var nav2power: Bool = true {
         didSet {
             let dref = DREF(dataref: .Nav2Power, value: nav2power.floatValue)
+            self.send(dref)
+        }
+    }
+    
+    @Published var nav2audio: Bool = false {
+        didSet {
+            let dref = DREF(dataref: .AudioSelectionNav2, value: nav2audio.floatValue)
+            self.send(dref)
+        }
+    }
+    
+    @Published var dmeAudio: Bool = false {
+        didSet {
+            let dref = DREF(dataref: .AudioDmeEnabled, value: dmeAudio.floatValue)
+            self.send(dref)
+        }
+    }
+    
+    @Published var comSelection: ComSelection = .com1 {
+        didSet {
+            // Set the corresponding COM receive button states
+            switch comSelection {
+            case .com1:
+                self.com1audio = true
+                self.com2audio = false
+            case .com2:
+                self.com1audio = false
+                self.com2audio = true
+            }
+            
+            let dref = DREF(dataref: .AudioComSelection, value: comSelection.floatValue)
             self.send(dref)
         }
     }
@@ -255,6 +307,18 @@ fileprivate extension Dataref {
             return 18
         case .Nav2Power:
             return 19
+        case .AudioSelectionCom1:
+            return 20
+        case .AudioSelectionCom2:
+            return 21
+        case .AudioSelectionNav1:
+            return 22
+        case .AudioSelectionNav2:
+            return 23
+        case .AudioDmeEnabled:
+            return 24
+        case .AudioComSelection:
+            return 25
         }
     }
 }
@@ -288,6 +352,17 @@ extension Gear: CustomFloatConvertible {
             return 0
         case .down:
             return 1
+        }
+    }
+}
+
+extension ComSelection: CustomFloatConvertible {
+    var floatValue: Float {
+        switch self {
+        case .com1:
+            return 6
+        case .com2:
+            return 7
         }
     }
 }

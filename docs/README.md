@@ -60,16 +60,30 @@ XPTouchBar has Touch Bar widgets for the following aircraft controls:
   - Nav
   - Strobe
   - Taxi
+- Radios
+  - COM1 (audio, mic)
+  - COM2 (audio, mic)
+  - NAV1 (audio)
+  - NAV2 (audio)
+  - DME (audio)
   
 XPTouchBar also forwards the following X-Plane keyboard shortcuts for convenience:
 
-| Key | Shortcut             |
-|-----|----------------------|
-| B   | Parking Brake On/Off |
-| G   | Landing Gear Up/Down |
-| M   | Show/Hide Map        |
-| P   | Play/Pause           |
-| Y   | Show/Hide Yoke       |
+| Key | Shortcut                 |
+|-----|--------------------------|
+| B   | Parking Brake On/Off     |
+| G   | Landing Gear Up/Down     |
+| M   | Show/Hide Map            |
+| P   | Play/Pause               |
+| Y   | Show/Hide Yoke           |
+| ⇧1  | Linear Spot              |
+| ⇧2  | Still Spot               |
+| ⇧3  | Camera: Runway           |
+| ⇧4  | Camera: Circle           |
+| ⇧5  | Camera: Tower            |
+| ⇧8  | Camera: Chase            |
+| ⇧9  | Camera: 3D Cockpit       |
+| ⇧W  | Camera: Forward With HUD |
 
 ## Requirements
 
