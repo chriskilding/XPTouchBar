@@ -90,9 +90,6 @@ struct XPTouchBarApp: App {
         .onChange(of: props.nav2audio) { newState in
             appDelegate.updateTouchBar()
         }
-        .onChange(of: props.markerAudio) { newState in
-            appDelegate.updateTouchBar()
-        }
         .onChange(of: props.dmeAudio) { newState in
             appDelegate.updateTouchBar()
         }
@@ -128,11 +125,52 @@ struct XPTouchBarApp: App {
                 }
                 .keyboardShortcut("Y", modifiers: [])
                 
-                camera
-                
                 lights
                 
                 radios
+            }
+            
+            CommandMenu("Camera") {
+                
+                Button("Cockpit") {
+                    self.props.camera = .cockpit
+                }
+                .keyboardShortcut("9", modifiers: [.shift])
+                
+                Button("Chase") {
+                    self.props.camera = .chase
+                }
+                .keyboardShortcut("8", modifiers: [.shift])
+                
+                Button("Circle") {
+                    self.props.camera = .circle
+                }
+                .keyboardShortcut("4", modifiers: [.shift])
+                
+                Button("Forward with HUD") {
+                    self.props.camera = .hud
+                }
+                .keyboardShortcut("W", modifiers: [.shift])
+                
+                Button("Linear Spot") {
+                    self.props.camera = .linearSpot
+                }
+                .keyboardShortcut("1", modifiers: [.shift])
+                
+                Button("Runway") {
+                    self.props.camera = .runway
+                }
+                .keyboardShortcut("3", modifiers: [.shift])
+                
+                Button("Still Spot") {
+                    self.props.camera = .stillSpot
+                }
+                .keyboardShortcut("2", modifiers: [.shift])
+                
+                Button("Tower") {
+                    self.props.camera = .tower
+                }
+                .keyboardShortcut("5", modifiers: [.shift])
             }
         }
         
@@ -140,19 +178,6 @@ struct XPTouchBarApp: App {
             ConnectionView()
                 .environmentObject(props)
                 .padding()
-        }
-    }
-    
-    var camera: some View {
-        Picker("Camera", selection: $props.camera) {
-            Text("Cockpit").tag(Camera.cockpit)
-            Text("Chase").tag(Camera.chase)
-            Text("Circle").tag(Camera.circle)
-            Text("Forward with HUD").tag(Camera.hud)
-            Text("Linear Spot").tag(Camera.linearSpot)
-            Text("Runway").tag(Camera.runway)
-            Text("Still Spot").tag(Camera.stillSpot)
-            Text("Tower").tag(Camera.tower)
         }
     }
     
@@ -209,7 +234,6 @@ struct XPTouchBarApp: App {
             navRadios
             Divider()
             Toggle("DME", isOn: $props.dmeAudio)
-            Toggle("MKR", isOn: $props.markerAudio)
         }
     }
     

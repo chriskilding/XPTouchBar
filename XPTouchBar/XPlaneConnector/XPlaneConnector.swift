@@ -157,13 +157,6 @@ class XPlaneConnector: ObservableObject {
         }
     }
     
-    @Published var markerAudio: Bool = true {
-        didSet {
-            let dref = DREF(dataref: .AudioMarkerEnabled, value: markerAudio.floatValue)
-            self.send(dref)
-        }
-    }
-    
     @Published var dmeAudio: Bool = false {
         didSet {
             let dref = DREF(dataref: .AudioDmeEnabled, value: dmeAudio.floatValue)
@@ -322,12 +315,10 @@ fileprivate extension Dataref {
             return 22
         case .AudioSelectionNav2:
             return 23
-        case .AudioMarkerEnabled:
-            return 24
         case .AudioDmeEnabled:
-            return 25
+            return 24
         case .AudioComSelection:
-            return 26
+            return 25
         }
     }
 }
@@ -374,8 +365,6 @@ extension ComSelection: CustomFloatConvertible {
             return 7
         }
     }
-    
-    
 }
 
 extension Camera: CustomFloatConvertible {

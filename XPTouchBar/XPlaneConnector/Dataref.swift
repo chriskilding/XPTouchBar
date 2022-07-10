@@ -112,9 +112,6 @@ enum Dataref {
     /// is nav2 selected for listening
     case AudioSelectionNav2
     
-    /// Is audio for the marker beacons enabled?
-    case AudioMarkerEnabled
-    
     /// Is DME audio enabled? This only listens to the dedicated DME receiver
     case AudioDmeEnabled
     
@@ -171,8 +168,6 @@ extension Dataref: CustomStringConvertible {
             return "sim/cockpit2/radios/actuators/audio_selection_nav1"
         case .AudioSelectionNav2:
             return "sim/cockpit2/radios/actuators/audio_selection_nav2"
-        case .AudioMarkerEnabled:
-            return "sim/cockpit2/radios/actuators/audio_marker_enabled"
         case .AudioDmeEnabled:
             return "sim/cockpit2/radios/actuators/audio_dme_enabled"
         case .AudioComSelection:

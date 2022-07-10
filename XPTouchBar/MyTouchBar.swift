@@ -122,7 +122,7 @@ class MyTouchBar: NSObject, NSTouchBarDelegate {
             popover.customizationLabel = "Radios"
             popover.collapsedRepresentationImage = NSImage(systemSymbolName: "radio", accessibilityDescription: "Radios")
             popover.popoverTouchBar.customizationIdentifier = .radiosBar
-            popover.popoverTouchBar.defaultItemIdentifiers = [.com1, .com1Mic, .flexibleSpace, .com2, .com2Mic, .flexibleSpace, .nav1, .nav2, .flexibleSpace, .dme, .flexibleSpace, .mkr]
+            popover.popoverTouchBar.defaultItemIdentifiers = [.com1, .com1Mic, .flexibleSpace, .com2, .com2Mic, .flexibleSpace, .nav1, .nav2, .flexibleSpace, .dme]
             popover.popoverTouchBar.delegate = touchBar.delegate!
             return popover
         case .com1:
@@ -145,18 +145,12 @@ class MyTouchBar: NSObject, NSTouchBarDelegate {
             let toggle = NSButtonTouchBarItem(identifier: identifier, title: "DME", target: self, action: #selector(Self.dmeChanged(_:)))
             toggle.customizationLabel = "DME"
             return toggle
-        case .mkr:
-            let toggle = NSButtonTouchBarItem(identifier: identifier, title: "MKR", target: self, action: #selector(Self.mkrChanged(_:)))
-            toggle.customizationLabel = "MKR"
-            return toggle
         case .com1Mic:
-            let image = NSImage(systemSymbolName: "mic", accessibilityDescription: "COM1 Mic")!
-            let toggle = NSButtonTouchBarItem(identifier: identifier, image: image, target: self, action: #selector(Self.com1MicPressed(_:)))
+            let toggle = NSButtonTouchBarItem(identifier: identifier, title: "MIC", target: self, action: #selector(Self.com1MicPressed(_:)))
             toggle.customizationLabel = "COM1 MIC"
             return toggle
         case .com2Mic:
-            let image = NSImage(systemSymbolName: "mic", accessibilityDescription: "COM2 Mic")!
-            let toggle = NSButtonTouchBarItem(identifier: identifier, image: image, target: self, action: #selector(Self.com2MicPressed(_:)))
+            let toggle = NSButtonTouchBarItem(identifier: identifier, title: "MIC", target: self, action: #selector(Self.com2MicPressed(_:)))
             toggle.customizationLabel = "COM2 MIC"
             return toggle
         case .camera:
@@ -165,9 +159,9 @@ class MyTouchBar: NSObject, NSTouchBarDelegate {
                 "Chase",
                 "Circle",
                 "HUD",
-                "Linear Spot",
+                "Linear",
                 "Runway",
-                "Still Spot",
+                "Spot",
                 "Tower",
             ]
             let control = NSPickerTouchBarItem(identifier: identifier, labels: labels, selectionMode: .selectOne, target: self, action: #selector(Self.cameraChanged(_:)))
@@ -278,10 +272,6 @@ class MyTouchBar: NSObject, NSTouchBarDelegate {
     
     @objc func nav2Changed(_ sender: NSButton) {
         props.nav2audio.toggle()
-    }
-    
-    @objc func mkrChanged(_ sender: NSButton) {
-        props.markerAudio.toggle()
     }
     
     @objc func dmeChanged(_ sender: NSButton) {
@@ -407,10 +397,6 @@ class MyTouchBar: NSObject, NSTouchBarDelegate {
             
             if let nav2Button = radiosBar.item(forIdentifier: .nav2) as? NSButtonTouchBarItem {
                 nav2Button.bezelColor = radiosBezelColor(props.nav2audio)
-            }
-            
-            if let mkrButton = radiosBar.item(forIdentifier: .mkr) as? NSButtonTouchBarItem {
-                mkrButton.bezelColor = radiosBezelColor(props.markerAudio)
             }
             
             if let dmeButton = radiosBar.item(forIdentifier: .dme) as? NSButtonTouchBarItem {
