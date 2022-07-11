@@ -132,45 +132,45 @@ struct XPTouchBarApp: App {
             
             CommandMenu("Camera") {
                 
-                Button("Cockpit") {
-                    self.props.camera = .cockpit
-                }
-                .keyboardShortcut("9", modifiers: [.shift])
-                
-                Button("Chase") {
-                    self.props.camera = .chase
-                }
-                .keyboardShortcut("8", modifiers: [.shift])
-                
-                Button("Circle") {
-                    self.props.camera = .circle
-                }
-                .keyboardShortcut("4", modifiers: [.shift])
-                
-                Button("Forward with HUD") {
-                    self.props.camera = .hud
-                }
-                .keyboardShortcut("W", modifiers: [.shift])
-                
                 Button("Linear Spot") {
                     self.props.camera = .linearSpot
                 }
                 .keyboardShortcut("1", modifiers: [.shift])
-                
-                Button("Runway") {
-                    self.props.camera = .runway
-                }
-                .keyboardShortcut("3", modifiers: [.shift])
                 
                 Button("Still Spot") {
                     self.props.camera = .stillSpot
                 }
                 .keyboardShortcut("2", modifiers: [.shift])
                 
+                Button("Runway") {
+                    self.props.camera = .runway
+                }
+                .keyboardShortcut("3", modifiers: [.shift])
+                
+                Button("Circle") {
+                    self.props.camera = .circle
+                }
+                .keyboardShortcut("4", modifiers: [.shift])
+                
                 Button("Tower") {
                     self.props.camera = .tower
                 }
                 .keyboardShortcut("5", modifiers: [.shift])
+                
+                Button("Chase") {
+                    self.props.camera = .chase
+                }
+                .keyboardShortcut("8", modifiers: [.shift])
+                
+                Button("Cockpit") {
+                    self.props.camera = .cockpit
+                }
+                .keyboardShortcut("9", modifiers: [.shift])
+                
+                Button("Forward with HUD") {
+                    self.props.camera = .hud
+                }
+                .keyboardShortcut("W", modifiers: [.shift])
             }
         }
         
@@ -233,7 +233,7 @@ struct XPTouchBarApp: App {
             Divider()
             navRadios
             Divider()
-            Toggle("DME", isOn: $props.dmeAudio)
+            Toggle("DME Audio", isOn: $props.dmeAudio)
         }
     }
     
