@@ -24,6 +24,15 @@ extension NSTouchBarItem.Identifier {
     static let dme = NSTouchBarItem.Identifier("XPTouchBar.Radios.DME")
     static let com1Mic = NSTouchBarItem.Identifier("XPTouchBar.Radios.COM1Mic")
     static let com2Mic = NSTouchBarItem.Identifier("XPTouchBar.Radios.COM2Mic")
+    static let hdg = NSTouchBarItem.Identifier("XPTouchBar.Autopilot.Heading")
+    static let nav = NSTouchBarItem.Identifier("XPTouchBar.Autopilot.Navigation")
+    static let apr = NSTouchBarItem.Identifier("XPTouchBar.Autopilot.Approach")
+    static let rev = NSTouchBarItem.Identifier("XPTouchBar.Autopilot.Reverse")
+    static let alt = NSTouchBarItem.Identifier("XPTouchBar.Autopilot.Altitude")
+    static let vs = NSTouchBarItem.Identifier("XPTouchBar.Autopilot.VerticalSpeed")
+    static let vsDown = NSTouchBarItem.Identifier("XPTouchBar.Autopilot.VerticalSpeed.Down")
+    static let vsUp = NSTouchBarItem.Identifier("XPTouchBar.Autopilot.VerticalSpeed.Up")
+    static let stec55 = NSTouchBarItem.Identifier("XPTouchBar.Autopilot.S-TEC")
 }
 
 extension NSTouchBar.CustomizationIdentifier {
