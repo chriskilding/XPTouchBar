@@ -125,6 +125,8 @@ struct XPTouchBarApp: App {
                 }
                 .keyboardShortcut("Y", modifiers: [])
                 
+                autopilot
+                
                 lights
                 
                 radios
@@ -224,6 +226,36 @@ struct XPTouchBarApp: App {
             nav1radios
             Divider()
             nav2radios
+        }
+    }
+    
+    var autopilot: some View {
+        Menu("Autopilot") {
+            Button("Altitude Mode (ALT)") {
+                self.props.autopilotAltitudeHold()
+            }
+            Button("Approach Mode (APR)") {
+                self.props.autopilotApproach()
+            }
+            Button("Heading Mode (HDG)") {
+                self.props.autopilotHeadingHold()
+            }
+            Button("Navigation Mode (NAV)") {
+                self.props.autopilotNav()
+            }
+            Button("Reverse Mode (REV)") {
+                self.props.autopilotBackCourse()
+            }
+            Divider()
+            Button("Vertical Speed Mode (VS)") {
+                self.props.autopilotVerticalSpeed()
+            }
+            Button("Vertical Speed Down (-VS)") {
+                self.props.autopilotVerticalSpeedDown()
+            }
+            Button("Vertical Speed Up (+VS)") {
+                self.props.autopilotVerticalSpeedUp()
+            }
         }
     }
     
