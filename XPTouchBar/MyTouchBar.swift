@@ -210,80 +210,80 @@ class MyTouchBar: NSObject, NSTouchBarDelegate {
     @objc func cameraChanged(_ sender: NSPickerTouchBarItem) {
         switch sender.selectedIndex {
         case 0:
-            props.camera = .cockpit
+            props.cameraCockpit()
         case 1:
-            props.camera = .chase
+            props.cameraChase()
         case 2:
-            props.camera = .circle
+            props.cameraCircle()
         case 3:
-            props.camera = .hud
+            props.cameraHud()
         case 4:
-            props.camera = .linearSpot
+            props.cameraLinearSpot()
         case 5:
-            props.camera = .runway
+            props.cameraRunway()
         case 6:
-            props.camera = .stillSpot
+            props.cameraStillSpot()
         case 7:
-            props.camera = .tower
+            props.cameraTower()
         default:
             break
         }
     }
     
     @objc func gearChanged(_ sender: NSButton) {
-        props.gear.toggle()
+        props.toggleLandingGear()
     }
     
     @objc func parkingBrakeChanged(_ sender: NSButton) {
-        props.parkingBrake.toggle()
+        props.toggleParkingBrake()
     }
     
     @objc func beaconChanged(_ sender: NSButton) {
-        props.beaconLights.toggle()
+        props.toggleBeaconLights()
     }
     
     @objc func landingChanged(_ sender: NSButton) {
-        props.landingLights.toggle()
+        props.toggleLandingLights()
     }
     
     @objc func navigationChanged(_ sender: NSButton) {
-        props.navigationLights.toggle()
+        props.toggleNavLights()
     }
     
     @objc func taxiChanged(_ sender: NSButton) {
-        props.taxiLight.toggle()
+        props.toggleTaxiLights()
     }
     
     @objc func strobeChanged(_ sender: NSButton) {
-        props.strobeLights.toggle()
+        props.toggleStrobeLights()
     }
     
     @objc func com1Changed(_ sender: NSButton) {
-        props.com1audio.toggle()
+        props.toggleCom1Audio()
     }
     
     @objc func com2Changed(_ sender: NSButton) {
-        props.com2audio.toggle()
+        props.toggleCom2Audio()
     }
     
     @objc func nav1Changed(_ sender: NSButton) {
-        props.nav1audio.toggle()
+        props.toggleNav1Audio()
     }
     
     @objc func nav2Changed(_ sender: NSButton) {
-        props.nav2audio.toggle()
+        props.toggleNav2Audio()
     }
     
     @objc func dmeChanged(_ sender: NSButton) {
-        props.dmeAudio.toggle()
+        props.toggleDmeAudio()
     }
     
     @objc func com1MicPressed(_ sender: NSButton) {
-        props.comSelection = .com1
+        props.com1Mic()
     }
     
     @objc func com2MicPressed(_ sender: NSButton) {
-        props.comSelection = .com2
+        props.com2Mic()
     }
     
     func updateNSTouchBar(_ touchBar: NSTouchBar) {

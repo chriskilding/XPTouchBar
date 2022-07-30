@@ -13,7 +13,7 @@ struct XPTouchBarApp: App {
                 return self.props.comSelection == .com1
             },
             set: { _ in
-                self.props.comSelection = .com1
+                self.props.com1Mic()
             })
     }
     
@@ -23,7 +23,7 @@ struct XPTouchBarApp: App {
                 return self.props.comSelection == .com2
             },
             set: { _ in
-                self.props.comSelection = .com2
+                self.props.com2Mic()
             })
     }
     
@@ -104,11 +104,12 @@ struct XPTouchBarApp: App {
             SidebarCommands()
             
             CommandMenu("Controls") {
-                Toggle("Parking Brake", isOn: $props.parkingBrake)
-                    .keyboardShortcut("B", modifiers: [])
+                Button("Parking Brake") {
+                    props.toggleParkingBrake()
+                }.keyboardShortcut("B", modifiers: [])
                 
                 Button("Landing Gear") {
-                    props.gear.toggle()
+                    props.toggleLandingGear()
                 }.keyboardShortcut("G", modifiers: [])
                 
                 Button("Show/Hide Map") {
@@ -121,7 +122,7 @@ struct XPTouchBarApp: App {
                 .keyboardShortcut("P", modifiers: [])
                 
                 Button("Show/Hide Yoke") {
-                    props.hideYoke.toggle()
+                    props.toggleYoke()
                 }
                 .keyboardShortcut("Y", modifiers: [])
                 
@@ -133,42 +134,42 @@ struct XPTouchBarApp: App {
             CommandMenu("Camera") {
                 
                 Button("Linear Spot") {
-                    self.props.camera = .linearSpot
+                    self.props.cameraLinearSpot()
                 }
                 .keyboardShortcut("1", modifiers: [.shift])
                 
                 Button("Still Spot") {
-                    self.props.camera = .stillSpot
+                    self.props.cameraStillSpot()
                 }
                 .keyboardShortcut("2", modifiers: [.shift])
                 
                 Button("Runway") {
-                    self.props.camera = .runway
+                    self.props.cameraRunway()
                 }
                 .keyboardShortcut("3", modifiers: [.shift])
                 
                 Button("Circle") {
-                    self.props.camera = .circle
+                    self.props.cameraCircle()
                 }
                 .keyboardShortcut("4", modifiers: [.shift])
                 
                 Button("Tower") {
-                    self.props.camera = .tower
+                    self.props.cameraTower()
                 }
                 .keyboardShortcut("5", modifiers: [.shift])
                 
                 Button("Chase") {
-                    self.props.camera = .chase
+                    self.props.cameraChase()
                 }
                 .keyboardShortcut("8", modifiers: [.shift])
                 
                 Button("Cockpit") {
-                    self.props.camera = .cockpit
+                    self.props.cameraCockpit()
                 }
                 .keyboardShortcut("9", modifiers: [.shift])
                 
                 Button("Forward with HUD") {
-                    self.props.camera = .hud
+                    self.props.cameraHud()
                 }
                 .keyboardShortcut("W", modifiers: [.shift])
             }
@@ -184,7 +185,9 @@ struct XPTouchBarApp: App {
     var com1radios: some View {
         Group {
             Toggle("COM1 Power", isOn: $props.com1power)
-            Toggle("COM1 Audio", isOn: $props.com1audio)
+            Button("COM1 Audio") {
+                props.toggleCom1Audio()
+            }
             Toggle("COM1 Mic", isOn: com1Mic)
         }
     }
@@ -192,7 +195,9 @@ struct XPTouchBarApp: App {
     var com2radios: some View {
         Group {
             Toggle("COM2 Power", isOn: $props.com2power)
-            Toggle("COM2 Audio", isOn: $props.com2audio)
+            Button("COM2 Audio") {
+                props.toggleCom2Audio()
+            }
             Toggle("COM2 Mic", isOn: com2Mic)
         }
     }
@@ -200,14 +205,18 @@ struct XPTouchBarApp: App {
     var nav1radios: some View {
         Group {
             Toggle("NAV1 Power", isOn: $props.nav1power)
-            Toggle("NAV1 Audio", isOn: $props.nav1audio)
+            Button("NAV1 Audio") {
+                props.toggleNav1Audio()
+            }
         }
     }
     
     var nav2radios: some View {
         Group {
             Toggle("NAV2 Power", isOn: $props.nav2power)
-            Toggle("NAV2 Audio", isOn: $props.nav2audio)
+            Button("NAV2 Audio") {
+                props.toggleNav2Audio()
+            }
         }
     }
     
@@ -233,17 +242,29 @@ struct XPTouchBarApp: App {
             Divider()
             navRadios
             Divider()
-            Toggle("DME Audio", isOn: $props.dmeAudio)
+            Button("DME Audio") {
+                props.toggleDmeAudio()
+            }
         }
     }
     
     var lights: some View {
         Menu("Lights") {
-            Toggle("Beacon", isOn: $props.beaconLights)
-            Toggle("Landing", isOn: $props.landingLights)
-            Toggle("Nav", isOn: $props.navigationLights)
-            Toggle("Strobe", isOn: $props.strobeLights)
-            Toggle("Taxi", isOn: $props.taxiLight)
+            Button("Beacon") {
+                props.toggleBeaconLights()
+            }
+            Button("Landing") {
+                props.toggleLandingLights()
+            }
+            Button("Nav") {
+                props.toggleNavLights()
+            }
+            Button("Strobe") {
+                props.toggleStrobeLights()
+            }
+            Button("Taxi") {
+                props.toggleTaxiLights()
+            }
         }
     }
 }

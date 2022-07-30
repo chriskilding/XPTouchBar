@@ -31,20 +31,6 @@ class XPlaneConnector: ObservableObject {
         }
     }
     
-    @Published var gear: Gear = .down {
-        didSet {
-            let dref = DREF(dataref: .GearHandleDown, value: gear.floatValue)
-            self.send(dref)
-        }
-    }
-    
-    @Published var parkingBrake: Bool = true {
-        didSet {
-            let dref = DREF(dataref: .ParkingBrakeRatio, value: parkingBrake.floatValue)
-            self.send(dref)
-        }
-    }
-    
     @Published var speedbrake: Float = 0 {
         didSet {
             let dref = DREF(dataref: .SpeedbrakeRatio, value: speedbrake)
@@ -59,48 +45,22 @@ class XPlaneConnector: ObservableObject {
         }
     }
     
-    @Published var landingLights: Bool = true {
-        didSet {
-            let dref = DREF(dataref: .LandingLightsOn, value: landingLights.floatValue)
-            self.send(dref)
-        }
-    }
+    @Published private(set) var parkingBrake: Bool = true
     
-    @Published var strobeLights: Bool = true {
-        didSet {
-            let dref = DREF(dataref: .StrobeLightsOn, value: strobeLights.floatValue)
-            self.send(dref)
-        }
-    }
+    @Published private(set) var gear: Gear = .down
     
-    @Published var taxiLight: Bool = true {
-        didSet {
-            let dref = DREF(dataref: .TaxiLightOn, value: taxiLight.floatValue)
-            self.send(dref)
-        }
-    }
+    @Published private(set) var landingLights: Bool = true
     
-    @Published var beaconLights: Bool = true {
-        didSet {
-            let dref = DREF(dataref: .BeaconOn, value: beaconLights.floatValue)
-            self.send(dref)
-        }
-    }
+    @Published private(set) var strobeLights: Bool = true
     
-    @Published var navigationLights: Bool = true {
-        didSet {
-            let dref = DREF(dataref: .NavigationLightsOn, value: navigationLights.floatValue)
-            self.send(dref)
-        }
-    }
+    @Published private(set) var taxiLight: Bool = true
     
-    @Published var hideYoke: Bool = false {
-        didSet {
-            let dref = DREF(dataref: .HideYoke, value: hideYoke.floatValue)
-            self.send(dref)
-        }
-    }
+    @Published private(set) var beaconLights: Bool = true
     
+    @Published private(set) var navigationLights: Bool = true
+    
+    @Published private(set) var camera: Camera = .cockpit
+        
     @Published var com1power: Bool = true {
         didSet {
             let dref = DREF(dataref: .Com1Power, value: com1power.floatValue)
@@ -108,12 +68,7 @@ class XPlaneConnector: ObservableObject {
         }
     }
     
-    @Published var com1audio: Bool = true {
-        didSet {
-            let dref = DREF(dataref: .AudioSelectionCom1, value: com1audio.floatValue)
-            self.send(dref)
-        }
-    }
+    @Published private(set) var com1audio: Bool = true
     
     @Published var com2power: Bool = true {
         didSet {
@@ -122,12 +77,7 @@ class XPlaneConnector: ObservableObject {
         }
     }
     
-    @Published var com2audio: Bool = false {
-        didSet {
-            let dref = DREF(dataref: .AudioSelectionCom2, value: com2audio.floatValue)
-            self.send(dref)
-        }
-    }
+    @Published private(set) var com2audio: Bool = false
     
     @Published var nav1power: Bool = true {
         didSet {
@@ -136,12 +86,7 @@ class XPlaneConnector: ObservableObject {
         }
     }
     
-    @Published var nav1audio: Bool = false {
-        didSet {
-            let dref = DREF(dataref: .AudioSelectionNav1, value: nav1audio.floatValue)
-            self.send(dref)
-        }
-    }
+    @Published private(set) var nav1audio: Bool = false
     
     @Published var nav2power: Bool = true {
         didSet {
@@ -150,23 +95,14 @@ class XPlaneConnector: ObservableObject {
         }
     }
     
-    @Published var nav2audio: Bool = false {
-        didSet {
-            let dref = DREF(dataref: .AudioSelectionNav2, value: nav2audio.floatValue)
-            self.send(dref)
-        }
-    }
+    @Published private(set) var nav2audio: Bool = false
     
-    @Published var dmeAudio: Bool = false {
-        didSet {
-            let dref = DREF(dataref: .AudioDmeEnabled, value: dmeAudio.floatValue)
-            self.send(dref)
-        }
-    }
+    @Published private(set) var dmeAudio: Bool = false
     
-    @Published var comSelection: ComSelection = .com1 {
+    @Published private(set) var comSelection: ComSelection = .com1 {
         didSet {
             // Set the corresponding COM receive button states
+            // TODO remove once receiving from RREF subscription
             switch comSelection {
             case .com1:
                 self.com1audio = true
@@ -175,16 +111,6 @@ class XPlaneConnector: ObservableObject {
                 self.com1audio = false
                 self.com2audio = true
             }
-            
-            let dref = DREF(dataref: .AudioComSelection, value: comSelection.floatValue)
-            self.send(dref)
-        }
-    }
-    
-    @Published var camera: Camera = .cockpit {
-        didSet {
-            let dref = DREF(dataref: .ViewType, value: camera.floatValue)
-            self.send(dref)
         }
     }
     
@@ -239,6 +165,167 @@ class XPlaneConnector: ObservableObject {
     func toggleMap() {
         let cmnd = CMND(command: .MapShowCurrent)
         self.send(cmnd)
+    }
+    
+    func toggleYoke() {
+        let cmnd = CMND(command: .ToggleYoke)
+        self.send(cmnd)
+    }
+    
+    func toggleCom1Audio() {
+        let cmnd = CMND(command: .MonitorAudioCom1)
+        self.send(cmnd)
+        
+        self.com1audio.toggle()
+    }
+    
+    func com1Mic() {
+        let cmnd = CMND(command: .TransmitAudioCom1)
+        self.send(cmnd)
+        
+        self.comSelection = .com1
+    }
+    
+    func toggleCom2Audio() {
+        let cmnd = CMND(command: .MonitorAudioCom2)
+        self.send(cmnd)
+        
+        self.com2audio.toggle()
+    }
+    
+    func com2Mic() {
+        let cmnd = CMND(command: .TransmitAudioCom2)
+        self.send(cmnd)
+        
+        self.comSelection = .com2
+    }
+    
+    func toggleNav1Audio() {
+        let cmnd = CMND(command: .MonitorAudioNav1)
+        self.send(cmnd)
+        
+        self.nav1audio.toggle()
+    }
+    
+    func toggleNav2Audio() {
+        let cmnd = CMND(command: .MonitorAudioNav2)
+        self.send(cmnd)
+        
+        self.nav2audio.toggle()
+    }
+    
+    func toggleDmeAudio() {
+        let cmnd = CMND(command: .MonitorAudioDme)
+        self.send(cmnd)
+        
+        self.dmeAudio.toggle()
+    }
+    
+    func toggleLandingGear() {
+        let cmnd = CMND(command: .LandingGearToggle)
+        self.send(cmnd)
+        
+        // Update local state
+        // TODO remove once using RREF subscriptions
+        self.gear.toggle()
+    }
+    
+    func toggleParkingBrake() {
+        let cmnd = CMND(command: .BrakesToggleMax)
+        self.send(cmnd)
+        
+        self.parkingBrake.toggle()
+    }
+    
+    func toggleBeaconLights() {
+        let cmnd = CMND(command: .BeaconLightsToggle)
+        self.send(cmnd)
+        
+        self.beaconLights.toggle()
+    }
+    
+    func toggleLandingLights() {
+        let cmnd = CMND(command: .LandingLightsToggle)
+        self.send(cmnd)
+        
+        self.landingLights.toggle()
+    }
+    
+    func toggleNavLights() {
+        let cmnd = CMND(command: .NavLightsToggle)
+        self.send(cmnd)
+        
+        self.navigationLights.toggle()
+    }
+    
+    func toggleStrobeLights() {
+        let cmnd = CMND(command: .StrobeLightsToggle)
+        self.send(cmnd)
+        
+        self.strobeLights.toggle()
+    }
+    
+    func toggleTaxiLights() {
+        let cmnd = CMND(command: .TaxiLightsToggle)
+        self.send(cmnd)
+        
+        self.taxiLight.toggle()
+    }
+    
+    func cameraChase() {
+        let cmnd = CMND(command: .Chase)
+        self.send(cmnd)
+        
+        self.camera = .chase
+    }
+    
+    func cameraCircle() {
+        let cmnd = CMND(command: .Circle)
+        self.send(cmnd)
+        
+        self.camera = .circle
+    }
+    
+    func cameraCockpit() {
+        let cmnd = CMND(command: .ThreeDCockpit)
+        self.send(cmnd)
+        
+        self.camera = .cockpit
+    }
+    
+    func cameraHud() {
+        let cmnd = CMND(command: .ForwardWithHud)
+        self.send(cmnd)
+        
+        self.camera = .hud
+    }
+    
+    func cameraLinearSpot() {
+        let cmnd = CMND(command: .LinearSpot)
+        self.send(cmnd)
+        
+        self.camera = .linearSpot
+    }
+    
+    func cameraStillSpot() {
+        let cmnd = CMND(command: .StillSpot)
+        self.send(cmnd)
+        
+        self.camera = .stillSpot
+    }
+    
+    func cameraRunway() {
+        let cmnd = CMND(command: .Runway)
+        self.send(cmnd)
+        
+        self.camera = .runway
+    }
+    
+    func cameraTower() {
+        let cmnd = CMND(command: .Tower)
+        self.send(cmnd)
+        
+        self.camera = .tower
     }
     
     private func restart() {
