@@ -128,6 +128,8 @@ struct XPTouchBarApp: App {
                 lights
                 
                 radios
+                
+                tow
             }
             
             CommandMenu("Camera") {
@@ -244,6 +246,28 @@ struct XPTouchBarApp: App {
             Toggle("Nav", isOn: $props.navigationLights)
             Toggle("Strobe", isOn: $props.strobeLights)
             Toggle("Taxi", isOn: $props.taxiLight)
+        }
+    }
+    
+    var tow: some View {
+        Menu("Tow") {
+            Button("Start") {
+                props.gliderTowStart()
+            }
+            Divider()
+            Button("Tow Left") {
+                props.gliderTowLeft()
+            }
+            Button("Tow Straight") {
+                props.gliderTowStraight()
+            }
+            Button("Tow Right") {
+                props.gliderTowRight()
+            }
+            Divider()
+            Button("Release") {
+                props.gliderRelease()
+            }
         }
     }
 }
