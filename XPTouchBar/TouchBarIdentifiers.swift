@@ -24,10 +24,17 @@ extension NSTouchBarItem.Identifier {
     static let dme = NSTouchBarItem.Identifier("XPTouchBar.Radios.DME")
     static let com1Mic = NSTouchBarItem.Identifier("XPTouchBar.Radios.COM1Mic")
     static let com2Mic = NSTouchBarItem.Identifier("XPTouchBar.Radios.COM2Mic")
+    static let tow = NSTouchBarItem.Identifier("XPTouchBar.Tow")
+    static let towStart = NSTouchBarItem.Identifier("XPTouchBar.Tow.Start")
+    static let towLeft = NSTouchBarItem.Identifier("XPTouchBar.Tow.Left")
+    static let towStraight = NSTouchBarItem.Identifier("XPTouchBar.Tow.Straight")
+    static let towRight = NSTouchBarItem.Identifier("XPTouchBar.Tow.Right")
+    static let towRelease = NSTouchBarItem.Identifier("XPTouchBar.Tow.Release")
 }
 
 extension NSTouchBar.CustomizationIdentifier {
     static let xpTouchBar = NSTouchBar.CustomizationIdentifier("XPTouchBar")
     static let lightsBar = NSTouchBar.CustomizationIdentifier("XPTouchBar.Lights")
     static let radiosBar = NSTouchBar.CustomizationIdentifier("XPTouchBar.Radios")
+    static let towBar = NSTouchBar.CustomizationIdentifier("XPTouchBar.Tow")
 }

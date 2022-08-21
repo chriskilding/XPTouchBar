@@ -241,6 +241,33 @@ class XPlaneConnector: ObservableObject {
         self.send(cmnd)
     }
     
+    /// Release glider tow rope
+    func gliderRelease() {
+        let cmd = CMND(command: .GliderAllRelease)
+        self.send(cmd)
+    }
+    
+    func gliderTowLeft() {
+        let cmd = CMND(command: .GliderTowLeft)
+        self.send(cmd)
+    }
+    
+    func gliderTowStraight() {
+        let cmd = CMND(command: .GliderTowStraight)
+        self.send(cmd)
+    }
+    
+    func gliderTowRight() {
+        let cmd = CMND(command: .GliderTowRight)
+        self.send(cmd)
+    }
+    
+    func gliderTowStart() {
+        // This is internally implemented by releasing the parking brake
+        // TODO upgrade this to a CommandRef
+        self.parkingBrake = false
+    }
+    
     private func restart() {
         stop()
         start()

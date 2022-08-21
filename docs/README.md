@@ -69,6 +69,12 @@ XPTouchBar has Touch Bar widgets for the following aircraft controls:
   - NAV1 (audio)
   - NAV2 (audio)
   - DME (audio)
+- Tow (for gliders)
+  - Start
+  - Tow Left (aerotow only)
+  - Tow Straight (aerotow only)
+  - Tow Right (aerotow only)
+  - Release tow cable
   
 XPTouchBar also forwards the following X-Plane keyboard shortcuts for convenience:
 
@@ -119,6 +125,7 @@ You can add any controls that you find useful. Here are some suggestions:
 
 | Aircraft            | Controls                                     |
 |---------------------|----------------------------------------------|
+| Gliders             | Tow, Speedbrake, Flaps (if present)          |
 | Cessna 172          | Throttle, Mixture, Flaps                     |
 | Cirrus Vision SF50  | Throttle, Flaps, Landing Gear                |
 | Boeing 737          | Speedbrake, Throttle, Flaps, Landing Gear    |

@@ -8,7 +8,7 @@ class MyTouchBar: NSObject, NSTouchBarDelegate {
         let touchBar = NSTouchBar()
         touchBar.customizationIdentifier = .xpTouchBar
         touchBar.defaultItemIdentifiers = [.throttle, .mixture, .flaps]
-        touchBar.customizationAllowedItemIdentifiers = [.throttle, .pitch, .mixture, .flaps, .gear, .parkingBrake, .speedbrake, .simSpeed, .lights, .camera, .radios, .flexibleSpace]
+        touchBar.customizationAllowedItemIdentifiers = [.throttle, .pitch, .mixture, .flaps, .gear, .parkingBrake, .speedbrake, .simSpeed, .lights, .camera, .radios, .tow, .flexibleSpace]
         touchBar.delegate = self
         return touchBar
     }
@@ -169,6 +169,34 @@ class MyTouchBar: NSObject, NSTouchBarDelegate {
             control.customizationLabel = "Camera"
             control.collapsedRepresentationImage = NSImage(systemSymbolName: "video", accessibilityDescription: "Camera")
             return control
+        case .tow:
+            let popover = NSPopoverTouchBarItem(identifier: identifier)
+            popover.customizationLabel = "Glider Tow"
+            popover.collapsedRepresentationLabel = "Tow"
+            popover.popoverTouchBar.customizationIdentifier = .towBar
+            popover.popoverTouchBar.defaultItemIdentifiers = [.towStart, .flexibleSpace, .towLeft, .towStraight, .towRight, .flexibleSpace, .towRelease]
+            popover.popoverTouchBar.delegate = touchBar.delegate!
+            return popover
+        case .towRelease:
+            let toggle = NSButtonTouchBarItem(identifier: identifier, title: "Release", target: self, action: #selector(Self.towReleasePressed(_:)))
+            toggle.customizationLabel = "Release"
+            return toggle
+        case .towLeft:
+            let toggle = NSButtonTouchBarItem(identifier: identifier, title: "Tow Left", target: self, action: #selector(Self.towLeftPressed(_:)))
+            toggle.customizationLabel = "Tow Left"
+            return toggle
+        case .towStraight:
+            let toggle = NSButtonTouchBarItem(identifier: identifier, title: "Tow Straight", target: self, action: #selector(Self.towStraightPressed(_:)))
+            toggle.customizationLabel = "Tow Straight"
+            return toggle
+        case .towRight:
+            let toggle = NSButtonTouchBarItem(identifier: identifier, title: "Tow Right", target: self, action: #selector(Self.towRightPressed(_:)))
+            toggle.customizationLabel = "Tow Right"
+            return toggle
+        case .towStart:
+            let toggle = NSButtonTouchBarItem(identifier: identifier, title: "Start", target: self, action: #selector(Self.towStartPressed(_:)))
+            toggle.customizationLabel = "Start"
+            return toggle
         default:
             return nil
         }
@@ -284,6 +312,26 @@ class MyTouchBar: NSObject, NSTouchBarDelegate {
     
     @objc func com2MicPressed(_ sender: NSButton) {
         props.comSelection = .com2
+    }
+    
+    @objc func towReleasePressed(_ sender: NSButton) {
+        props.gliderRelease()
+    }
+    
+    @objc func towLeftPressed(_ sender: NSButton) {
+        props.gliderTowLeft()
+    }
+    
+    @objc func towStraightPressed(_ sender: NSButton) {
+        props.gliderTowStraight()
+    }
+    
+    @objc func towRightPressed(_ sender: NSButton) {
+        props.gliderTowRight()
+    }
+    
+    @objc func towStartPressed(_ sender: NSButton) {
+        props.gliderTowStart()
     }
     
     func updateNSTouchBar(_ touchBar: NSTouchBar) {
