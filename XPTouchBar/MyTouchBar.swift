@@ -222,7 +222,7 @@ class MyTouchBar: NSObject, NSTouchBarDelegate {
             let items = [hdg, nav, apr, rev, alt, vs, vsDown, vsUp]
             
             let group = NSGroupTouchBarItem(identifier: identifier, items: items)
-            group.customizationLabel = "Autopilot (S-TEC 55)"
+            group.customizationLabel = "Autopilot"
             return group
         default:
             return nil

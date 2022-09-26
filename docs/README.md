@@ -73,13 +73,13 @@ XPTouchBar has Touch Bar widgets for the following aircraft controls:
   - NAV2 (audio)
   - DME (audio)
   - MKR (audio)
-- Autopilot (S-TEC 55 like)
+- Autopilot
   - HDG
   - NAV
   - APR
   - REV
   - ALT
-  - VS (with +VS/-VS controls, press-and-hold them to change vertical speed quickly)
+  - VS (with +VS/-VS controls, press-and-hold to change vertical speed quickly)
   
 XPTouchBar also forwards the following X-Plane keyboard shortcuts for convenience:
 
@@ -99,7 +99,7 @@ XPTouchBar also forwards the following X-Plane keyboard shortcuts for convenienc
 | ⇧9  | Camera: 3D Cockpit       |
 | ⇧W  | Camera: Forward With HUD |
 
-**Note:** For simplicity, only the X-Plane S-TEC autopilot controls are included at the moment, and they are designed as one predefined group of controls. If you would like support for other autopilots, or the ability to add individual autopilot buttons to the Touch Bar, please open a GitHub Issue.
+**Note:** For simplicity, only the X-Plane S-TEC like autopilot controls are included at the moment, and they are designed as one predefined group of controls. If you would like support for other autopilot controls, or the ability to add individual autopilot controls to the Touch Bar, please open a GitHub Issue.
 
 ## Requirements
 
