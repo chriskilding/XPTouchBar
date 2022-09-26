@@ -8,7 +8,7 @@ Control [X-Plane](https://www.x-plane.com) with the Mac Touch Bar.
 
 XPTouchBar is a companion app to X-Plane which presents flight controls in the Touch Bar.
 
-XPTouchBar is completely customizable. You choose the controls that appear in the Touch Bar to complement the aircraft you're flying, and the hardware controls you have. (For example, if you don't have a throttle quadrant, put the throttle controls in the Touch Bar. If you do have a throttle quadrant, use the Touch Bar for something else).
+XPTouchBar is completely customizable. You choose the controls that appear in the Touch Bar to complement the aircraft you're flying, and the hardware controls you have. (For example, if you don't have a throttle quadrant, you could put the throttle controls in the Touch Bar. If you do have a throttle quadrant, you could put some of the other controls in the Touch Bar).
 
 You could use XPTouchBar as...
 
@@ -73,7 +73,7 @@ XPTouchBar has Touch Bar widgets for the following aircraft controls:
   - NAV2 (audio)
   - DME (audio)
   - MKR (audio)
-- Autopilot (S-TEC 55)
+- Autopilot (S-TEC 55 like)
   - HDG
   - NAV
   - APR
