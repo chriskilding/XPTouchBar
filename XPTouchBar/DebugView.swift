@@ -30,6 +30,7 @@ struct DebugView: View {
             Entry(dataref: Dataref.AudioSelectionNav2, value: props.nav2audio),
             Entry(dataref: Dataref.AudioComSelection, value: props.comSelection),
             Entry(dataref: Dataref.AudioDmeEnabled, value: props.dmeAudio),
+            Entry(dataref: Dataref.AudioMarkerEnabled, value: props.mkrAudio),
             Entry(dataref: Dataref.HideYoke, value: props.hideYoke)
         ].sorted(using: sortOrder)
     }

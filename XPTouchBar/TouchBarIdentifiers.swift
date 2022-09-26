@@ -21,6 +21,7 @@ extension NSTouchBarItem.Identifier {
     static let com2 = NSTouchBarItem.Identifier("XPTouchBar.Radios.COM2")
     static let nav1 = NSTouchBarItem.Identifier("XPTouchBar.Radios.NAV1")
     static let nav2 = NSTouchBarItem.Identifier("XPTouchBar.Radios.NAV2")
+    static let mkr = NSTouchBarItem.Identifier("XPTouchBar.Radios.MKR")
     static let dme = NSTouchBarItem.Identifier("XPTouchBar.Radios.DME")
     static let com1Mic = NSTouchBarItem.Identifier("XPTouchBar.Radios.COM1Mic")
     static let com2Mic = NSTouchBarItem.Identifier("XPTouchBar.Radios.COM2Mic")

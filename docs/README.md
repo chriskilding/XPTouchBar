@@ -72,6 +72,7 @@ XPTouchBar has Touch Bar widgets for the following aircraft controls:
   - NAV1 (audio)
   - NAV2 (audio)
   - DME (audio)
+  - MKR (audio)
 - Autopilot (S-TEC 55)
   - HDG
   - NAV
