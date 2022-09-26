@@ -116,6 +116,8 @@ enum Dataref {
     case AudioDmeEnabled
     
     case AudioComSelection
+    
+    case AudioMarkerEnabled
 }
 
 extension Dataref: CustomStringConvertible {
@@ -172,6 +174,8 @@ extension Dataref: CustomStringConvertible {
             return "sim/cockpit2/radios/actuators/audio_dme_enabled"
         case .AudioComSelection:
             return "sim/cockpit2/radios/actuators/audio_com_selection"
+        case .AudioMarkerEnabled:
+            return "sim/cockpit2/radios/actuators/audio_marker_enabled"
         }
     }
 }

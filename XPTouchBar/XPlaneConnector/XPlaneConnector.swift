@@ -164,6 +164,13 @@ class XPlaneConnector: ObservableObject {
         }
     }
     
+    @Published var mkrAudio: Bool = true {
+        didSet {
+            let dref = DREF(dataref: .AudioMarkerEnabled, value: mkrAudio.floatValue)
+            self.send(dref)
+        }
+    }
+    
     @Published var comSelection: ComSelection = .com1 {
         didSet {
             // Set the corresponding COM receive button states
@@ -319,6 +326,8 @@ fileprivate extension Dataref {
             return 24
         case .AudioComSelection:
             return 25
+        case .AudioMarkerEnabled:
+            return 26
         }
     }
 }
