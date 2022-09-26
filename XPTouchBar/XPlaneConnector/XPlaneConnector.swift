@@ -248,6 +248,46 @@ class XPlaneConnector: ObservableObject {
         self.send(cmnd)
     }
     
+    func autopilotAltitudeHold() {
+        let cmd = CMND(command: .AutopilotAltitudeHold)
+        self.send(cmd)
+    }
+    
+    func autopilotHeadingHold() {
+        let cmd = CMND(command: .AutopilotHeadingHold)
+        self.send(cmd)
+    }
+    
+    func autopilotApproach() {
+        let cmd = CMND(command: .AutopilotApproach)
+        self.send(cmd)
+    }
+    
+    func autopilotBackCourse() {
+        let cmd = CMND(command: .AutopilotBackCourse)
+        self.send(cmd)
+    }
+    
+    func autopilotNav() {
+        let cmd = CMND(command: .AutopilotNav)
+        self.send(cmd)
+    }
+    
+    func autopilotVerticalSpeed() {
+        let cmd = CMND(command: .AutopilotVerticalSpeed)
+        self.send(cmd)
+    }
+    
+    func autopilotVerticalSpeedDown() {
+        let cmd = CMND(command: .AutopilotVerticalSpeedDown)
+        self.send(cmd)
+    }
+    
+    func autopilotVerticalSpeedUp() {
+        let cmd = CMND(command: .AutopilotVerticalSpeedUp)
+        self.send(cmd)
+    }
+    
     private func restart() {
         stop()
         start()

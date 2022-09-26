@@ -8,13 +8,14 @@ Control [X-Plane](https://www.x-plane.com) with the Mac Touch Bar.
 
 XPTouchBar is a companion app to X-Plane which presents flight controls in the Touch Bar.
 
-XPTouchBar is completely customizable. You choose the controls that appear in the Touch Bar to complement the aircraft you're flying, and the hardware controls you have (e.g. sidestick/yoke, rudder pedals, throttle quadrant).
+XPTouchBar is completely customizable. You choose the controls that appear in the Touch Bar to complement the aircraft you're flying, and the hardware controls you have. (For example, if you don't have a throttle quadrant, you could put the throttle controls in the Touch Bar. If you do have a throttle quadrant, you could put some of the other controls in the Touch Bar).
 
 You could use XPTouchBar as...
 
 - a throttle quadrant (Throttle / Prop / Mixture / Speedbrake / Flaps as needed)
 - an avionics panel
 - an audio panel
+- an autopilot unit
 - ...anything else you can think of
 
 ![Screenshot](img/jet.png)
@@ -32,6 +33,8 @@ XPTouchBar aims to provide X-Plane controls which:
 - play to the strengths of the Touch Bar (e.g. sliders and multi-state switches)
 - are used frequently in flight, or must be quickly accessible during takeoff/landing
 - are hard to use with the keyboard or mouse
+
+The placement and priority of controls in XPTouchBar follows the adage "Aviate, Navigate, Communicate". For example, the throttle quadrant is an "Aviate" control, so it is immediately accessible at the top level of the Touch Bar. Meanwhile the audio panel is a "Communicate" control, so it lives in a popover.
 
 ## Features
 
@@ -70,6 +73,13 @@ XPTouchBar has Touch Bar widgets for the following aircraft controls:
   - NAV2 (audio)
   - DME (audio)
   - MKR (audio)
+- Autopilot
+  - HDG
+  - NAV
+  - APR
+  - REV
+  - ALT
+  - VS (with +VS/-VS controls, press-and-hold to change vertical speed quickly)
   
 XPTouchBar also forwards the following X-Plane keyboard shortcuts for convenience:
 
@@ -89,10 +99,12 @@ XPTouchBar also forwards the following X-Plane keyboard shortcuts for convenienc
 | ⇧9  | Camera: 3D Cockpit       |
 | ⇧W  | Camera: Forward With HUD |
 
+**Note:** For simplicity, only the X-Plane S-TEC like autopilot controls are included at the moment, and they are designed as one predefined group of controls. If you would like support for other autopilot controls, or the ability to add individual autopilot controls to the Touch Bar, please open a GitHub Issue.
+
 ## Requirements
 
 - Mac with Touch Bar
-- macOS 12
+- macOS 12 or higher
 - X-Plane 11.55 or higher
 - Access to X-Plane's UDP port (default: 49000)
 - External monitor (if you are using X-Plane and XPTouchBar on the same machine)

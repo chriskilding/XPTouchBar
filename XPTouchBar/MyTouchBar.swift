@@ -8,7 +8,7 @@ class MyTouchBar: NSObject, NSTouchBarDelegate {
         let touchBar = NSTouchBar()
         touchBar.customizationIdentifier = .xpTouchBar
         touchBar.defaultItemIdentifiers = [.throttle, .mixture, .flaps]
-        touchBar.customizationAllowedItemIdentifiers = [.throttle, .pitch, .mixture, .flaps, .gear, .parkingBrake, .speedbrake, .simSpeed, .lights, .camera, .radios, .flexibleSpace]
+        touchBar.customizationAllowedItemIdentifiers = [.throttle, .pitch, .mixture, .flaps, .gear, .parkingBrake, .speedbrake, .simSpeed, .lights, .camera, .radios, .stec55, .flexibleSpace]
         touchBar.delegate = self
         return touchBar
     }
@@ -173,6 +173,57 @@ class MyTouchBar: NSObject, NSTouchBarDelegate {
             control.customizationLabel = "Camera"
             control.collapsedRepresentationImage = NSImage(systemSymbolName: "video", accessibilityDescription: "Camera")
             return control
+        case .hdg:
+            let toggle = NSButtonTouchBarItem(identifier: identifier, title: "HDG", target: self, action: #selector(Self.hdgPressed(_:)))
+            toggle.customizationLabel = "Heading Mode"
+            return toggle
+        case .nav:
+            let toggle = NSButtonTouchBarItem(identifier: identifier, title: "NAV", target: self, action: #selector(Self.navPressed(_:)))
+            toggle.customizationLabel = "Navigation Mode"
+            return toggle
+        case .apr:
+            let toggle = NSButtonTouchBarItem(identifier: identifier, title: "APR", target: self, action: #selector(Self.aprPressed(_:)))
+            toggle.customizationLabel = "Approach Mode"
+            return toggle
+        case .rev:
+            let toggle = NSButtonTouchBarItem(identifier: identifier, title: "REV", target: self, action: #selector(Self.revPressed(_:)))
+            toggle.customizationLabel = "Reverse Mode"
+            return toggle
+        case .alt:
+            let toggle = NSButtonTouchBarItem(identifier: identifier, title: "ALT", target: self, action: #selector(Self.altPressed(_:)))
+            toggle.customizationLabel = "Altitude Mode"
+            return toggle
+        case .vs:
+            let toggle = NSButtonTouchBarItem(identifier: identifier, title: "VS", target: self, action: #selector(Self.vsPressed(_:)))
+            toggle.customizationLabel = "Vertical Speed Mode"
+            return toggle
+        case .vsDown:
+            let image = NSImage(systemSymbolName: "minus", accessibilityDescription: nil)!
+            let toggle = NSButtonTouchBarItem(identifier: identifier, title: "VS", image: image, target: self, action: #selector(Self.vsDownPressed(_:)))
+            toggle.customizationLabel = "Vertical Speed Down"
+            toggle.bezelColor = .systemGray
+            return repeaterButton(toggle)
+        case .vsUp:
+            let image = NSImage(systemSymbolName: "plus", accessibilityDescription: nil)!
+            let toggle = NSButtonTouchBarItem(identifier: identifier, title: "VS", image: image, target: self, action: #selector(Self.vsUpPressed(_:)))
+            toggle.customizationLabel = "Vertical Speed Up"
+            toggle.bezelColor = .systemGray
+            return repeaterButton(toggle)
+        case .stec55:
+            let hdg = self.touchBar(touchBar, makeItemForIdentifier: .hdg)!
+            let nav = self.touchBar(touchBar, makeItemForIdentifier: .nav)!
+            let apr = self.touchBar(touchBar, makeItemForIdentifier: .apr)!
+            let rev = self.touchBar(touchBar, makeItemForIdentifier: .rev)!
+            let alt = self.touchBar(touchBar, makeItemForIdentifier: .alt)!
+            let vs = self.touchBar(touchBar, makeItemForIdentifier: .vs)!
+            let vsDown = self.touchBar(touchBar, makeItemForIdentifier: .vsDown)!
+            let vsUp = self.touchBar(touchBar, makeItemForIdentifier: .vsUp)!
+            
+            let items = [hdg, nav, apr, rev, alt, vs, vsDown, vsUp]
+            
+            let group = NSGroupTouchBarItem(identifier: identifier, items: items)
+            group.customizationLabel = "Autopilot"
+            return group
         default:
             return nil
         }
@@ -292,6 +343,38 @@ class MyTouchBar: NSObject, NSTouchBarDelegate {
     
     @objc func com2MicPressed(_ sender: NSButton) {
         props.comSelection = .com2
+    }
+    
+    @objc func altPressed(_ sender: NSButton) {
+        props.autopilotAltitudeHold()
+    }
+    
+    @objc func hdgPressed(_ sender: NSButton) {
+        props.autopilotHeadingHold()
+    }
+    
+    @objc func aprPressed(_ sender: NSButton) {
+        props.autopilotApproach()
+    }
+    
+    @objc func revPressed(_ sender: NSButton) {
+        props.autopilotBackCourse()
+    }
+    
+    @objc func navPressed(_ sender: NSButton) {
+        props.autopilotNav()
+    }
+    
+    @objc func vsPressed(_ sender: NSButton) {
+        props.autopilotVerticalSpeed()
+    }
+    
+    @objc func vsDownPressed(_ sender: NSButton) {
+        props.autopilotVerticalSpeedDown()
+    }
+    
+    @objc func vsUpPressed(_ sender: NSButton) {
+        props.autopilotVerticalSpeedUp()
     }
     
     func updateNSTouchBar(_ touchBar: NSTouchBar) {
@@ -444,4 +527,12 @@ fileprivate func radiosBezelColor(_ isOn: Bool) -> NSColor {
     } else {
         return .controlColor
     }
+}
+
+fileprivate func repeaterButton(_ button: NSButtonTouchBarItem) -> NSButtonTouchBarItem {
+    if let b = button.view as? NSButton {
+        b.isContinuous = true
+        b.setPeriodicDelay(0.2, interval: 0.15)
+    }
+    return button
 }
