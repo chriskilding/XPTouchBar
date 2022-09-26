@@ -122,7 +122,7 @@ class MyTouchBar: NSObject, NSTouchBarDelegate {
             popover.customizationLabel = "Radios"
             popover.collapsedRepresentationImage = NSImage(systemSymbolName: "radio", accessibilityDescription: "Radios")
             popover.popoverTouchBar.customizationIdentifier = .radiosBar
-            popover.popoverTouchBar.defaultItemIdentifiers = [.com1, .com1Mic, .flexibleSpace, .com2, .com2Mic, .flexibleSpace, .nav1, .nav2, .flexibleSpace, .dme]
+            popover.popoverTouchBar.defaultItemIdentifiers = [.com1, .com1Mic, .flexibleSpace, .com2, .com2Mic, .flexibleSpace, .nav1, .nav2, .flexibleSpace, .dme, .flexibleSpace, .mkr]
             popover.popoverTouchBar.delegate = touchBar.delegate!
             return popover
         case .com1:
@@ -140,6 +140,10 @@ class MyTouchBar: NSObject, NSTouchBarDelegate {
         case .nav2:
             let toggle = NSButtonTouchBarItem(identifier: identifier, title: "NAV2", target: self, action: #selector(Self.nav2Changed(_:)))
             toggle.customizationLabel = "NAV2"
+            return toggle
+        case .mkr:
+            let toggle = NSButtonTouchBarItem(identifier: identifier, title: "MKR", target: self, action: #selector(Self.mkrChanged(_:)))
+            toggle.customizationLabel = "MKR"
             return toggle
         case .dme:
             let toggle = NSButtonTouchBarItem(identifier: identifier, title: "DME", target: self, action: #selector(Self.dmeChanged(_:)))
@@ -278,6 +282,10 @@ class MyTouchBar: NSObject, NSTouchBarDelegate {
         props.dmeAudio.toggle()
     }
     
+    @objc func mkrChanged(_ sender: NSButton) {
+        props.mkrAudio.toggle()
+    }
+    
     @objc func com1MicPressed(_ sender: NSButton) {
         props.comSelection = .com1
     }
@@ -401,6 +409,10 @@ class MyTouchBar: NSObject, NSTouchBarDelegate {
             
             if let dmeButton = radiosBar.item(forIdentifier: .dme) as? NSButtonTouchBarItem {
                 dmeButton.bezelColor = radiosBezelColor(props.dmeAudio)
+            }
+            
+            if let mkrButton = radiosBar.item(forIdentifier: .mkr) as? NSButtonTouchBarItem {
+                mkrButton.bezelColor = radiosBezelColor(props.mkrAudio)
             }
             
             if let com1MicButton = radiosBar.item(forIdentifier: .com1Mic) as? NSButtonTouchBarItem,

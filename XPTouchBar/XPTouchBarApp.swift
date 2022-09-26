@@ -93,6 +93,9 @@ struct XPTouchBarApp: App {
         .onChange(of: props.dmeAudio) { newState in
             appDelegate.updateTouchBar()
         }
+        .onChange(of: props.mkrAudio) { newState in
+            appDelegate.updateTouchBar()
+        }
         .onChange(of: props.comSelection) { newState in
             appDelegate.updateTouchBar()
         }
@@ -234,6 +237,8 @@ struct XPTouchBarApp: App {
             navRadios
             Divider()
             Toggle("DME Audio", isOn: $props.dmeAudio)
+            Divider()
+            Toggle("MKR Audio", isOn: $props.mkrAudio)
         }
     }
     
