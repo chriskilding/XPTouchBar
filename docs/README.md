@@ -20,9 +20,11 @@ You could use XPTouchBar as...
 
 ![Screenshot](img/jet.png)
 
+![Screenshot](img/autopilot.png)
+
 ![Screenshot](img/lights.png)
 
-![Screenshot](img/radios.png)
+![Screenshot](img/audio.png)
 
 You can use XPTouchBar on the same machine as X-Plane (e.g. X-Plane on your external monitor, XPTouchBar on your MacBook monitor), or you can use them on different machines (e.g. X-Plane on your gaming PC, XPTouchBar on your Mac as a remote control).
 
